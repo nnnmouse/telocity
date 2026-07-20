@@ -1,0 +1,2301 @@
+{
+  "DEFAULT_MODEL": "gemma",
+  "DEFAULT_REASONING": false,
+  "HARD_TIMEOUT": 3,
+  "IDLE_TIMEOUT": 1,
+  "CHUNK_SIZE": 50,
+  "BATCH_SIZE": 1,
+  "PARALLEL": 1,
+  "URL": "https://localhost:8443/v1/chat/completions",
+  "ENDPOINT": "chatcompletions",
+  "RPM": 5,
+  "MAX_FAIL": 5,
+  "RETRY_DELAY": 5000,
+  "FAILURE_MEANS_DEATH": false,
+  "SOURCE_LANGUAGE": "source language",
+  "TARGET_LANGUAGE": "English",
+  "TEMPLATES": {
+    "GEMMA1": "gemma",
+    "DEEPSEEKOR": "deepseek/deepseek-v4-flash",
+    "YOURKEY1": "yourkey1",
+    "YOURKEY2": "yourkey2",
+    "GENERIC_EN_INSTRUCTIONS": "{{ .ContextualInformation }}Please translate the following text into {{ .LanguageTarget }}. Adhere strictly to the following principles during translation:\n1. **Meaning & Style:** Accurately convey the core meaning, narrative voice, and emotional nuances of the source text, faithfully preserving the author's distinctive style.\n2. **Terminology & Consistency:** Ensure consistent translation of recurring proper nouns, titles, honorifics, and key concepts. Proper nouns (such as names and places) should be accurately transliterated or romanized according to standard conventions rather than anglicized, while titles and honorifics should be adapted naturally to the target language.\n3. **Context & Adaptation:** For humor, hyperbole, or culturally specific expressions, prioritize capturing their intended spirit and impact over a literal, word-for-word translation.\n4. **Fluency & Naturalness:** Ensure the final translation is seamless and natural, utilizing proper syntax so it flows as if originally written by a native speaker of the target language.\nOutput ONLY the final translated text. Do not include any introductory remarks, explanations, footnotes, or conversational replies.\n\n{{ .TextToInject }}",
+    "ALT_GENERIC_EN_INSTRUCTIONS": "{{ .ContextualInformation }}Please translate the following {{ .LanguageSource }} text into {{ .LanguageTarget }}. Adhere strictly to the following principles during translation:\n1. **Meaning & Style:** Accurately convey the core meaning, narrative voice, and emotional nuances of the source text, faithfully preserving the author's distinctive style.\n2. **Terminology & Consistency:** Ensure consistent translation of recurring proper nouns, titles, honorifics, and key concepts. Proper nouns (such as names and places) should be accurately transliterated or romanized according to standard conventions rather than anglicized, while titles and honorifics should be adapted naturally to the target language.\n3. **Context & Adaptation:** For humor, hyperbole, or culturally specific expressions, prioritize capturing their intended spirit and impact over a literal, word-for-word translation.\n4. **Fluency & Naturalness:** Ensure the final translation is seamless and natural, utilizing proper syntax so it flows as if originally written by a native speaker of the target language.\nOutput ONLY the final translated text. Do not include any introductory remarks, explanations, footnotes, or conversational replies.\n\n{{ .TextToInject }}",
+    "GENERIC_EN_ACGN_INSTRUCTIONS": "{{ .ContextualInformation }}Please translate the following text into {{ .LanguageTarget }}. You are translating literature rich in web novel conventions, subculture tropes, and varying atmospheric settings. Adhere strictly to the following principles:\n1. **Tone & Identity:** Accurately convey the narrative voice and emotional nuances. Pay special attention to character pronouns, inner monologues, and tonal contrasts—particularly when dealing with avatars, shifting identities, or mental-versus-physical discrepancies, ensuring the character's internal tension is faithfully preserved.\n2. **Subculture & Terminology:** Adapt internet slang, gaming/system UI elements, and trope-specific jargon naturally. Maintain strict consistency for lore, unique power systems, proper nouns, titles, and honorifics.\n3. **Localization:** Translate humor, hyperbole, and culturally specific idioms contextually rather than literally, ensuring the intended impact (e.g., comedic, clinical, suspenseful, or cute) is effectively captured.\n4. **Fluency & Naturalness:** Ensure the final translation is seamless and natural, utilizing proper syntax so it flows as if originally written by a native speaker of the target language.\nOutput ONLY the final translated text. Do not include any introductory remarks, explanations, footnotes, or conversational replies.\n\n{{ .TextToInject }}",
+    "ALT_GENERIC_EN_ACGN_INSTRUCTIONS": "{{ .ContextualInformation }}Please translate the following {{ .LanguageSource }} text into {{ .LanguageTarget }}. You are translating literature rich in web novel conventions, subculture tropes, and varying atmospheric settings. Adhere strictly to the following principles:\n1. **Tone & Identity:** Accurately convey the narrative voice and emotional nuances. Pay special attention to character pronouns, inner monologues, and tonal contrasts—particularly when dealing with avatars, shifting identities, or mental-versus-physical discrepancies, ensuring the character's internal tension is faithfully preserved.\n2. **Subculture & Terminology:** Adapt internet slang, gaming/system UI elements, and trope-specific jargon naturally. Maintain strict consistency for lore, unique power systems, proper nouns, titles, and honorifics.\n3. **Localization:** Translate humor, hyperbole, and culturally specific idioms contextually rather than literally, ensuring the intended impact (e.g., comedic, clinical, suspenseful, or cute) is effectively captured.\n4. **Fluency & Naturalness:** Ensure the final translation is seamless and natural, utilizing proper syntax so it flows as if originally written by a native speaker of the target language.\nOutput ONLY the final translated text. Do not include any introductory remarks, explanations, footnotes, or conversational replies.\n\n{{ .TextToInject }}",
+    "chapterformat": "Task: Analyze the text sample provided below and determine the exact JavaScript/TypeScript compatible regular expression (RegExp) pattern required to match its chapter or section headings.\n\nRules:\n1. The regular expression must match the start of the line where the chapter heading begins (using \"^\"), but it must allow for optional leading whitespace, tabs, or full-width Chinese spaces (using a pattern like `^[ \\t\\u3000]*` or `^\\s*`) to prevent failure from indentation.\n2. It must support the numeral system used in the sample (such as Arabic numerals, Roman numerals, spelled-out words, or Chinese/Japanese Hanzi/Kanji numerals). For Chinese numerals, proactively include the character '两' alongside standard digits to cover larger chapter numbers (e.g., Chapter 200+) even if not visible in the short sample.\n3. The output regular expression must be enclosed only in inline backticks, e.g., `^pattern`. Do not use triple backticks (code block format) and do not provide any additional explanation.\n\nReference Examples:\n- \"Chapter 15\" -> `^[ \\t\\u3000]*Chapter\\s+\\d+`\n- \"第15章 启程\" -> `^[ \\t\\u3000]*第\\d+章`\n- \"第两百五十章 启程\" -> `^[ \\t\\u3000]*第[0-9一二三四五六七八九十百千零两]+章`\n- \"15. The Journey\" -> `^[ \\t\\u3000]*\\d+\\.`\n\nText Sample:\n\n{{ .TextToInject }}",
+    "styleprofile": "Task: Analyze the writing style of the text sample below and output a concise profile for translator reference.\n\nRules:\n1. Identify and output exactly four attributes: Point of View (e.g., First-person, Third-person limited), Narrative Tense (e.g., Past, Present), Tone (e.g., Informal, Archaic, Technical, Melodramatic), and Vocabulary Register (e.g., Colloquial, High Literary).\n2. Output format: Exactly four bullet points with NO introductory, explanatory, or concluding text.\n\nText Sample:\n\n{{ .TextToInject }}",
+    "glossarygen": "Task: Scan the text sample below to identify major characters, core terms, cultivation realms, items, or locations.\n\nRules:\n1. Extract all significant unique entities without limiting the count.\n2. Format as a clean markdown list: '- EntityName (Proposed Translation): Brief 1-sentence description or context'.\n3. Do not write any conversational introductions, greetings, or explanations.\n\nText Sample:\n\n{{ .TextToInject }}",
+    "contextualinformation": "Task: Analyze the text sample below and build a comprehensive, loss-proof translation context profile.\n\nRules:\n1. Extract all relevant context across exactly three distinct sections. If a section has no relevant data in the text sample, output the header and write 'None identified'.\n   ### 1. Main Cast & Pronoun Directory\n   Identify all main characters introduced or mentioned in this block. For each, output:\n   - [Original Name] (Proposed English Translation) | Gender: [Male/Female/Unknown] | Brief Context\n   \n   ### 2. Style & Narrative Guidelines\n   Identify the point of view, tense, and writing register (e.g., informal, archaic, descriptive).\n   \n   ### 3. Key Glossary & Terminology\n   List all critical unique terms, cultivation realms, items, or locations with their proposed translations.\n   \n2. Output ONLY the markdown formatted sections. No conversational greetings, introductory text, or closing notes.\n\nText Sample:\n\n{{ .TextToInject }}",
+    "synthesis": "Task: Synthesize, de-duplicate, and losslessly consolidate the multiple diagnostic outputs provided below into a single, unified, additive summary.\n\nGuidelines:\n1. Analyze all input blocks. They represent partial analysis of the same document across different chunks.\n2. Resolve contradictions and intelligently combine overlapping data (e.g., merging description notes for the same character or glossary term).\n3. Lossless Preservation: Retain all unique entities, terms, and data points. Do NOT drop or omit items for the sake of brevity if they appear in any input block.\n4. Organize the final output following the exact structure and formatting used in the inputs. Do not alter the structural categories.\n5. Remove redundant entries, repeated definitions, or duplicate headings.\n6. Output ONLY the consolidated, clean synthesized result. No introductory text, explanations, or concluding conversational commentary.\n\nInput Blocks to Synthesize:\n\n{{ .TextToInject }}",
+    "filediagnostic": "Task: Analyze the text sample below for optical character recognition (OCR) errors, encoding corruption, or formatting anomalies.\n\nRules:\n1. Output exactly one line starting with either '[CLEAN]' or '[ISSUES FOUND: <comma-separated list of anomalies>]'.\n2. If issues are found, provide exactly two inline examples of the malformed text as they appear in the sample.\n3. Output ONLY the assessment and raw examples. No surrounding conversational text.\n\nText Sample:\n\n{{ .TextToInject }}",
+    "cleanup": "Task: Reformat the text below by correcting broken line endings inside paragraphs, excessive spacing, and scanner glitches, while preserving the original words and narrative structure.\n\nRules:\n1. Re-align paragraphs so sentences flow continuously on the same line. Do not keep line breaks that occur mid-sentence.\n2. Do NOT summarize, translate, rewrite, or inject new information.\n3. Output ONLY the cleaned text. No conversational introductions or notes.\n\nText Sample:\n\n{{ .TextToInject }}",
+    "schemagen": "Task: Analyze the structural format of the text sample below and output its keys or headers.\n\nRules:\n1. Identify the layout schema (CSV, JSONL, Markdown Table, or XML).\n2. Output a clean JSON array representing the schema keys or column headers.\n3. Do not include markdown blocks (e.g., ```), conversational explanations, or formatting commentary.\n\nText Sample:\n\n{{ .TextToInject }}",
+    "summary": "Task: Write a detailed, plot-focused summary, in English, of the following file.\n\nRules:\n1. Focus heavily on narrative progression, key events, and character developments.\n2. Output ONLY the summary text. No conversational introductions, formatting commentary, or concluding remarks.\n\nText Sample:\n\n{{ .TextToInject }}",
+    "GENERIC_ZH_INSTRUCTIONS": "{{ .ContextualInformation }}请将以下文本翻译为{{ .LanguageTarget }}。翻译时需严格遵循以下原则：\n1. **核心语义与风格**：准确传达原文的核心语义、叙事语气与情感细节，忠实保留原作者独特的行行文风格与笔触。\n2. **术语与一致性**：确保文中反复出现的专有名词、头衔、敬语及核心概念译法前后高度一致。专有名词（如人名、地名）应根据标准规范进行准确拼写或音译，避免过度英文化或意译；头衔与敬语则需根据目标语言的表达习惯进行自然转换。\n3. **语境与意译**：对于幽默、夸张或具有特定文化特质的表达，优先体现其精髓与预期效果，切忌生硬的逐字直译。\n4. **行文流畅度**：保障译文行文流畅、自然，句法结构符合目标语言习惯，读来宛如用目标语言直接创作的优秀文本。\n请仅输出最终译文，切勿包含任何前言、解释、注释或对话性回复。\n\n{{ .TextToInject }}",
+    "ALT_GENERIC_ZH_INSTRUCTIONS": "{{ .ContextualInformation }}请将以下{{ .LanguageSource }}文本翻译为{{ .LanguageTarget }}。翻译时需严格遵循以下原则：\n1. **核心语义与风格**：准确传达原文的核心语义、叙事语气与情感细节，忠实保留原作者独特的行文风格与笔触。\n2. **术语与一致性**：确保文中反复出现的专有名词、头衔、敬语及核心概念译法前后高度一致。专有名词（如人名、地名）应根据标准规范进行准确拼写或音译，避免过度英文化或意译；头衔与敬语则需根据目标语言的表达习惯进行自然转换。\n3. **语境与意译**：对于幽默、夸张或具有特定文化特质的表达，优先体现其精髓与预期效果，切忌生硬的逐字直译。\n4. **行文流畅度**：保障译文行文流畅、自然，句法结构符合目标语言习惯，读来宛如用目标语言直接创作的优秀文本。\n请仅输出最终译文，切勿包含任何前言、解释、注释或对话性回复。\n\n{{ .TextToInject }}",
+    "GENERIC_ZH_ACGN_INSTRUCTIONS": "{{ .ContextualInformation }}请将以下文本翻译为{{ .LanguageTarget }}。原文通常包含丰富的网络文学设定、亚文化元素及多变的题材氛围，请在翻译时严格遵循以下原则：\n1. **语调与角色身份**：精准传达叙事语气与情感细节。特别注意代词的使用、内心独白与外在表达的区分——尤其在涉及身份转换、虚拟化身、或心理认知与生理表象存在反差的情境中，需精准还原角色特性的张力。\n2. **亚文化与术语**：贴切地处理网络语汇、游戏/系统面板提示及特定题材黑话。确保世界观设定、独特能力体系、专有名词、头衔与敬语的译法前后高度一致。\n3. **本土化转换**：对于幽默、夸张及特定文化语境的表达，优先体现其精髓与预期效果（如严谨克制、轻松搞笑、惊悚悬疑或萌系风格），切忌生硬直译。\n4. **行文流畅度**：保障译文行文流畅、自然，句法结构符合目标语言习惯，读来宛如用目标语言直接创作的优秀文本。\n请仅输出最终译文，切勿包含任何前言、解释、注释或对话性回复。\n\n{{ .TextToInject }}",
+    "ALT_GENERIC_ZH_ACGN_INSTRUCTIONS": "{{ .ContextualInformation }}请将以下{{ .LanguageSource }}文本翻译为{{ .LanguageTarget }}。原文通常包含丰富的网络文学设定、亚文化元素及多变的题材氛围，请在翻译时严格遵循以下原则：\n1. **语调与角色身份**：精准传达叙事语气与情感细节。特别注意代词的使用、内心独白与外在表达的区分——尤其在涉及身份转换、虚拟化身、或心理认知与生理表象存在反差的情境中，需精准还原角色特性的张力。\n2. **亚文化与术语**：贴切地处理网络语汇、游戏/系统面板提示及特定题材黑话。确保世界观设定、独特能力体系、专有名词、头衔与敬语的译法前后高度一致。\n3. **本土化转换**：对于幽默、夸张及特定文化语境的表达，优先体现其精髓与预期效果（如严谨克制、轻松搞笑、惊悚悬疑或萌系风格），切忌生硬直译。\n4. **行文流畅度**：保障译文行文流畅、自然，句法结构符合目标语言习惯，读来宛如用目标语言直接创作的优秀文本。\n请仅输出最终译文，切勿包含任何前言、解释、注释或对话性回复。\n\n{{ .TextToInject }}",
+    "cnchapterformat": "任务：分析下方提供的文本样本，并确定匹配其章节或分节标题所需的精确 JavaScript/TypeScript 兼容正则表达式（RegExp）模式。\n\n规则：\n1. 正则表达必须匹配章节标题开始的行首（使用“^”），但必须允许可选的前导空格、制表符或全角空格（使用类似 `^[ \\t\\u3000]*` 或 `^\\s*` 的模式），以防止由于缩进导致匹配失败。\n2. 需支持样本中使用的数字系统（例如阿拉伯数字、罗马数字、英文单词、或中文/日文汉字数字）。若是中文数字，需主动包含字符“两”以及常规数字，以应对后续可能出现的更大章节数（如：第两百章及以上），即使在当前简短样本中未显现。\n3. 输出的正则表达式必须且仅包裹在行内反引号中，例如 `^pattern`。请勿使用三反引号（代码块格式），且不要编写任何额外的解释。\n\n参考示例：\n- \"Chapter 15\" -> `^[ \\t\\u3000]*Chapter\\s+\\d+`\n- \"第15章 启程\" -> `^[ \\t\\u3000]*第\\d+章`\n- \"第两百五十章 启程\" -> `^[ \\t\\u3000]*第[0-9一二三四五六七八九十百千零两]+章`\n- \"15. The Journey\" -> `^[ \\t\\u3000]*\\d+\\.`\n\n文本样本：\n\n{{ .TextToInject }}",
+    "cnstyleprofile": "任务：分析下方中文文本样本的写作风格，并输出一个简明的风格画像，供翻译参考。\n\n规则：\n1. 识别并精确输出以下四个属性：叙事视角（如：第一人称、第三人称受限）、叙事时态（如：过去时、现在时）、语气基调（如：非正式、古雅、专业、煽情）以及词汇语体（如：口语、高雅文学语体）。\n2. 输出格式：仅包含四个要点（使用项目符号），不要有任何前言、解释或总结性文字。\n\n文本样本：\n\n{{ .TextToInject }}",
+    "cnglossarygen": "任务：扫描下方的中文文本样本，识别出主要的出场角色、核心术语、修炼境界、道具或地点。\n\n规则：\n1. 提取所有核心且唯一的实体，不要限制数量。\n2. 格式化为整洁的 Markdown 列表：'- 中文实体 (建议英文翻译): 简短的一句话描述或出场上下文'。\n3. 请勿编写任何寒暄、前言或额外的解释。\n\n文本样本：\n\n{{ .TextToInject }}",
+    "cncontextualinformation": "任务：分析下方文本样本，构建一个全面且防丢失的翻译上下文画像。\n\n规则：\n1. 通过以下三个独立章节提取所有相关上下文。如果某个章节在文本样本中没有相关数据，请输出该标题并写上“未发现”。\n   ### 1. 主要角色及代词目录\n   识别本段落中引入或提及的所有主要人物。针对每个人物输出：\n   - [原文名字] (建议英文翻译) | 性别: [男/女/未知] | 简要背景或出场上下文\n   \n   ### 2. 风格与叙事指南\n   识别视角、时态以及写作语体级别（例如：口语、书面、古风、描述性等）。\n   \n   ### 3. 核心词汇与术语表\n   列出所有关键的独特术语、修炼境界、道具或地点，并提供其建议的英文翻译。\n   \n2. 仅输出符合 Markdown 格式的上述章节。请勿包含任何寒暄、引导性文本或结束语。\n\n文本样本：\n\n{{ .TextToInject }}",
+    "cnsynthesis": "任务：对下方提供的多个局部诊断或分析输出进行综合、去重和无损合并，形成一个统一、递增的最终总结。\n\n指南：\n1. 分析所有的输入块。它们代表了对同一篇文档不同分块的局部分析。\n2. 解决相互矛盾的内容，智能合并重叠的数据（例如：合并针对同一人物或术语的描述注释）。\n3. 无损保留：保留所有独特的实体、术语和数据点。切勿为了控制篇幅而遗漏任何出现在单一输入块中的条目。\n4. 最终输出必须严格遵循输入内容所使用的结构和格式。请勿修改其结构分类。\n5. 去除多余的重复条目、重复定义或重复的标题。\n6. 仅输出合并去重后的整洁综合结果。不要包含任何前言、解释或结尾的寒暄文字。\n\n待合并的输入块：\n\n{{ .TextToInject }}",
+    "cnsummary": "任务：针对下方的文本样本，撰写一份以故事叙事和情节推进为核心的详细中文摘要。\n\n规则：\n1. 重点关注剧情发展、核心事件以及关键人物的成长与变化。\n2. 仅输出摘要正文。请勿包含任何寒暄、前言、格式说明或结束语。\n\n文本样本：\n\n{{ .TextToInject }}"
+  },
+  "PARAM_CONFIGS": {
+    "deepseek": {
+      "reasoningType": "reason_and_instruct",
+      "metadata": {
+        "helptext_key": "models.dual",
+        "stripTags": { "start": "<think>", "end": "</think>" },
+        "display": true,
+        "localJSONL": true,
+        "defaultReasoning": true,
+        "stripEmpty": true,
+        "markdownBrainRot": true,
+        "forceStream": false,
+        "injectORSessionId": true,
+        "substitutionPrefix": "EN"
+      },
+      "instruct": {
+        "prompt": {
+          "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
+        },
+        "model": {
+          "chunkSize": 200,
+          "batchSize": 50,
+          "parallel": 10,
+          "rpm": 20,
+          "retryDelay": 15000,
+          "maxAttempts": 2,
+          "maxFail": 5,
+          "failureMeansDeath": false,
+          "tempValues": [0.3, 0.5, 0.7, 1],
+          "max_tokens": [true, 16000],
+          "temperature": [false, 1],
+          "top_k": [false, 0],
+          "top_p": [false, 0.95],
+          "presence_penalty": [false, 0],
+          "url": "https://openrouter.ai/api/v1/chat/completions",
+          "endpoint": "openrouter-chat",
+          "apiKey": "{{YOURKEY1}}",
+          "idleTimeout": 1,
+          "hardTimeout": 15,
+          "model": [true, "{{DEEPSEEKOR}}"],
+          "provider": [true, { "only": ["deepseek"] }],
+          "reasoning": [true, { "enabled": false }]
+        }
+      },
+      "reasoning": {
+        "prompt": {
+          "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
+        },
+        "model": {
+          "chunkSize": 200,
+          "batchSize": 50,
+          "parallel": 10,
+          "rpm": 20,
+          "retryDelay": 15000,
+          "maxAttempts": 2,
+          "maxFail": 5,
+          "failureMeansDeath": false,
+          "tempValues": [0.3, 0.5, 0.7, 1],
+          "max_tokens": [true, 16000],
+          "temperature": [false, 1],
+          "top_k": [false, 0],
+          "top_p": [false, 0.95],
+          "presence_penalty": [false, 0],
+          "url": "https://openrouter.ai/api/v1/chat/completions",
+          "endpoint": "openrouter-chat",
+          "apiKey": "{{YOURKEY1}}",
+          "idleTimeout": 1,
+          "hardTimeout": 15,
+          "model": [true, "{{DEEPSEEKOR}}"],
+          "provider": [true, { "only": ["deepseek"] }],
+          "reasoning": [true, { "enabled": true }]
+        }
+      }
+    },
+    "gemma": {
+      "reasoningType": "reason_and_instruct",
+      "metadata": {
+        "helptext_key": "models.dual",
+        "stripTags": { "start": "<|channel>thought", "end": "<channel|>" },
+        "display": true,
+        "defaultReasoning": true,
+        "localJSONL": true,
+        "stripEmpty": true,
+        "markdownBrainRot": true,
+        "forceStream": false,
+        "substitutionPrefix": "EN"
+      },
+      "instruct": {
+        "prompt": {
+          "defPrep": [
+            true,
+            "{{GENERIC_EN_ACGN_INSTRUCTIONS}}\n\n{{GENERIC_EN_ACGN_INSTRUCTIONS}}",
+            "user"
+          ]
+        },
+        "model": {
+          "chunkSize": 100,
+          "batchSize": 32,
+          "parallel": 4,
+          "rpm": 1000,
+          "maxAttempts": 3,
+          "maxFail": 50,
+          "tempValues": [0.3, 0.5, 0.75, 1],
+          "temperature": [true, 0],
+          "top_k": [true, 64],
+          "top_p": [true, 0.95],
+          "presence_penalty": [false, 1.5],
+          "hardTimeout": 5,
+          "model": [true, "{{GEMMA1}}"],
+          "chat_template_kwargs": [true, { "enable_thinking": false }],
+          "grammar": [
+            true,
+            "root ::= char+\nchar ::= latin9 | cjk-punct\nlatin9 ::= [\\u0020-\\u007E\\u00A0-\\u00FF\\u20AC\\t\\r\\n]\ncjk-punct ::= [\\u2000-\\u206F\\u3000-\\u303F\\uFF00-\\uFFEF]"
+          ]
+        }
+      },
+      "reasoning": {
+        "prompt": {
+          "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
+        },
+        "model": {
+          "chunkSize": 100,
+          "batchSize": 32,
+          "parallel": 4,
+          "rpm": 1000,
+          "maxAttempts": 3,
+          "maxFail": 50,
+          "temperature": [true, 1],
+          "top_k": [true, 64],
+          "top_p": [true, 0.95],
+          "presence_penalty": [false, 1.5],
+          "hardTimeout": 10,
+          "model": [true, "{{GEMMA1}}"],
+          "chat_template_kwargs": [true, { "enable_thinking": true }],
+          "thinking_budget_tokens": [true, 8192],
+          "reasoning_control": [true, true],
+          "grammar": [false, ""]
+        }
+      }
+    },
+    "hymt": {
+      "reasoningType": "instruct_only",
+      "metadata": {
+        "helptext_key": "models.instruct",
+        "display": true,
+        "localJSONL": true,
+        "stripEmpty": true,
+        "markdownBrainRot": true,
+        "forceStream": false,
+        "substitutionPrefix": "EN"
+      },
+      "default": {
+        "prompt": {
+          "defPrep": [
+            true,
+            "{{GENERIC_EN_ACGN_INSTRUCTIONS}}\n\n{{GENERIC_EN_ACGN_INSTRUCTIONS}}",
+            "user"
+          ]
+        },
+        "model": {
+          "chunkSize": 30,
+          "batchSize": 32,
+          "parallel": 4,
+          "rpm": 1000,
+          "maxAttempts": 3,
+          "maxFail": 50,
+          "tempValues": [0.4, 0.7],
+          "temperature": [true, 0],
+          "top_k": [true, 20],
+          "top_p": [true, 0.6],
+          "hardTimeout": 2,
+          "model": [true, "hymt"],
+          "grammar": [
+            true,
+            "root ::= char+\nchar ::= latin9 | cjk-punct\nlatin9 ::= [\\u0020-\\u007E\\u00A0-\\u00FF\\u20AC\\t\\r\\n]\ncjk-punct ::= [\\u2000-\\u206F\\u3000-\\u303F\\uFF00-\\uFFEF]"
+          ]
+        }
+      }
+    },
+    "internaltranslation": {
+      "reasoningType": "reason_only",
+      "metadata": {
+        "helptext_key": "models.instruct",
+        "stripTags": { "start": "<|channel>thought", "end": "<channel|>" },
+        "display": false,
+        "localJSONL": true,
+        "stripEmpty": false,
+        "markdownBrainRot": false,
+        "forceStream": false,
+        "substitutionPrefix": "EN"
+      },
+      "default": {
+        "prompt": { "defPrep": [true, "{{GENERIC_EN_INSTRUCTIONS}}", "user"] },
+        "model": {
+          "batchSize": 1,
+          "chunkSize": 200000,
+          "maxAttempts": 1,
+          "temperature": [true, 1],
+          "top_k": [true, 64],
+          "top_p": [true, 0.95],
+          "seed": [true, 1],
+          "hardTimeout": 20,
+          "url": "https://localhost:8443/v1/chat/completions",
+          "endpoint": "chatcompletions",
+          "model": [true, "gemmamoelargectx"],
+          "chat_template_kwargs": [true, { "enable_thinking": false }],
+          "thinking_budget_tokens": [false, 8192],
+          "reasoning_control": [false, true],
+          "grammar": [false, ""],
+          "response_format": [
+            true,
+            {
+              "type": "json_schema",
+              "json_schema": {
+                "name": "telocity_i18n_translation",
+                "strict": true,
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "e": {
+                      "type": "object",
+                      "properties": {
+                        "c": {
+                          "type": "object",
+                          "properties": {
+                            "cfg": {
+                              "type": "object",
+                              "properties": {
+                                "editorNotFound": { "type": "string" },
+                                "failedToWriteLocale": { "type": "string" },
+                                "invalidLocale": { "type": "string" }
+                              },
+                              "required": [
+                                "editorNotFound",
+                                "failedToWriteLocale",
+                                "invalidLocale"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "cm": {
+                              "type": "object",
+                              "properties": {
+                                "diffLineCount": { "type": "string" },
+                                "diffLineCount1": { "type": "string" },
+                                "diffLineCount2": { "type": "string" },
+                                "invalidWidth": { "type": "string" },
+                                "missingArgs": { "type": "string" }
+                              },
+                              "required": [
+                                "diffLineCount",
+                                "diffLineCount1",
+                                "diffLineCount2",
+                                "invalidWidth",
+                                "missingArgs"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "co": {
+                              "type": "object",
+                              "properties": { "coError": { "type": "string" } },
+                              "required": ["coError"],
+                              "additionalProperties": false
+                            },
+                            "jd": {
+                              "type": "object",
+                              "properties": {
+                                "emptyJson": { "type": "string" },
+                                "invalidJson": { "type": "string" },
+                                "invalidSplitSize": { "type": "string" }
+                              },
+                              "required": [
+                                "emptyJson",
+                                "invalidJson",
+                                "invalidSplitSize"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "mg": {
+                              "type": "object",
+                              "properties": {
+                                "extensionRequired": { "type": "string" }
+                              },
+                              "required": ["extensionRequired"],
+                              "additionalProperties": false
+                            },
+                            "or": {
+                              "type": "object",
+                              "properties": {
+                                "apiKeyRequired": { "type": "string" },
+                                "contentFilterTriggered": { "type": "string" },
+                                "fetchFailed": { "type": "string" },
+                                "invalidResponse": { "type": "string" },
+                                "jsonParseFailed": { "type": "string" },
+                                "maxTokensReached": { "type": "string" },
+                                "missingResponseField": { "type": "string" },
+                                "requestTimedOut": { "type": "string" },
+                                "responseExecutionFailedOrCancelled": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "apiKeyRequired",
+                                "contentFilterTriggered",
+                                "fetchFailed",
+                                "invalidResponse",
+                                "jsonParseFailed",
+                                "maxTokensReached",
+                                "missingResponseField",
+                                "requestTimedOut",
+                                "responseExecutionFailedOrCancelled"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "rd": {
+                              "type": "object",
+                              "properties": {
+                                "noPortAvailable": { "type": "string" },
+                                "unkServError": { "type": "string" }
+                              },
+                              "required": ["noPortAvailable", "unkServError"],
+                              "additionalProperties": false
+                            },
+                            "rm": {
+                              "type": "object",
+                              "properties": {
+                                "binRequired": { "type": "string" },
+                                "modelRequired": { "type": "string" }
+                              },
+                              "required": ["binRequired", "modelRequired"],
+                              "additionalProperties": false
+                            },
+                            "sp": {
+                              "type": "object",
+                              "properties": {
+                                "invalidSplitSize": { "type": "string" }
+                              },
+                              "required": ["invalidSplitSize"],
+                              "additionalProperties": false
+                            },
+                            "st": {
+                              "type": "object",
+                              "properties": {
+                                "delimiterPairRequired": { "type": "string" }
+                              },
+                              "required": ["delimiterPairRequired"],
+                              "additionalProperties": false
+                            },
+                            "tc": {
+                              "type": "object",
+                              "properties": {
+                                "failedToDownload": { "type": "string" },
+                                "invalidJsonlSource": { "type": "string" },
+                                "modelDownloadError": { "type": "string" },
+                                "modelNotFoundForDownload": {
+                                  "type": "string"
+                                },
+                                "poolShuttingDown": { "type": "string" },
+                                "tokenizerDoesNotExist": { "type": "string" },
+                                "tokenizerFilesNotFound": { "type": "string" },
+                                "workerCrashedCode": { "type": "string" }
+                              },
+                              "required": [
+                                "failedToDownload",
+                                "invalidJsonlSource",
+                                "modelDownloadError",
+                                "modelNotFoundForDownload",
+                                "poolShuttingDown",
+                                "tokenizerDoesNotExist",
+                                "tokenizerFilesNotFound",
+                                "workerCrashedCode"
+                              ],
+                              "additionalProperties": false
+                            }
+                          },
+                          "required": [
+                            "cfg",
+                            "cm",
+                            "co",
+                            "jd",
+                            "mg",
+                            "or",
+                            "rd",
+                            "rm",
+                            "sp",
+                            "st",
+                            "tc"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "lcli": {
+                          "type": "object",
+                          "properties": {
+                            "booleanWithValue": { "type": "string" },
+                            "causePrefix": { "type": "string" },
+                            "cfgCouldNotBeLoaded": { "type": "string" },
+                            "commandNotImplemented": { "type": "string" },
+                            "missingValue": { "type": "string" },
+                            "notInteractive": { "type": "string" },
+                            "processingAborted": { "type": "string" },
+                            "unexpectedPositional": { "type": "string" },
+                            "unknownErrorOccurred": { "type": "string" },
+                            "unknownOption": { "type": "string" }
+                          },
+                          "required": [
+                            "booleanWithValue",
+                            "causePrefix",
+                            "cfgCouldNotBeLoaded",
+                            "commandNotImplemented",
+                            "missingValue",
+                            "notInteractive",
+                            "processingAborted",
+                            "unexpectedPositional",
+                            "unknownErrorOccurred",
+                            "unknownOption"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "lllm": {
+                          "type": "object",
+                          "properties": {
+                            "accountWideError": { "type": "string" },
+                            "audioNotSupportedModality": { "type": "string" },
+                            "availableLanguagesList": { "type": "string" },
+                            "contentFilterTriggered": { "type": "string" },
+                            "emptyFile": { "type": "string" },
+                            "endpointRequired": { "type": "string" },
+                            "failedLock": { "type": "string" },
+                            "failedToParseStreamChunk": { "type": "string" },
+                            "failedToSaveProgress": { "type": "string" },
+                            "failureMeansDeathStopped": { "type": "string" },
+                            "fileNotFound": { "type": "string" },
+                            "hardTimeOut": { "type": "string" },
+                            "idleTimeOut": { "type": "string" },
+                            "initializingBatch": { "type": "string" },
+                            "invalidEndpoint": { "type": "string" },
+                            "invalidFileSize": { "type": "string" },
+                            "invalidLanguageInput": { "type": "string" },
+                            "invalidLanguageInputNoSuggestion": {
+                              "type": "string"
+                            },
+                            "invalidReasoningType": { "type": "string" },
+                            "invalidRegex": { "type": "string" },
+                            "jsonlContentFilter": { "type": "string" },
+                            "jsonlContentFilterIncomplete": {
+                              "type": "string"
+                            },
+                            "jsonlError": { "type": "string" },
+                            "jsonlExecutionIncomplete": { "type": "string" },
+                            "jsonlGenError": { "type": "string" },
+                            "jsonlMalformedLine": { "type": "string" },
+                            "jsonlMaxTokensIncomplete": { "type": "string" },
+                            "jsonlMaxTokensLength": { "type": "string" },
+                            "jsonlStatusError": { "type": "string" },
+                            "jsonlStreamTerminatedError": { "type": "string" },
+                            "jsonlUnrecognizedFormat": { "type": "string" },
+                            "llmAPICall": { "type": "string" },
+                            "maxFailReached": { "type": "string" },
+                            "maxTokensLimitReached": { "type": "string" },
+                            "mediaNotSupportedCompletions": {
+                              "type": "string"
+                            },
+                            "networkErrorOpenAI": { "type": "string" },
+                            "networkErrorReason": { "type": "string" },
+                            "noFilesFound": { "type": "string" },
+                            "openaiApiError": { "type": "string" },
+                            "partFileCollision": { "type": "string" },
+                            "promptBlockedWarning": { "type": "string" },
+                            "promptMissing": { "type": "string" },
+                            "responseNull": { "type": "string" },
+                            "sourceAndTargetMustBeDifferent": {
+                              "type": "string"
+                            },
+                            "sourceRequired": { "type": "string" },
+                            "sourceTargetRequired": { "type": "string" },
+                            "streamEndedPrematurely": { "type": "string" },
+                            "streamInterrupted": { "type": "string" },
+                            "streamTerminatedError": { "type": "string" },
+                            "targetFileExists": { "type": "string" },
+                            "tExceeded": { "type": "string" },
+                            "undefinedParam": { "type": "string" },
+                            "undefinedPromptPreset": { "type": "string" },
+                            "unknownOpenAIError": { "type": "string" },
+                            "unknownStatusCodeError": { "type": "string" }
+                          },
+                          "required": [
+                            "accountWideError",
+                            "audioNotSupportedModality",
+                            "availableLanguagesList",
+                            "contentFilterTriggered",
+                            "emptyFile",
+                            "endpointRequired",
+                            "failedLock",
+                            "failedToParseStreamChunk",
+                            "failedToSaveProgress",
+                            "failureMeansDeathStopped",
+                            "fileNotFound",
+                            "hardTimeOut",
+                            "idleTimeOut",
+                            "initializingBatch",
+                            "invalidEndpoint",
+                            "invalidFileSize",
+                            "invalidLanguageInput",
+                            "invalidLanguageInputNoSuggestion",
+                            "invalidReasoningType",
+                            "invalidRegex",
+                            "jsonlContentFilter",
+                            "jsonlContentFilterIncomplete",
+                            "jsonlError",
+                            "jsonlExecutionIncomplete",
+                            "jsonlGenError",
+                            "jsonlMalformedLine",
+                            "jsonlMaxTokensIncomplete",
+                            "jsonlMaxTokensLength",
+                            "jsonlStatusError",
+                            "jsonlStreamTerminatedError",
+                            "jsonlUnrecognizedFormat",
+                            "llmAPICall",
+                            "maxFailReached",
+                            "maxTokensLimitReached",
+                            "mediaNotSupportedCompletions",
+                            "networkErrorOpenAI",
+                            "networkErrorReason",
+                            "noFilesFound",
+                            "openaiApiError",
+                            "partFileCollision",
+                            "promptBlockedWarning",
+                            "promptMissing",
+                            "responseNull",
+                            "sourceAndTargetMustBeDifferent",
+                            "sourceRequired",
+                            "sourceTargetRequired",
+                            "streamEndedPrematurely",
+                            "streamInterrupted",
+                            "streamTerminatedError",
+                            "targetFileExists",
+                            "tExceeded",
+                            "undefinedParam",
+                            "undefinedPromptPreset",
+                            "unknownOpenAIError",
+                            "unknownStatusCodeError"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "v": {
+                          "type": "object",
+                          "properties": {
+                            "audioNotFound": { "type": "string" },
+                            "imageNotFound": { "type": "string" },
+                            "invalidAllowH2": { "type": "string" },
+                            "invalidAPIKey": { "type": "string" },
+                            "invalidArgArray": { "type": "string" },
+                            "invalidAudioOption": { "type": "string" },
+                            "invalidBatchSize": { "type": "string" },
+                            "invalidChunkSize": { "type": "string" },
+                            "invalidDataURI": { "type": "string" },
+                            "invalidDelayValue": { "type": "string" },
+                            "invalidExtraBodyType": { "type": "string" },
+                            "invalidImageArray": { "type": "string" },
+                            "invalidIndex": { "type": "string" },
+                            "invalidMaxTokensRange": { "type": "string" },
+                            "invalidModel": { "type": "string" },
+                            "invalidOption": { "type": "string" },
+                            "invalidParallelSize": { "type": "string" },
+                            "invalidPenaltyRange": { "type": "string" },
+                            "invalidPrompt": { "type": "string" },
+                            "invalidSessionId": { "type": "string" },
+                            "invalidTemperatureRange": { "type": "string" },
+                            "invalidTempValueRange": { "type": "string" },
+                            "invalidTempValues": { "type": "string" },
+                            "invalidTopKRange": { "type": "string" },
+                            "invalidTopPRange": { "type": "string" },
+                            "invalidURL": { "type": "string" },
+                            "invalidURLScheme": { "type": "string" },
+                            "mutuallyExclusiveMedia": { "type": "string" },
+                            "mutuallyExclusivePrompts": { "type": "string" },
+                            "seedMustBePositiveInteger": { "type": "string" },
+                            "unsupportedAudioType": { "type": "string" },
+                            "unsupportedImageType": { "type": "string" },
+                            "unsupportedImageType2": { "type": "string" }
+                          },
+                          "required": [
+                            "audioNotFound",
+                            "imageNotFound",
+                            "invalidAllowH2",
+                            "invalidAPIKey",
+                            "invalidArgArray",
+                            "invalidAudioOption",
+                            "invalidBatchSize",
+                            "invalidChunkSize",
+                            "invalidDataURI",
+                            "invalidDelayValue",
+                            "invalidExtraBodyType",
+                            "invalidImageArray",
+                            "invalidIndex",
+                            "invalidMaxTokensRange",
+                            "invalidModel",
+                            "invalidOption",
+                            "invalidParallelSize",
+                            "invalidPenaltyRange",
+                            "invalidPrompt",
+                            "invalidSessionId",
+                            "invalidTemperatureRange",
+                            "invalidTempValueRange",
+                            "invalidTempValues",
+                            "invalidTopKRange",
+                            "invalidTopPRange",
+                            "invalidURL",
+                            "invalidURLScheme",
+                            "mutuallyExclusiveMedia",
+                            "mutuallyExclusivePrompts",
+                            "seedMustBePositiveInteger",
+                            "unsupportedAudioType",
+                            "unsupportedImageType",
+                            "unsupportedImageType2"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": ["c", "lcli", "lllm", "v"],
+                      "additionalProperties": false
+                    },
+                    "help": {
+                      "type": "object",
+                      "properties": {
+                        "commands": {
+                          "type": "object",
+                          "properties": {
+                            "avg": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {},
+                                  "required": [],
+                                  "additionalProperties": false
+                                },
+                                "usage": { "type": "string" }
+                              },
+                              "required": ["description", "flags", "usage"],
+                              "additionalProperties": false
+                            },
+                            "bg": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {
+                                    "chunksize": { "type": "string" },
+                                    "context": { "type": "string" },
+                                    "model": { "type": "string" },
+                                    "params": { "type": "string" },
+                                    "reason": { "type": "string" },
+                                    "regex": { "type": "string" },
+                                    "source": { "type": "string" },
+                                    "target": { "type": "string" }
+                                  },
+                                  "required": [
+                                    "chunksize",
+                                    "context",
+                                    "model",
+                                    "params",
+                                    "reason",
+                                    "regex",
+                                    "source",
+                                    "target"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "footer": { "type": "string" },
+                                "usage": { "type": "string" }
+                              },
+                              "required": [
+                                "description",
+                                "flags",
+                                "footer",
+                                "usage"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "bg2": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {
+                                    "chunksize": { "type": "string" },
+                                    "model": { "type": "string" },
+                                    "params": { "type": "string" },
+                                    "prompt": { "type": "string" },
+                                    "pselector": { "type": "string" },
+                                    "reason": { "type": "string" },
+                                    "sysprompt": { "type": "string" }
+                                  },
+                                  "required": [
+                                    "chunksize",
+                                    "model",
+                                    "params",
+                                    "prompt",
+                                    "pselector",
+                                    "reason",
+                                    "sysprompt"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "footer": { "type": "string" },
+                                "usage": { "type": "string" }
+                              },
+                              "required": [
+                                "description",
+                                "flags",
+                                "footer",
+                                "usage"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "br": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {
+                                    "apikey": { "type": "string" },
+                                    "batchsize": { "type": "string" },
+                                    "export": { "type": "string" },
+                                    "model": { "type": "string" },
+                                    "parallel": { "type": "string" },
+                                    "params": { "type": "string" },
+                                    "reason": { "type": "string" },
+                                    "retry": { "type": "string" },
+                                    "stream": { "type": "string" },
+                                    "url": { "type": "string" }
+                                  },
+                                  "required": [
+                                    "apikey",
+                                    "batchsize",
+                                    "export",
+                                    "model",
+                                    "parallel",
+                                    "params",
+                                    "reason",
+                                    "retry",
+                                    "stream",
+                                    "url"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "footer": { "type": "string" },
+                                "usage": { "type": "string" }
+                              },
+                              "required": [
+                                "description",
+                                "flags",
+                                "footer",
+                                "usage"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "cfg": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {
+                                    "edit": { "type": "string" },
+                                    "lang": { "type": "string" },
+                                    "remove": { "type": "string" }
+                                  },
+                                  "required": ["edit", "lang", "remove"],
+                                  "additionalProperties": false
+                                },
+                                "footer": { "type": "string" },
+                                "usage": { "type": "string" }
+                              },
+                              "required": [
+                                "description",
+                                "flags",
+                                "footer",
+                                "usage"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "cm": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {
+                                    "force": { "type": "string" },
+                                    "width": { "type": "string" }
+                                  },
+                                  "required": ["force", "width"],
+                                  "additionalProperties": false
+                                },
+                                "usage": { "type": "string" }
+                              },
+                              "required": ["description", "flags", "usage"],
+                              "additionalProperties": false
+                            },
+                            "jd": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {
+                                    "merge": { "type": "string" },
+                                    "size": { "type": "string" },
+                                    "split": { "type": "string" }
+                                  },
+                                  "required": ["merge", "size", "split"],
+                                  "additionalProperties": false
+                                },
+                                "usage": { "type": "string" }
+                              },
+                              "required": ["description", "flags", "usage"],
+                              "additionalProperties": false
+                            },
+                            "mg": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {
+                                    "exclude": { "type": "string" },
+                                    "extension": { "type": "string" },
+                                    "failed": { "type": "string" },
+                                    "include": { "type": "string" },
+                                    "noignore": { "type": "string" },
+                                    "params": { "type": "string" }
+                                  },
+                                  "required": [
+                                    "exclude",
+                                    "extension",
+                                    "failed",
+                                    "include",
+                                    "noignore",
+                                    "params"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "usage": { "type": "string" }
+                              },
+                              "required": ["description", "flags", "usage"],
+                              "additionalProperties": false
+                            },
+                            "or": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {
+                                    "apikey": { "type": "string" },
+                                    "help": { "type": "string" },
+                                    "params": { "type": "string" }
+                                  },
+                                  "required": ["apikey", "help", "params"],
+                                  "additionalProperties": false
+                                },
+                                "usage": { "type": "string" }
+                              },
+                              "required": ["description", "flags", "usage"],
+                              "additionalProperties": false
+                            },
+                            "os": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {
+                                    "apikey": { "type": "string" },
+                                    "audio": { "type": "string" },
+                                    "chunksize": { "type": "string" },
+                                    "file": { "type": "string" },
+                                    "image": { "type": "string" },
+                                    "model": { "type": "string" },
+                                    "outfile": { "type": "string" },
+                                    "params": { "type": "string" },
+                                    "partial": { "type": "string" },
+                                    "pselector": { "type": "string" },
+                                    "reason": { "type": "string" },
+                                    "url": { "type": "string" }
+                                  },
+                                  "required": [
+                                    "apikey",
+                                    "audio",
+                                    "chunksize",
+                                    "file",
+                                    "image",
+                                    "model",
+                                    "outfile",
+                                    "params",
+                                    "partial",
+                                    "pselector",
+                                    "reason",
+                                    "url"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "footer": { "type": "string" },
+                                "usage": { "type": "string" }
+                              },
+                              "required": [
+                                "description",
+                                "flags",
+                                "footer",
+                                "usage"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "rd": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {},
+                                  "required": [],
+                                  "additionalProperties": false
+                                },
+                                "usage": { "type": "string" }
+                              },
+                              "required": ["description", "flags", "usage"],
+                              "additionalProperties": false
+                            },
+                            "rm": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {
+                                    "all": { "type": "string" },
+                                    "bin": { "type": "string" },
+                                    "force": { "type": "string" },
+                                    "model": { "type": "string" }
+                                  },
+                                  "required": ["all", "bin", "force", "model"],
+                                  "additionalProperties": false
+                                },
+                                "usage": { "type": "string" }
+                              },
+                              "required": ["description", "flags", "usage"],
+                              "additionalProperties": false
+                            },
+                            "sp": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {
+                                    "size": { "type": "string" }
+                                  },
+                                  "required": ["size"],
+                                  "additionalProperties": false
+                                },
+                                "usage": { "type": "string" }
+                              },
+                              "required": ["description", "flags", "usage"],
+                              "additionalProperties": false
+                            },
+                            "st": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {
+                                    "brainrot": { "type": "string" },
+                                    "compress": { "type": "string" },
+                                    "enddelimiter": { "type": "string" },
+                                    "extracttag": { "type": "string" },
+                                    "params": { "type": "string" },
+                                    "startdelimiter": { "type": "string" },
+                                    "unformat": { "type": "string" }
+                                  },
+                                  "required": [
+                                    "brainrot",
+                                    "compress",
+                                    "enddelimiter",
+                                    "extracttag",
+                                    "params",
+                                    "startdelimiter",
+                                    "unformat"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "footer": { "type": "string" },
+                                "usage": { "type": "string" }
+                              },
+                              "required": [
+                                "description",
+                                "flags",
+                                "footer",
+                                "usage"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "tc": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {
+                                    "params": { "type": "string" }
+                                  },
+                                  "required": ["params"],
+                                  "additionalProperties": false
+                                },
+                                "footer": { "type": "string" },
+                                "usage": { "type": "string" }
+                              },
+                              "required": [
+                                "description",
+                                "flags",
+                                "footer",
+                                "usage"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "tc2": {
+                              "type": "object",
+                              "properties": {
+                                "description": { "type": "string" },
+                                "flags": {
+                                  "type": "object",
+                                  "properties": {
+                                    "chunksize": { "type": "string" },
+                                    "params": { "type": "string" }
+                                  },
+                                  "required": ["chunksize", "params"],
+                                  "additionalProperties": false
+                                },
+                                "usage": { "type": "string" }
+                              },
+                              "required": ["description", "flags", "usage"],
+                              "additionalProperties": false
+                            }
+                          },
+                          "required": [
+                            "avg",
+                            "bg",
+                            "bg2",
+                            "br",
+                            "cfg",
+                            "cm",
+                            "jd",
+                            "mg",
+                            "or",
+                            "os",
+                            "rd",
+                            "rm",
+                            "sp",
+                            "st",
+                            "tc",
+                            "tc2"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "generic": {
+                          "type": "object",
+                          "properties": {
+                            "commandDescriptions": {
+                              "type": "object",
+                              "properties": {
+                                "avg": { "type": "string" },
+                                "bg": { "type": "string" },
+                                "bg2": { "type": "string" },
+                                "br": { "type": "string" },
+                                "cfg": { "type": "string" },
+                                "cm": { "type": "string" },
+                                "jd": { "type": "string" },
+                                "mg": { "type": "string" },
+                                "or": { "type": "string" },
+                                "os": { "type": "string" },
+                                "rd": { "type": "string" },
+                                "rm": { "type": "string" },
+                                "sp": { "type": "string" },
+                                "st": { "type": "string" },
+                                "tc": { "type": "string" },
+                                "tc2": { "type": "string" }
+                              },
+                              "required": [
+                                "avg",
+                                "bg",
+                                "bg2",
+                                "br",
+                                "cfg",
+                                "cm",
+                                "jd",
+                                "mg",
+                                "or",
+                                "os",
+                                "rd",
+                                "rm",
+                                "sp",
+                                "st",
+                                "tc",
+                                "tc2"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "commandHeader": { "type": "string" },
+                            "flags": {
+                              "type": "object",
+                              "properties": { "version": { "type": "string" } },
+                              "required": ["version"],
+                              "additionalProperties": false
+                            },
+                            "footer": { "type": "string" },
+                            "globalOptionsHeader": { "type": "string" },
+                            "header": { "type": "string" },
+                            "usage": { "type": "string" }
+                          },
+                          "required": [
+                            "commandDescriptions",
+                            "commandHeader",
+                            "flags",
+                            "footer",
+                            "globalOptionsHeader",
+                            "header",
+                            "usage"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "optionsHeader": { "type": "string" }
+                      },
+                      "required": ["commands", "generic", "optionsHeader"],
+                      "additionalProperties": false
+                    },
+                    "languages": {
+                      "type": "object",
+                      "properties": {
+                        "_LLM_INSTRUCTIONS_ALIASES": { "type": "string" },
+                        "ARABIC": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "BENGALI": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "BURMESE": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "CANTONESE": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "CHINESE": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "CZECH": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "DETECTED": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "DUTCH": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "ENGLISH": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "FILIPINO": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "FRENCH": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "GERMAN": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "GUJARATI": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "HEBREW": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "HINDI": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "INDONESIAN": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "ITALIAN": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "JAPANESE": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "KAZAKH": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "KHMER": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "KOREAN": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "MALAY": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "MARATHI": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "MONGOLIAN": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "PERSIAN": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "POLISH": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "PORTUGUESE": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "RUSSIAN": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "SIMPLIFIED_CHINESE": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "SPANISH": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "TAMIL": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "TELUGU": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "THAI": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "TIBETAN": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "TRADITIONAL_CHINESE": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "TURKISH": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "UKRAINIAN": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "URDU": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "UYGHUR": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        },
+                        "VIETNAMESE": {
+                          "type": "object",
+                          "properties": {
+                            "aliases": {
+                              "type": "array",
+                              "items": { "type": "string" }
+                            },
+                            "name": { "type": "string" }
+                          },
+                          "required": ["aliases", "name"],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "_LLM_INSTRUCTIONS_ALIASES",
+                        "ARABIC",
+                        "BENGALI",
+                        "BURMESE",
+                        "CANTONESE",
+                        "CHINESE",
+                        "CZECH",
+                        "DETECTED",
+                        "DUTCH",
+                        "ENGLISH",
+                        "FILIPINO",
+                        "FRENCH",
+                        "GERMAN",
+                        "GUJARATI",
+                        "HEBREW",
+                        "HINDI",
+                        "INDONESIAN",
+                        "ITALIAN",
+                        "JAPANESE",
+                        "KAZAKH",
+                        "KHMER",
+                        "KOREAN",
+                        "MALAY",
+                        "MARATHI",
+                        "MONGOLIAN",
+                        "PERSIAN",
+                        "POLISH",
+                        "PORTUGUESE",
+                        "RUSSIAN",
+                        "SIMPLIFIED_CHINESE",
+                        "SPANISH",
+                        "TAMIL",
+                        "TELUGU",
+                        "THAI",
+                        "TIBETAN",
+                        "TRADITIONAL_CHINESE",
+                        "TURKISH",
+                        "UKRAINIAN",
+                        "URDU",
+                        "UYGHUR",
+                        "VIETNAMESE"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "m": {
+                      "type": "object",
+                      "properties": {
+                        "c": {
+                          "type": "object",
+                          "properties": {
+                            "avg": {
+                              "type": "object",
+                              "properties": {
+                                "averageBytesPerLine": { "type": "string" },
+                                "averageCharsPerLine": { "type": "string" }
+                              },
+                              "required": [
+                                "averageBytesPerLine",
+                                "averageCharsPerLine"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "br": {
+                              "type": "object",
+                              "properties": {
+                                "exportedSuccessfully": { "type": "string" }
+                              },
+                              "required": ["exportedSuccessfully"],
+                              "additionalProperties": false
+                            },
+                            "cfg": {
+                              "type": "object",
+                              "properties": {
+                                "cfgDeletedSuccessfully": { "type": "string" },
+                                "localeSuccessfullyChanged": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "cfgDeletedSuccessfully",
+                                "localeSuccessfullyChanged"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "cm": {
+                              "type": "object",
+                              "properties": { "success": { "type": "string" } },
+                              "required": ["success"],
+                              "additionalProperties": false
+                            },
+                            "jd": {
+                              "type": "object",
+                              "properties": {
+                                "fullyAligned": { "type": "string" },
+                                "mergedSuccess": { "type": "string" },
+                                "partCreated": { "type": "string" },
+                                "savedSuccess": { "type": "string" },
+                                "splitSuccess": { "type": "string" }
+                              },
+                              "required": [
+                                "fullyAligned",
+                                "mergedSuccess",
+                                "partCreated",
+                                "savedSuccess",
+                                "splitSuccess"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "models": {
+                              "type": "object",
+                              "properties": {
+                                "completion": { "type": "string" },
+                                "dual": { "type": "string" },
+                                "effort": { "type": "string" },
+                                "fallback": { "type": "string" },
+                                "genericprep": { "type": "string" },
+                                "genericsys": { "type": "string" },
+                                "instruct": { "type": "string" },
+                                "noHelp": { "type": "string" },
+                                "reasoning": { "type": "string" }
+                              },
+                              "required": [
+                                "completion",
+                                "dual",
+                                "effort",
+                                "fallback",
+                                "genericprep",
+                                "genericsys",
+                                "instruct",
+                                "noHelp",
+                                "reasoning"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "or": {
+                              "type": "object",
+                              "properties": {
+                                "audioCompletionTokens": { "type": "string" },
+                                "audioPromptTokens": { "type": "string" },
+                                "batchStatsHeader": { "type": "string" },
+                                "byokIncluded": { "type": "string" },
+                                "byokUsageAllTime": { "type": "string" },
+                                "byokUsageDaily": { "type": "string" },
+                                "byokUsageMonthly": { "type": "string" },
+                                "byokUsageWeekly": { "type": "string" },
+                                "cachedTokens": { "type": "string" },
+                                "cacheWriteTokens": { "type": "string" },
+                                "costsSection": { "type": "string" },
+                                "creditsSection": { "type": "string" },
+                                "failedRequests": { "type": "string" },
+                                "failedSection": { "type": "string" },
+                                "generalSection": { "type": "string" },
+                                "header": { "type": "string" },
+                                "imageCompletionTokens": { "type": "string" },
+                                "isFreeTier": { "type": "string" },
+                                "label": { "type": "string" },
+                                "limit": { "type": "string" },
+                                "limitRemaining": { "type": "string" },
+                                "limitReset": { "type": "string" },
+                                "malformed": { "type": "string" },
+                                "modelsSection": { "type": "string" },
+                                "no": { "type": "string" },
+                                "notAvailable": { "type": "string" },
+                                "providersSection": { "type": "string" },
+                                "reasoningTokens": { "type": "string" },
+                                "streamTerminatedError": { "type": "string" },
+                                "successfulRequests": { "type": "string" },
+                                "tokensSection": { "type": "string" },
+                                "totalCompletionTokens": { "type": "string" },
+                                "totalCost": { "type": "string" },
+                                "totalPromptTokens": { "type": "string" },
+                                "totalRequests": { "type": "string" },
+                                "totalTokens": { "type": "string" },
+                                "unknownError": { "type": "string" },
+                                "unlimited": { "type": "string" },
+                                "upstreamCompletionCost": { "type": "string" },
+                                "upstreamInferenceCost": { "type": "string" },
+                                "upstreamPromptCost": { "type": "string" },
+                                "usageAllTime": { "type": "string" },
+                                "usageDaily": { "type": "string" },
+                                "usageMonthly": { "type": "string" },
+                                "usageSection": { "type": "string" },
+                                "usageWeekly": { "type": "string" },
+                                "videoPromptTokens": { "type": "string" },
+                                "yes": { "type": "string" }
+                              },
+                              "required": [
+                                "audioCompletionTokens",
+                                "audioPromptTokens",
+                                "batchStatsHeader",
+                                "byokIncluded",
+                                "byokUsageAllTime",
+                                "byokUsageDaily",
+                                "byokUsageMonthly",
+                                "byokUsageWeekly",
+                                "cachedTokens",
+                                "cacheWriteTokens",
+                                "costsSection",
+                                "creditsSection",
+                                "failedRequests",
+                                "failedSection",
+                                "generalSection",
+                                "header",
+                                "imageCompletionTokens",
+                                "isFreeTier",
+                                "label",
+                                "limit",
+                                "limitRemaining",
+                                "limitReset",
+                                "malformed",
+                                "modelsSection",
+                                "no",
+                                "notAvailable",
+                                "providersSection",
+                                "reasoningTokens",
+                                "streamTerminatedError",
+                                "successfulRequests",
+                                "tokensSection",
+                                "totalCompletionTokens",
+                                "totalCost",
+                                "totalPromptTokens",
+                                "totalRequests",
+                                "totalTokens",
+                                "unknownError",
+                                "unlimited",
+                                "upstreamCompletionCost",
+                                "upstreamInferenceCost",
+                                "upstreamPromptCost",
+                                "usageAllTime",
+                                "usageDaily",
+                                "usageMonthly",
+                                "usageSection",
+                                "usageWeekly",
+                                "videoPromptTokens",
+                                "yes"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "rd": {
+                              "type": "object",
+                              "properties": {
+                                "closeBtn": { "type": "string" },
+                                "confirmDelete": { "type": "string" },
+                                "contentLoadError": { "type": "string" },
+                                "deleteBtn": { "type": "string" },
+                                "ebookLoaded": { "type": "string" },
+                                "emptyLibrary": { "type": "string" },
+                                "fontSizeLabel": { "type": "string" },
+                                "importLabel": { "type": "string" },
+                                "instructions": { "type": "string" },
+                                "libraryModeLoaded": { "type": "string" },
+                                "libraryTitle": { "type": "string" },
+                                "loadBtn": { "type": "string" },
+                                "loadingMsg": { "type": "string" },
+                                "nextBtn": { "type": "string" },
+                                "notFound": { "type": "string" },
+                                "portInUse": { "type": "string" },
+                                "previousBtn": { "type": "string" },
+                                "readingFile": { "type": "string" },
+                                "recalcProgressMsg": { "type": "string" },
+                                "recalcTitle": { "type": "string" },
+                                "reflowingMsg": { "type": "string" },
+                                "seekingPageMsg": { "type": "string" },
+                                "serverRunningAt": { "type": "string" },
+                                "sizeHXLarge": { "type": "string" },
+                                "sizeLarge": { "type": "string" },
+                                "sizeMedium": { "type": "string" },
+                                "sizeMediumL": { "type": "string" },
+                                "sizeNormal": { "type": "string" },
+                                "sizeSmall": { "type": "string" },
+                                "sizeTHXLarge": { "type": "string" },
+                                "sizeTXLarge": { "type": "string" },
+                                "sizeVSmall": { "type": "string" },
+                                "sizeXLarge": { "type": "string" },
+                                "syncBtn": { "type": "string" },
+                                "syncLabel": { "type": "string" },
+                                "themeToggleTitle": { "type": "string" },
+                                "title": { "type": "string" }
+                              },
+                              "required": [
+                                "closeBtn",
+                                "confirmDelete",
+                                "contentLoadError",
+                                "deleteBtn",
+                                "ebookLoaded",
+                                "emptyLibrary",
+                                "fontSizeLabel",
+                                "importLabel",
+                                "instructions",
+                                "libraryModeLoaded",
+                                "libraryTitle",
+                                "loadBtn",
+                                "loadingMsg",
+                                "nextBtn",
+                                "notFound",
+                                "portInUse",
+                                "previousBtn",
+                                "readingFile",
+                                "recalcProgressMsg",
+                                "recalcTitle",
+                                "reflowingMsg",
+                                "seekingPageMsg",
+                                "serverRunningAt",
+                                "sizeHXLarge",
+                                "sizeLarge",
+                                "sizeMedium",
+                                "sizeMediumL",
+                                "sizeNormal",
+                                "sizeSmall",
+                                "sizeTHXLarge",
+                                "sizeTXLarge",
+                                "sizeVSmall",
+                                "sizeXLarge",
+                                "syncBtn",
+                                "syncLabel",
+                                "themeToggleTitle",
+                                "title"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "rm": {
+                              "type": "object",
+                              "properties": {
+                                "filesDeletedSuccessfully": {
+                                  "type": "string"
+                                },
+                                "filesToDelete": { "type": "string" },
+                                "noFilesToDelete": { "type": "string" }
+                              },
+                              "required": [
+                                "filesDeletedSuccessfully",
+                                "filesToDelete",
+                                "noFilesToDelete"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "sp": {
+                              "type": "object",
+                              "properties": {
+                                "fileSplitSuccess": { "type": "string" },
+                                "partCreated": { "type": "string" }
+                              },
+                              "required": ["fileSplitSuccess", "partCreated"],
+                              "additionalProperties": false
+                            },
+                            "st": {
+                              "type": "object",
+                              "properties": {
+                                "blockDeleted": { "type": "string" },
+                                "blockExtracted": { "type": "string" },
+                                "compressed": { "type": "string" },
+                                "newlinesNormalized": { "type": "string" }
+                              },
+                              "required": [
+                                "blockDeleted",
+                                "blockExtracted",
+                                "compressed",
+                                "newlinesNormalized"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "tc": {
+                              "type": "object",
+                              "properties": {
+                                "aboveTripleHeader": { "type": "string" },
+                                "anomalyRow": { "type": "string" },
+                                "availableModelsForDownload": {
+                                  "type": "string"
+                                },
+                                "avgTc": { "type": "string" },
+                                "doubleToTripleHeader": { "type": "string" },
+                                "downloadingModelFiles": { "type": "string" },
+                                "downloadSuccess": { "type": "string" },
+                                "medianTc": { "type": "string" },
+                                "tc": { "type": "string" },
+                                "workerOomRetry": { "type": "string" },
+                                "writingFilesTo": { "type": "string" }
+                              },
+                              "required": [
+                                "aboveTripleHeader",
+                                "anomalyRow",
+                                "availableModelsForDownload",
+                                "avgTc",
+                                "doubleToTripleHeader",
+                                "downloadingModelFiles",
+                                "downloadSuccess",
+                                "medianTc",
+                                "tc",
+                                "workerOomRetry",
+                                "writingFilesTo"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "tc2": {
+                              "type": "object",
+                              "properties": {
+                                "aboveTripleHeader": { "type": "string" },
+                                "anomalyRow": { "type": "string" },
+                                "avgTc": { "type": "string" },
+                                "doubleToTripleHeader": { "type": "string" },
+                                "medianTc": { "type": "string" },
+                                "tc": { "type": "string" }
+                              },
+                              "required": [
+                                "aboveTripleHeader",
+                                "anomalyRow",
+                                "avgTc",
+                                "doubleToTripleHeader",
+                                "medianTc",
+                                "tc"
+                              ],
+                              "additionalProperties": false
+                            }
+                          },
+                          "required": [
+                            "avg",
+                            "br",
+                            "cfg",
+                            "cm",
+                            "jd",
+                            "models",
+                            "or",
+                            "rd",
+                            "rm",
+                            "sp",
+                            "st",
+                            "tc",
+                            "tc2"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "lcli": {
+                          "type": "object",
+                          "properties": {
+                            "deletionAborted": { "type": "string" },
+                            "deletionConfirm": { "type": "string" },
+                            "redacted": { "type": "string" },
+                            "yN": { "type": "string" }
+                          },
+                          "required": [
+                            "deletionAborted",
+                            "deletionConfirm",
+                            "redacted",
+                            "yN"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "lllm": {
+                          "type": "object",
+                          "properties": {
+                            "anotherInstanceIsProcessing": { "type": "string" },
+                            "apiDebugTemplate": { "type": "string" },
+                            "batchProgress": { "type": "string" },
+                            "closingTag": { "type": "string" },
+                            "ctrlCPressed": { "type": "string" },
+                            "ctrlCPressed2": { "type": "string" },
+                            "filesMerged": { "type": "string" },
+                            "generatingRequests": { "type": "string" },
+                            "openingTag": { "type": "string" },
+                            "processedChunkOf": { "type": "string" },
+                            "processingComplete": { "type": "string" },
+                            "progressSavedTerminating": { "type": "string" },
+                            "quittingWithoutSaving": { "type": "string" },
+                            "retrying": { "type": "string" },
+                            "retryWithTemp": { "type": "string" },
+                            "sourceEmpty": { "type": "string" },
+                            "terminatedForcefully": { "type": "string" },
+                            "wroteEntries": { "type": "string" }
+                          },
+                          "required": [
+                            "anotherInstanceIsProcessing",
+                            "apiDebugTemplate",
+                            "batchProgress",
+                            "closingTag",
+                            "ctrlCPressed",
+                            "ctrlCPressed2",
+                            "filesMerged",
+                            "generatingRequests",
+                            "openingTag",
+                            "processedChunkOf",
+                            "processingComplete",
+                            "progressSavedTerminating",
+                            "quittingWithoutSaving",
+                            "retrying",
+                            "retryWithTemp",
+                            "sourceEmpty",
+                            "terminatedForcefully",
+                            "wroteEntries"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": ["c", "lcli", "lllm"],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": ["e", "help", "languages", "m"],
+                  "additionalProperties": false
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "PREFIX_REPLACEMENTS": {
+    "EN_DETECTED": "source language",
+    "EN_ENGLISH": "English",
+    "EN_SIMPLIFIED_CHINESE": "Simplified Chinese",
+    "EN_TRADITIONAL_CHINESE": "Traditional Chinese",
+    "EN_CHINESE": "Chinese",
+    "EN_FRENCH": "French",
+    "EN_JAPANESE": "Japanese",
+    "EN_PORTUGUESE": "Portuguese",
+    "EN_SPANISH": "Spanish",
+    "EN_TURKISH": "Turkish",
+    "EN_RUSSIAN": "Russian",
+    "EN_ARABIC": "Arabic",
+    "EN_KOREAN": "Korean",
+    "EN_THAI": "Thai",
+    "EN_ITALIAN": "Italian",
+    "EN_GERMAN": "German",
+    "EN_VIETNAMESE": "Vietnamese",
+    "EN_MALAY": "Malay",
+    "EN_INDONESIAN": "Indonesian",
+    "EN_FILIPINO": "Filipino",
+    "EN_HINDI": "Hindi",
+    "EN_POLISH": "Polish",
+    "EN_CZECH": "Czech",
+    "EN_DUTCH": "Dutch",
+    "EN_KHMER": "Khmer",
+    "EN_BURMESE": "Burmese",
+    "EN_PERSIAN": "Persian",
+    "EN_GUJARATI": "Gujarati",
+    "EN_URDU": "Urdu",
+    "EN_TELUGU": "Telugu",
+    "EN_MARATHI": "Marathi",
+    "EN_HEBREW": "Hebrew",
+    "EN_BENGALI": "Bengali",
+    "EN_TAMIL": "Tamil",
+    "EN_UKRAINIAN": "Ukrainian",
+    "EN_TIBETAN": "Tibetan",
+    "EN_KAZAKH": "Kazakh",
+    "EN_MONGOLIAN": "Mongolian",
+    "EN_UYGHUR": "Uyghur",
+    "EN_CANTONESE": "Cantonese",
+    "CN_DETECTED": "源语言",
+    "CN_CHINESE": "中文",
+    "CN_SIMPLIFIED_CHINESE": "中文",
+    "CN_ENGLISH": "英语",
+    "CN_FRENCH": "法语",
+    "CN_PORTUGUESE": "葡萄牙语",
+    "CN_SPANISH": "西班牙语",
+    "CN_JAPANESE": "日语",
+    "CN_TURKISH": "土耳其语",
+    "CN_RUSSIAN": "俄语",
+    "CN_ARABIC": "阿拉伯语",
+    "CN_KOREAN": "韩语",
+    "CN_THAI": "泰语",
+    "CN_ITALIAN": "意大利语",
+    "CN_GERMAN": "德语",
+    "CN_VIETNAMESE": "越南语",
+    "CN_MALAY": "马来语",
+    "CN_INDONESIAN": "印尼语",
+    "CN_FILIPINO": "菲律宾语",
+    "CN_HINDI": "印地语",
+    "CN_TRADITIONAL_CHINESE": "繁体中文",
+    "CN_POLISH": "波兰语",
+    "CN_CZECH": "捷克语",
+    "CN_DUTCH": "荷兰语",
+    "CN_KHMER": "高棉语",
+    "CN_BURMESE": "缅甸语",
+    "CN_PERSIAN": "波斯语",
+    "CN_GUJARATI": "古吉拉特语",
+    "CN_URDU": "乌尔都语",
+    "CN_TELUGU": "泰卢固语",
+    "CN_MARATHI": "马拉地语",
+    "CN_HEBREW": "希伯来语",
+    "CN_BENGALI": "孟加拉语",
+    "CN_TAMIL": "泰米尔语",
+    "CN_UKRAINIAN": "乌克兰语",
+    "CN_TIBETAN": "藏语",
+    "CN_KAZAKH": "哈萨克语",
+    "CN_MONGOLIAN": "蒙古语",
+    "CN_UYGHUR": "维吾尔语",
+    "CN_CANTONESE": "粤语",
+    "JA_DETECTED": "ソース言語",
+    "JA_ENGLISH": "英語",
+    "JA_FRENCH": "フランス語",
+    "JA_JAPANESE": "日本語",
+    "JA_CHINESE": "中国語",
+    "JA_SIMPLIFIED_CHINESE": "簡体中国語",
+    "JA_TRADITIONAL_CHINESE": "繁体中国語",
+    "JA_CANTONESE": "広東語",
+    "JA_SPANISH": "スペイン語",
+    "JA_PORTUGUESE": "ポルトガル語",
+    "JA_RUSSIAN": "ロシア語",
+    "JA_ARABIC": "アラビア語",
+    "JA_KOREAN": "韓国語",
+    "JA_GERMAN": "ドイツ語",
+    "JA_ITALIAN": "イタリア語",
+    "JA_DUTCH": "オランダ語",
+    "JA_POLISH": "ポーランド語",
+    "JA_TURKISH": "トルコ語",
+    "JA_VIETNAMESE": "ベトナム語",
+    "JA_THAI": "タイ語",
+    "JA_INDONESIAN": "インドネシア語",
+    "JA_MALAY": "マレー語",
+    "JA_FILIPINO": "フィリピノ語",
+    "JA_HINDI": "ヒンディー語",
+    "JA_BENGALI": "ベンガル語",
+    "JA_URDU": "ウルドゥー語",
+    "JA_PERSIAN": "ペルシャ語",
+    "JA_HEBREW": "ヘブライ語",
+    "JA_GUJARATI": "グジャラート語",
+    "JA_TELUGU": "テルグ語",
+    "JA_MARATHI": "マラーティー語",
+    "JA_TAMIL": "タミル語",
+    "JA_UKRAINIAN": "ウクライナ語",
+    "JA_CZECH": "チェコ語",
+    "JA_KHMER": "クメール語",
+    "JA_BURMESE": "ビルマ語",
+    "JA_TIBETAN": "チベット語",
+    "JA_KAZAKH": "カザフ語",
+    "JA_MONGOLIAN": "モンゴル語",
+    "JA_UYGHUR": "ウイグル語"
+  },
+  "VERSION": 1
+}

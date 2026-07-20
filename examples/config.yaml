@@ -1,0 +1,142 @@
+globalTTL: 600
+macros:
+  "llamacpp": >
+    /usr/bin/llama-server
+    --port ${PORT}
+    --no-mmap
+    --fit off
+    --n-gpu-layers all
+    --kv-unified
+    --flash-attn on
+    -t 6
+    --repeat-penalty 1.0
+    --min-p 0.0
+    --timeout 600
+    --reasoning-format deepseek
+    --reasoning-budget-message "
+
+
+    [REASONING TOKEN BUDGET LIMIT EXCEEDED] Considering the limited time by the user, I have to give the solution based on the thinking directly now.
+    "
+
+  "np1": "--parallel 1"
+  "np4": "--parallel 4"
+
+  "mtp": "--spec-type draft-mtp --spec-draft-n-max 2"
+  "ngrammod": "--spec-type ngram-mod --spec-ngram-mod-n-match 24 --spec-ngram-mod-n-min 48 --spec-ngram-mod-n-max 64"
+
+  "defvis": "--image-min-tokens 560 --image-max-tokens 1120 --batch-size 2048 --ubatch-size 2048"
+
+  "brd": "--cache-type-k q8_0 --cache-type-v q8_0"
+  "brdconfirmed": "--cache-type-k q4_0 --cache-type-v q4_0"
+
+  "lowctx": "--ctx-size 16384"
+  "defctx": "--ctx-size 32768"
+  "mediumctx": "--ctx-size 65536"
+  "largectx": "--ctx-size 131072"
+
+  "cachey": "--cache-ram 8192 --ctx-checkpoints 10"
+  "cachen": "--cache-ram 0 --ctx-checkpoints 0"
+
+  "defsampgemma": "--temp 1.0 --top-k 64 --top-p 0.95"
+  "gemma": "${cachey} ${brd} ${defsampgemma}"
+  "gemmavis": "${defvis} ${gemma}"
+
+  "defsamphymt": "--temp 0.7 --top-k 20 --top-p 0.6"
+  "hymt": "${cachen} ${defsamphymt}"
+
+  "model_gemma_e4b": "/path/to/models/gemma-4-e4b-it-qat-ud-q4_k_xl.gguf"
+  "model_gemma_e4b_mtp": "/path/to/models/mtp-gemma-4-e4b-it.gguf"
+  "mmproj_gemma_e4b": "/path/to/models/mmproj-gemma-4-e4b-it.gguf"
+
+  "model_gemma_e2b": "/path/to/models/gemma-4-e2b-it-qat-ud-q4_k_xl.gguf"
+  "model_gemma_e2b_mtp": "/path/to/models/mtp-gemma-4-e2b-it.gguf"
+  "mmproj_gemma_e2b": "/path/to/models/mmproj-gemma-4-e2b-it.gguf"
+
+  "model_hymt": "/path/to/models/hy-mt2-1.8b-q8_0.gguf"
+
+  "model_gemma_26ba4b": "/path/to/models/gemma-4-26b-a4b-it-qat-ud-q4_k_xl.gguf"
+  "model_gemma_26ba4b_mtp": "/path/to/models/mtp-gemma-4-26b-a4b-it.gguf"
+  "mmproj_gemma_26ba4b": "/path/to/models/mmproj-gemma-4-26b-a4b-it.gguf"
+
+models:
+  "gemma":
+    concurrencyLimit: 4
+    cmd: |
+      ${llamacpp}
+      ${np4}
+      ${mtp}
+      ${mediumctx}
+      ${gemmavis}
+      --model ${model_gemma_e4b}
+      --model-draft ${model_gemma_e4b_mtp}
+      --mmproj ${mmproj_gemma_e4b}
+
+  "gemmamini":
+    concurrencyLimit: 4
+    cmd: |
+      ${llamacpp}
+      ${np4}
+      ${mtp}
+      ${mediumctx}
+      ${gemmavis}
+      --model ${model_gemma_e2b}
+      --model-draft ${model_gemma_e2b_mtp}
+      --mmproj ${mmproj_gemma_e2b}
+
+  "hymt":
+    unlisted: true
+    concurrencyLimit: 4
+    cmd: |
+      ${llamacpp}
+      ${np4}
+      ${defctx}
+      ${hymt}
+      --model ${model_hymt}
+
+  "gemmamoe":
+    concurrencyLimit: 1
+    cmd: |
+      ${llamacpp}
+      ${np1}
+      ${mtp}
+      ${defctx}
+      --n-cpu-moe 20
+      ${gemma}
+      --model ${model_gemma_26ba4b}
+      --model-draft ${model_gemma_26ba4b_mtp}
+
+  "gemmamoelargectx":
+    concurrencyLimit: 1
+    cmd: |
+      ${llamacpp}
+      ${np1}
+      ${largectx}
+      --n-cpu-moe 22
+      ${gemma}
+      --model ${model_gemma_26ba4b}
+
+  "gemmamoevl":
+    concurrencyLimit: 1
+    cmd: |
+      ${llamacpp}
+      ${np1}
+      ${mtp}
+      ${defctx}
+      --n-cpu-moe 23
+      ${gemmavis}
+      --model ${model_gemma_26ba4b}
+      --model-draft ${model_gemma_26ba4b_mtp}
+      --mmproj ${mmproj_gemma_26ba4b}
+
+groups:
+  "single_model_group":
+    swap: true
+    exclusive: true
+    members:
+      - "gemma"
+      - "gemmamini"
+      - "hymt"
+      - "gemmamoe"
+      - "gemmamoevl"
+      - "gemmamoelargectx"

@@ -1,0 +1,7 @@
+saveExact: true
+minimumReleaseAge: 10080
+ignoreScripts: true
+allowBuilds: {}
+minimumReleaseAgeExclude:
+  - typescript
+  - "@typescript/*"

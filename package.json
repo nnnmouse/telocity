@@ -1,0 +1,73 @@
+{
+  "name": "telocity",
+  "version": "1.0.3",
+  "private": true,
+  "description": "A CLI script for basic local LLM interactions.",
+  "author": "nnnmouse",
+  "bin": {
+    "telocity": "./dist/start.js",
+    "telocity-dev": "./bin/start.ts"
+  },
+  "files": [
+    "dist/",
+    "data/",
+    "bin/",
+    "src/",
+    "LICENSE-APACHE-2.0",
+    "NOTICE"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./core": "./dist/libs/core/index.js",
+    "./LLM": "./dist/libs/LLM/index.js",
+    "./thirdparty": "./dist/libs/thirdparty/index.js",
+    "./types": "./dist/libs/types/index.js"
+  },
+  "scripts": {
+    "schema": "node ./scripts/translationschemagenerator.ts && pnpm fmt",
+    "clean": "rimraf dist",
+    "clean:strings": "node ./scripts/cleanstrings.ts",
+    "pretest": "pnpm clean:strings && pnpm typecheck && pnpm lint && pnpm i18ns && pnpm confs",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "i18ns": "node ./scripts/i18nvalidator.ts",
+    "confs": "node ./scripts/configvalidator.ts",
+    "test": "cross-env TDEVELOPER=1 vitest",
+    "build": "pnpm clean && pnpm build:esbuild",
+    "build:esbuild": "node build.ts",
+    "build:sea": "node build.ts --sea",
+    "sea:inject": "node scripts/compile_sea.ts",
+    "sea:package": "pnpm clean && pnpm build:sea && pnpm sea:inject",
+    "start": "node ./dist/start.js",
+    "start:dev": "node ./bin/start.ts",
+    "translate": "pnpm schema && cross-env TDEVELOPER=1 telocity-dev cfg -rf && cross-env TDEVELOPER=1 node ./scripts/make_project_translations.ts && pnpm fmt",
+    "mockserv": "node ./scripts/mockserv.ts",
+    "mockserv:markdown": "node ./scripts/mockserv.ts --markdown",
+    "mockfail": "node ./scripts/mockserv.ts --fail",
+    "mockfail:finishreason": "node ./scripts/mockserv.ts --finishreason",
+    "mockfail:forbidden": "node ./scripts/mockserv.ts --forbidden",
+    "mockfail:ratelimit": "node ./scripts/mockserv.ts --ratelimit",
+    "mockfail:ratelimitafter": "node ./scripts/mockserv.ts --ratelimitafter 4",
+    "mockfail:payment": "node ./scripts/mockserv.ts --payment",
+    "mockfail:timeout": "node ./scripts/mockserv.ts --timeout",
+    "mockfail:failafter": "node ./scripts/mockserv.ts --failafter 4",
+    "mockfail:transport": "node ./scripts/mockserv.ts --transport"
+  },
+  "devDependencies": {
+    "@types/node": "26.1.0",
+    "ajv": "8.20.0",
+    "cross-env": "10.1.0",
+    "esbuild": "0.28.1",
+    "oxfmt": "0.57.0",
+    "oxlint": "1.72.0",
+    "rimraf": "6.1.3",
+    "typescript": "7.0.2",
+    "vitest": "4.1.9"
+  },
+  "packageManager": "pnpm@11.15.0+sha512.266f8957a30d2be6e9468e5e66bcdedd35a794175f71b067ba8504d686cce1d0c0f429b33c323c3c569ad4891e667574a49ff71d1b89a22cc66f13c65818c578",
+  "url": "https://github.com/nnnmouse/telocity"
+}

@@ -1,0 +1,69 @@
+A lot of backends out there and clients only support http/2 with TLS enabled. It's really pass:[*******] but since the situation is like this I don't bother with support for clearnet h2c either, not worth having.
+
+For local testing, download link:https://github.com/Filosottile/mkcert[mkcert] then:
+
+[source,bash]
+----
+mkcert -install
+mkcert localhost 127.0.0.1 ::1
+----
+
+Copy the certs into your backend folder, run llama-swap with `-tls-cert-file localhost.pem -tls-key-file localhost-key.pem`
+
+And add this line to your bashrc:
+
+[source,bash]
+----
+export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
+----
+
+It's really more of a note to self: there's not much reason to use http/2 locally but it's good to dogfood this path with some local use since I don't use a higher level library.
+
+== Testing HTTP/2 with llama-swap as a transparent proxy
+
+[source,yaml]
+----
+healthCheckTimeout: 500
+logLevel: info
+logToStdout: "proxy"
+globalTTL: 0
+
+hooks:
+  on_startup:
+    preload:
+      - "llama-launcher"
+
+models:
+  "llama-launcher":
+    cmd: |
+      /usr/bin/llama-server
+      --port 10001
+      --models-preset /path/to/models/llamapresets.ini
+      --models-max 1
+      --reasoning-budget-message "
+
+
+      [REASONING TOKEN BUDGET LIMIT EXCEEDED] Considering the limited time by the user, I have to give the solution based on the thinking directly now.
+      "
+    proxy: http://127.0.0.1:10001
+    ttl: 0
+    unlisted: true
+
+peers:
+  llama-server-backend:
+    proxy: http://127.0.0.1:10001
+    models:
+      - "gemma"
+      - "gemmamini"
+      - "hymt"
+      - "gemmamoe"
+      - "gemmamoelargectx"
+      - "gemmamoevl"
+----
+
+Launch with:
+
+[source,bash]
+----
+llama-swap.exe --config /path/to/config.yaml -tls-cert-file /path/to/localhost.pem -tls-key-file /path/to/localhost-key.pem
+----

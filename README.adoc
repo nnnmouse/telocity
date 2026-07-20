@@ -1,0 +1,136 @@
+= telocity
+
+A CLI thing for poking at local LLMs. Only works with plain text files (use link:https://github.com/kovidgoyal/calibre[calibre]'s ebook-convert, luke) Not a srs script, just a playground for myself.  
+Script's strings are a testbed for tiny local llm translation, all UI strings other than `en-US.json` are translated with link:https://huggingface.co/unsloth/gemma-4-26B-A4B-it-qat-GGUF[unsloth/gemma-4-26B-A4B-it-qat-GGUF], `scripts/make_project_translations.ts` shows how it's done, default preset settings were used (preset will only be written to your own config if TDEVELOPER env var is set).
+
+== Installation
+
+Node+script bundle on Windows: just download the SEA package in Releases.
+
+Otherwise:
+Scripts depend on Node.js and pnpm being installed.
+
+[source,bash]
+----
+git clone https://github.com/nnnmouse/telocity
+cd telocity
+pnpm install
+pnpm build
+pnpm add -g .
+----
+
+Instead of `pnpm build` you can run `pnpm sea:package` if you feel adventurous. I have not tested it on other OSes.
+
+Generate bash completions with:
+
+[source,bash]
+----
+# Generates completions for --partial --pselector --params based
+# on your current config json templates and model presets.
+telocity co > _telocity_completions
+----
+
+Quickstart typical use with your default preset:
+[source,bash]
+----
+# Generate a jsonl with the preset's chunksize.
+# Segments some.txt into chunks of X lines injected with a translation prompt.
+# Each chunk becomes a JSON line request.
+telocity bg some.txt some.jsonl
+
+# Run inference. This uses your default preset to decide --parallel
+# and --batchsize checkpoints (number of requests before saving,
+# printing content to terminal).
+telocity br some.jsonl
+
+# A few examples of other flows:
+# Low context backend? no prob. generate multiple keypoints chunks
+# (main cast information, glossary, writing style)
+telocity bg2 \
+  --chunksize 200 \
+  --pselector contextualinformation \
+  some.txt context.jsonl
+
+telocity br context_results.jsonl --export context.txt
+
+# Merge the multiple context chunks into one
+telocity os \
+  --pselector synthesis \
+  --file context.txt \
+  --outfile context_final.txt
+
+vim context_final.txt
+# LGTM
+
+# Extract a regexp to create JSON line chunks by chapter start
+# instead of segmenting by number of X lines
+telocity os --partial chapterformat --file some.txt
+# llm said "^第\d+章"
+
+telocity bg \
+  --context context_final.txt \
+  --regex "^第\d+章" \
+  some.txt some.jsonl
+
+telocity br some.jsonl --batchsize 50 --parallel 4
+telocity br some_results.jsonl --export mytranslatedcontent.txt
+# enjoy a good read
+----
+
+If you are a lazinessmaxxxer like me and want to have shorthands to call upon presets, throw dat in yer bashrc
+
+[source,bash]
+----
+_telocity_preset_wrapper() {
+  local preset="$1"
+  shift
+
+  if [ $# -eq 0 ]; then
+    command telocity
+  elif [[ "$1" == -* ]]; then
+    command telocity "$@"
+  else
+    local subcommand="$1"
+    shift
+    command telocity "$subcommand" --params "$preset" "$@"
+  fi
+}
+
+deepseek() { _telocity_preset_wrapper "deepseek" "$@"; }
+alias ds='deepseek'
+hymt() { _telocity_preset_wrapper "hymt" "$@"; }
+alias hy='hymt'
+alias tc='telocity'
+complete -F _telocity_completions telocity tc deepseek ds hymt hy
+----
+
+What the earlier "A few example" looks like as lazymaxxer, aliasing
+telocity to tc:
+
+[source,bash]
+----
+tc bg2 -c 200 -S con—TAB s—TAB context.jsonl
+tc br co—TABTAB -e context.txt
+tc os -S syn—TAB -i co—TABTABTAB -o context_final.txt
+vim co—TABHARDER
+tc os -P ch—TAB -i s—TAB
+tc bg -i context_final.txt -x "^第\d+章" s—TAB some.jsonl
+tc br s—TABTAB -b 50 -P 4
+tc br so—TABTABTAB -e mytranslatedcontent.txt
+----
+
+grug dun wanna typ mor than nesry
+
+Highly recommended to keep a local model as the default preset of the program and use a specific preset shorthand for API models.
+
+== Recommended local models for us vramlets
+
+link:https://huggingface.co/unsloth/gemma-4-26B-A4B-it-qat-GGUF[unsloth/gemma-4-26B-A4B-it-qat-GGUF] && link:https://huggingface.co/unsloth/gemma-4-E4B-it-qat-GGUF[unsloth/gemma-4-E4B-it-qat-GGUF] && link:https://huggingface.co/unsloth/gemma-4-E2B-it-qat-GGUF[unsloth/gemma-4-E2B-it-qat-GGUF]
+
+link:https://huggingface.co/tencent/Hy-MT2-7B-GGUF[tencent/Hy-MT2-7B-GGUF] && link:https://huggingface.co/tencent/Hy-MT2-1.8B-GGUF[tencent/Hy-MT2-1.8B-GGUF]
+
+== Credits:
+
+link:https://github.com/huggingface/transformers.js[huggingface for transformers.js] (tokenworker.js was adapted from their tokenizer code and remains under their license and attribution.)
+
+link:https://github.com/fabiospampinato/fast-string-width[fast string width implementation in TS]

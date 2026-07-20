@@ -1,0 +1,73 @@
+{
+  "deepseek": {
+    "reasoningType": "reason_and_instruct",
+    "metadata": {
+      "helptext_key": "models.dual",
+      "stripTags": { "start": "<think>", "end": "</think>" },
+      "display": true,
+      "localJSONL": true,
+      "defaultReasoning": true,
+      "stripEmpty": true,
+      "markdownBrainRot": true,
+      "forceStream": false,
+      "injectORSessionId": true,
+      "substitutionPrefix": "EN"
+    },
+    "instruct": {
+      "prompt": {
+        "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
+      },
+      "model": {
+        "chunkSize": 200,
+        "batchSize": 50,
+        "parallel": 10,
+        "rpm": 20,
+        "retryDelay": 15000,
+        "maxAttempts": 2,
+        "failureMeansDeath": false,
+        "tempIncrement": 0.2,
+        "max_tokens": [true, 16000],
+        "temperature": [false, 1],
+        "top_k": [false, 0],
+        "top_p": [false, 0.95],
+        "presence_penalty": [false, 0],
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "endpoint": "openrouter-chat",
+        "apiKey": "{{YOURKEY1}}",
+        "idleTimeout": 1,
+        "hardTimeout": 15,
+        "model": [true, "{{DEEPSEEKOR}}"],
+        "provider": [true, { "only": ["deepseek"] }],
+        "reasoning": [true, { "enabled": false }]
+      }
+    },
+    "reasoning": {
+      "prompt": {
+        "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
+      },
+      "model": {
+        "chunkSize": 200,
+        "batchSize": 50,
+        "parallel": 10,
+        "rpm": 20,
+        "retryDelay": 15000,
+        "maxAttempts": 2,
+        "failureMeansDeath": false,
+        "tempIncrement": 0.2,
+        "max_tokens": [true, 16000],
+        "temperature": [false, 1],
+        "top_k": [false, 0],
+        "top_p": [false, 0.95],
+        "presence_penalty": [false, 0],
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "endpoint": "openrouter-chat",
+        "apiKey": "{{YOURKEY1}}",
+        "idleTimeout": 1,
+        "hardTimeout": 15,
+        "model": [true, "{{DEEPSEEKOR}}"],
+        "provider": [true, { "only": ["deepseek"] }],
+        "reasoning": [true, { "enabled": true }]
+      }
+    }
+  }
+}

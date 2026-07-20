@@ -1,0 +1,40 @@
+{
+  "hymt": {
+    "reasoningType": "instruct_only",
+    "metadata": {
+      "helptext_key": "models.instruct",
+      "display": true,
+      "localJSONL": true,
+      "stripEmpty": true,
+      "markdownBrainRot": true,
+      "forceStream": false,
+      "substitutionPrefix": "EN"
+    },
+    "default": {
+      "prompt": {
+        "defPrep": [
+          true,
+          "{{GENERIC_EN_ACGN_INSTRUCTIONS}}\n\n{{GENERIC_EN_ACGN_INSTRUCTIONS}}",
+          "user"
+        ]
+      },
+      "model": {
+        "chunkSize": 30,
+        "batchSize": 32,
+        "parallel": 4,
+        "rpm": 1000,
+        "maxAttempts": 3,
+        "tempIncrement": 0.4,
+        "temperature": [true, 0],
+        "top_k": [true, 20],
+        "top_p": [true, 0.6],
+        "hardTimeout": 2,
+        "model": [true, "hymt"],
+        "grammar": [
+          true,
+          "root ::= char+\nchar ::= latin9 | cjk-punct\nlatin9 ::= [\\u0020-\\u007E\\u00A0-\\u00FF\\u20AC\\t\\r\\n]\ncjk-punct ::= [\\u2000-\\u206F\\u3000-\\u303F\\uFF00-\\uFFEF]"
+        ]
+      }
+    }
+  }
+}
