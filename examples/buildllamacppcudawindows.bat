@@ -10,7 +10,7 @@ cd /d "%~dp0..\.."
 
 echo === Configuring build with CMake (Ninja + CUDA) ===
 
-cmake -G Ninja -B build -DGGML_CCACHE=OFF -DGGML_CUDA=ON -DGGML_CUDA_NCCL=OFF -DCMAKE_BUILD_TYPE=Release
+cmake -G Ninja -B build -DGGML_CCACHE=OFF -DGGML_CUDA=ON -DGGML_CUDA_NCCL=OFF -DCMAKE_BUILD_TYPE=Release -DLLAMA_BUILD_TESTS=OFF -DLLAMA_BUILD_EXAMPLES=OFF -DGGML_BACKEND_DL=OFF -DBUILD_SHARED_LIBS=OFF
 
 if %ERRORLEVEL% neq 0 (
     echo Error: CMake configuration failed.
@@ -19,7 +19,7 @@ if %ERRORLEVEL% neq 0 (
 
 echo === Building project ===
 
-cmake --build build --config Release -j 6
+cmake --build build --config Release --target llama-app -j 6
 if %ERRORLEVEL% neq 0 (
     echo Error: Build failed.
     exit /b %ERRORLEVEL%
