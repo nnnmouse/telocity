@@ -1,0 +1,993 @@
+{
+  "e": {
+    "c": {
+      "cfg": {
+        "editorNotFound": "没有找到合适的文本编辑器。请将 $EDITOR 环境变量设置为您偏好的文本编辑器。",
+        "failedToWriteLocale": "写入本地化文件失败: {{ .ErrorMessage }}",
+        "invalidLocale": "无效的本地化: '{{ .Lang }}'。"
+      },
+      "cm": {
+        "diffLineCount": "输入文件包含不同数量的非空行。",
+        "diffLineCount1": " - 输入 1 ({{ .File1 }}): {{ .Lines1 }} 行。",
+        "diffLineCount2": " - 输入 2 ({{ .File2 }}): {{ .Lines2 }} 行。",
+        "invalidWidth": "无效的列宽: '{{ .Width }}'. 列宽必须是正整数。",
+        "missingArgs": "缺少必需参数。期望: <file1> <file2> <target>"
+      },
+      "co": {
+        "coError": "无法为命令 '{{ .Command }}' 加载模块。跳过补全生成。"
+      },
+      "jd": {
+        "emptyJson": "目标 JSON 不包含任何可分割的元素。",
+        "invalidJson": "无法从 '{{ .FilePath }} ' 解析 JSON。",
+        "invalidSplitSize": "无效的拆分大小参数: '{{ .Size }}'. 必须是正整数。"
+      },
+      "mg": {
+        "extensionRequired": "需要文件扩展名。请使用 -e 或 --extension 标志提供。"
+      },
+      "or": {
+        "apiKeyRequired": "需要一个 OpenRouter API 密钥。请通过 --apikey、--params 参数或 TELOCITYKEY 环境变量提供。",
+        "contentFilterTriggered": "响应被内容过滤器阻止 (finish_reason: content_filter)",
+        "fetchFailed": "获取 OpenRouter 密钥信息失败。状态: {{ .Status }}. 响应: {{ .Error }}",
+        "invalidResponse": "无法获取密钥状态。请确认加载的配置包含有效的 OpenRouter API 密钥。",
+        "jsonParseFailed": "解析 JSON 行失败: {{ .Error }}",
+        "maxTokensReached": "达到最大令牌限制 (finish_reason: length)",
+        "missingResponseField": "响应字段缺失或为空。",
+        "requestTimedOut": "请求在 {{ .Seconds }} 秒后超时。",
+        "responseExecutionFailedOrCancelled": "响应执行失败或取消 (状态: incomplete)"
+      },
+      "rd": {
+        "noPortAvailable": "4 次尝试后无法找到可用端口。",
+        "unkServError": "服务器运行时错误: {{ .Unk }}"
+      },
+      "rm": {
+        "binRequired": "使用 --bin 时需要模型名称或 --all 标志。",
+        "modelRequired": "使用 --model 时需要模型名称或 --all 标志。"
+      },
+      "sp": {
+        "invalidSplitSize": "无效的拆分大小: '{{ .Size }}'. 大小必须是正数。"
+      },
+      "st": {
+        "delimiterPairRequired": "需要起始和结束分隔符。"
+      },
+      "tc": {
+        "failedToDownload": "下载 '{{ .ModelUrl }}': {{ .Status }} {{ .StatusText }}",
+        "invalidJsonlSource": "输入文件不是有效的 JSONL 源文件。",
+        "modelDownloadError": "模型下载过程中发生错误: {{ .ErrorMessage }}",
+        "modelNotFoundForDownload": "未找到模型 '{{ .ModelName }}'。",
+        "poolShuttingDown": "工作池正在关闭。",
+        "tokenizerDoesNotExist": "预设 '{{ .PresetName }}' 的分词器不存在。",
+        "tokenizerFilesNotFound": "无法加载分词器文件 '{{ .TokenizerName }} '。",
+        "workerCrashedCode": "工作崩溃，代码为 {{ .Code }}。"
+      }
+    },
+    "lcli": {
+      "booleanWithValue": "选项 '{{ .Option }}' 不接受参数。",
+      "causePrefix": "原因:",
+      "cfgCouldNotBeLoaded": "配置文件无法从 '{{ .UserConfigPath }} ' 加载。",
+      "commandNotImplemented": "未实现命令: '{{ .CommandAlias }} '。",
+      "missingValue": "选项 '{{ .Option }}' 的参数缺失。",
+      "notInteractive": "非交互式模式下不支持确认。",
+      "processingAborted": "处理已中止。",
+      "unexpectedPositional": "意外的位置参数: '{{ .Argument }} '。",
+      "unknownErrorOccurred": "发生未知错误。",
+      "unknownOption": "未知选项: '{{ .Option }}'。"
+    },
+    "lllm": {
+      "accountWideError": "[致命] 遇到账户级错误 {{ .Status }}: 立即取消批次运行。",
+      "audioNotSupportedModality": "音频模式在 Responses 或 Completions API 中不受支持。",
+      "availableLanguagesList": "此模型的可用选项: {{ .List }}",
+      "contentFilterTriggered": "生成停止，因为输出触发了后端的内容安全过滤器。",
+      "emptyFile": "文件为空或仅包含空白字符。",
+      "endpointRequired": "配置错误: 显式的 'endpoint' 参数缺失。所有模型配置和执行预设必须明确声明目标端点。",
+      "failedLock": "无法获取锁文件。",
+      "failedToParseStreamChunk": "无法解析流块: {{ .Error }}",
+      "failedToSaveProgress": "无法保存批次进度。",
+      "failureMeansDeathStopped": "遇到失败且 failureMeansDeath 处于激活状态。正在停止批次处理。",
+      "fileNotFound": "文件未找到: '{{ .FilePath }} '。",
+      "hardTimeOut": "硬超时超出。请求完成需要太长时间。",
+      "idleTimeOut": "空闲超时超出。服务器未发送数据。",
+      "initializingBatch": "批次处理初始化时发生错误。",
+      "invalidEndpoint": "配置的端点 '{{ .Endpoint }}' 无效。可用端点: {{ .Available }}。",
+      "invalidFileSize": "文件大小超过最大限制 {{ .MAX_SIZE_MB }} MB。",
+      "invalidLanguageInput": "语言 '{{ .Input }}' 无法解析。您是指 '{{ .Closest }}' 吗？",
+      "invalidLanguageInputNoSuggestion": "语言 '{{ .Input }}' 无法解析。",
+      "invalidReasoningType": "模型预设 '{{ .Model }} ' 的无效推理类型。",
+      "invalidRegex": "无效的正则表达式模式 '{{ .Pattern }}': {{ .Error }}",
+      "jsonlContentFilter": "[错误: 响应被内容过滤器阻止 (finish_reason: content_filter)]",
+      "jsonlContentFilterIncomplete": "[错误: 响应被内容过滤器阻止 (状态: incomplete, 原因: content_filter)]",
+      "jsonlError": "[错误: {{ .Message }}]",
+      "jsonlExecutionIncomplete": "[错误: 响应执行 {{ .Reason }} (状态: incomplete, 原因: {{ .Reason }})]",
+      "jsonlGenError": "JSONL 文件生成过程中发生错误。",
+      "jsonlMalformedLine": "[格式错误行]",
+      "jsonlMaxTokensIncomplete": "[错误: 最大令牌限制达到 (状态: incomplete, 原因: {{ .Reason }})]",
+      "jsonlMaxTokensLength": "[错误: 最大令牌限制达到 (finish_reason: length)]",
+      "jsonlStatusError": "[错误 (状态 {{ .Status }}): {{ .Message }}]",
+      "jsonlStreamTerminatedError": "[错误: 流以 finish_reason 错误终止]",
+      "jsonlUnrecognizedFormat": "[错误: 对 {{ .CustomId }} 的未识别或未知响应格式]",
+      "llmAPICall": "API 调用期间出错: ",
+      "maxFailReached": "批次处理已中止。已达到最大允许原始失败尝试阈值 {{ .MaxFail }}。",
+      "maxTokensLimitReached": "生成被截断，因为达到最大输出令牌限制。",
+      "mediaNotSupportedCompletions": "媒体 (音频/图像) 不支持在 Completions API 中。",
+      "networkErrorOpenAI": "调用 '{{ .URL }} ' 时发生网络错误。",
+      "networkErrorReason": " 原因: {{ .Code }}",
+      "noFilesFound": "未找到匹配的文件 (扩展名: .{{ .Extension }}, 已应用过滤器)。",
+      "openaiApiError": "API 调用失败，状态 {{ .Status }}: {{ .Message }}",
+      "partFileCollision": "部分文件冲突",
+      "promptBlockedWarning": "[警告] 提示被可能的安全/护栏阻止 (HTTP 403)。跳过重试。",
+      "promptMissing": "未通过 CLI 或配置文件提供提示。终止。",
+      "responseNull": "API 响应体为空。",
+      "sourceAndTargetMustBeDifferent": "源路径和目标路径必须不同。",
+      "sourceRequired": "需要源路径。",
+      "sourceTargetRequired": "需要源路径和目标路径。",
+      "streamEndedPrematurely": "流在没有 [DONE] 信号的情况下提前结束。",
+      "streamInterrupted": "流因错误 {{ .ErrorContent }} 中断。",
+      "streamTerminatedError": "流因错误终止 (finish_reason: error)",
+      "targetFileExists": "目标路径已存在: '{{ .TargetPath }} '。",
+      "tExceeded": "空闲超时超出",
+      "undefinedParam": "请求预设 '{{ .ParamKey }}' 未定义。",
+      "undefinedPromptPreset": "请求提示预设 '{{ .PresetKey }}' 未在配置模板中找到或为空。",
+      "unknownOpenAIError": "与 API 通信时发生未知错误。",
+      "unknownStatusCodeError": "未知状态码错误"
+    },
+    "v": {
+      "audioNotFound": "音频文件未找到: '{{ .Audio }} '。",
+      "imageNotFound": "警告: 图像文件未找到，跳过 '{{ .Image }} '。",
+      "invalidAllowH2": "HTTP/2 选项必须是布尔值 (true 或 false)，收到: {{ .Value }}。",
+      "invalidAPIKey": "提供无效的 API 密钥: {{ .APIKey }}",
+      "invalidArgArray": "提供无效的参数数组: {{ .OptionValue }}",
+      "invalidAudioOption": "无效的音频对象。",
+      "invalidBatchSize": "无效的批次大小。必须是在 1 到 1000 之间的整数。提供: {{ .BatchSize }}",
+      "invalidChunkSize": "无效的块大小。必须是在 1 到 500000 之间的整数。提供: {{ .ChunkSize }}",
+      "invalidDataURI": "无效的图像格式。期望以 'data:' 开头的 data URI 字符串，但收到: {{ .Value }}",
+      "invalidDelayValue": "Delay 或 RetryDelay 必须是非负数。",
+      "invalidExtraBodyType": "'extra_body' 参数必须是有效的 JSON 对象结构，但收到: {{ .Value }}",
+      "invalidImageArray": "无效的图像输入。期望是 data URI 数组，但收到: {{ .Value }}",
+      "invalidIndex": "无效的起始索引。必须是非负整数。提供: {{ .Index }}",
+      "invalidMaxTokensRange": "max_tokens 参数必须是大于或等于 1 的正整数。",
+      "invalidModel": "无效的模型名称: {{ .Model }}",
+      "invalidOption": "无效的选项值: {{ .Value }}。",
+      "invalidParallelSize": "无效的并发限制。必须是 1 到 128 之间的整数。提供: {{ .Parallel }}",
+      "invalidPenaltyRange": "频率/存在惩罚必须是 -2.0 到 2.0 之间的数。",
+      "invalidPrompt": "无效的提示。必须是非空字符串。",
+      "invalidSessionId": "无效的 session_id。",
+      "invalidTemperatureRange": "温度必须是 0.0 到 2.0 之间的数。",
+      "invalidTempValueRange": "温度值 {{ .Value }} 必须是 0.0 到 2.0 之间的数。",
+      "invalidTempValues": "选项 'tempValues' 必须是数字数组，收到 {{ .Value }}。",
+      "invalidTopKRange": "Top_k 必须是正整数。",
+      "invalidTopPRange": "Top_p 必须是 0.0 到 1.0 之间的数。",
+      "invalidURL": "无效的 URL: {{ .URL }}",
+      "invalidURLScheme": "无效的 URL 方案。必须以 http:// 或 https:// 开头。提供: {{ .URL }}",
+      "mutuallyExclusiveMedia": "不能同时使用音频和图像。",
+      "mutuallyExclusivePrompts": "提供了多个提示源。请最多提供一个提示源 (CLI 位置参数、--pselector 或 --partial)。",
+      "seedMustBePositiveInteger": "种子必须是正整数。",
+      "unsupportedAudioType": "不支持音频类型 '{{ .Ext }}'，文件 '{{ .Audio }} '。支持: mp3, mp4, mpeg, mpga, m4a, wav, webm。",
+      "unsupportedImageType": "警告: 图像通配符模式 '{{ .Args }}' 未匹配任何支持的文件。",
+      "unsupportedImageType2": "跳过不支持的图像类型 '{{ .Ext }}'，文件: '{{ .Image }}'。"
+    }
+  },
+  "help": {
+    "commands": {
+      "avg": {
+        "description": "计算文件中每个非空行的字符数（字形）和字节数。",
+        "flags": {},
+        "usage": "用法: telocity avg <source_path>"
+      },
+      "bg": {
+        "description": "从源文本文件生成结构化 JSONL 请求批次，用于翻译任务。",
+        "flags": {
+          "chunksize": "每个块/请求的行数。 (默认: {{ .ChunkSize }})",
+          "context": "额外的上下文或包含上下文的文件路径，每个块中都要包含在提示中。",
+          "model": "覆盖参数集中指定的模型。",
+          "params": "用于提示和模型配置的参数集。 (默认: {{ .DefaultModel }})",
+          "reason": "切换推理模式（针对支持此功能的预设）。",
+          "regex": "用于分割源文件为块的正则表达式模式，而不是基于行数的块大小。",
+          "source": "翻译提示的源语言。",
+          "target": "翻译提示的目标语言。"
+        },
+        "footer": "\n可用参数集:\n{{ .ModelParamList }}\n\n可用 JSONL 格式:\n{{ .FormatsList }}",
+        "usage": "用法: telocity bg [选项] <source_file> <target_jsonl_file>"
+      },
+      "bg2": {
+        "description": "为通用文本转换生成结构化 JSONL 请求批次。如果省略源文件或设置为 '-'，则处理标准输入 (stdin)。",
+        "flags": {
+          "chunksize": "每个块/请求的字符数。 (默认: {{ .ChunkSize }})",
+          "model": "覆盖参数集中指定的模型。",
+          "params": "用于提示和模型配置的参数集。 (默认: {{ .DefaultModel }})",
+          "prompt": "要添加到每个块前面的提示（或包含提示的文件路径）。覆盖预设的预提示。",
+          "pselector": "从配置模板中查找并使用提示预设作为指令。",
+          "reason": "切换推理模式（针对支持此功能的预设）。",
+          "sysprompt": "系统提示或包含系统提示的文件路径。覆盖预设的系统提示。"
+        },
+        "footer": "\n可用参数集:\n{{ .ModelParamList }}\n\n可用 JSONL 格式:\n{{ .FormatsList }}",
+        "usage": "用法: telocity bg2 [选项] [source_file] <target_jsonl_file>"
+      },
+      "br": {
+        "description": "原生执行 JSONL 批次作业，管理重试和结构化输出，或将完成的 JSONL 导出为纯文本。如果省略目标路径，则根据源路径自动派生。",
+        "flags": {
+          "apikey": "API 密钥。",
+          "batchsize": "覆盖 JSONL 批次大小 (默认: {{ .BatchSize }})。",
+          "export": "将已完成的输出 JSONL 文件导出为标准文本文件。",
+          "model": "模型覆盖。",
+          "parallel": "覆盖 JSONL 并发请求限制 (默认: {{ .Parallel }})。",
+          "params": "从参数集中拉取设置的模型预设。 (默认: {{ .DefaultModel }})",
+          "reason": "切换推理模式（针对支持此功能的预设）。",
+          "retry": "重试上一次运行中失败的请求。重试运行的目标输出文件作为参数。",
+          "stream": "如果批次大小为 1，则启用实时流式传输到终端。（注意：流式传输绕过后端元数据保留。）",
+          "url": "基础 API URL (自动附加 JSONL 端点)。"
+        },
+        "footer": "可用预设:\n{{ .ModelParamList }}",
+        "usage": "用法: telocity br [选项] <source_jsonl> [target]"
+      },
+      "cfg": {
+        "description": "管理应用程序配置和当前本地化。",
+        "flags": {
+          "edit": "在默认编辑器中打开用户配置文件。",
+          "lang": "设置应用程序语言。",
+          "remove": "删除用户配置文件（提示确认）。"
+        },
+        "footer": "支持的本地化:\n{{ .LocaleList }}",
+        "usage": "用法: telocity cfg [选项]"
+      },
+      "cm": {
+        "description": "将两个文本文件并排比较并合并到单个输出文件中。",
+        "flags": {
+          "force": "即使两个输入文件行数不同，也强制合并。",
+          "width": "设置输出每半部分的列宽。 (默认: {{ .Width }})"
+        },
+        "usage": "用法: telocity cm <file1> <file2> <target> [选项]"
+      },
+      "jd": {
+        "description": "比较结构化 JSON 翻译键，合并新翻译，或安全地拆分文件同时保留层次化路径结构。",
+        "flags": {
+          "merge": "在目标 JSON 中就地更新，合并来自次要翻译映射的本地化值。",
+          "size": "每个拆分文件的最大大小（KB），默认为 20。",
+          "split": "安全地将层次化 JSON 文件拆分为多个部分，同时保留对象路径结构。"
+        },
+        "usage": "用法: telocity jd <source_json> <target_json/target_dir> [output_json] [选项]"
+      },
+      "mg": {
+        "description": "递归查找并合并源目录中的文本文件。支持通过标志或 .mginclude/.mgignore 文件进行 glob 过滤。",
+        "flags": {
+          "exclude": "排除的 glob 模式（冒号分隔，例如 \"tests/**:node_modules/**\"）或包含模式的文件路径。",
+          "extension": "要查找的扩展名（必需）。",
+          "failed": "将成功的重试合并回原始输出文件。需要 <original_jsonl> <retry_jsonl> [output_file]。",
+          "include": "包含的 glob 模式（冒号分隔，例如 \"src/**:libs/**\"）或包含模式的文件路径。",
+          "noignore": "不读取或应用本地 .mgignore 文件中的规则。",
+          "params": "用于解析目标策略和 JSONL 格式的参数配置预设。"
+        },
+        "usage": "用法: telocity mg <source_directory> [target_directory] [选项]"
+      },
+      "or": {
+        "description": "获取并显示 OpenRouter API 密钥限制、每日使用量和剩余额度。",
+        "flags": {
+          "apikey": "要查询的 OpenRouter API 密钥。覆盖所有其他密钥配置。",
+          "help": "显示此命令的帮助信息。",
+          "params": "用于查找 API 密钥回退的预设配置密钥。"
+        },
+        "usage": "用法: telocity or [选项]"
+      },
+      "os": {
+        "description": "对 LLM 执行单个单次提示。提示可以是字面文本或文件路径。支持来自标准输入 (stdin)、文本文件、图像和音频的上下文。",
+        "flags": {
+          "apikey": "为请求提供 API 密钥。",
+          "audio": "音频文件的路径，用于音频上下文。支持格式: mp3, mp4, mpeg, mpga, m4a, wav, webm。",
+          "chunksize": "截断输入文本的块大小。",
+          "file": "要作为上下文添加到提示中的文本文件路径。",
+          "image": "用于视觉上下文的图像路径。支持 glob 模式和冒号分隔列表（例如 \"img1.jpg:*.png\"）。支持格式: png, jpg/jpeg, gif, webp。",
+          "model": "覆盖预设中指定的模型名称。",
+          "outfile": "保存 LLM 输出的路径，作为替代位置参数 [output_file]。",
+          "params": "选择模型参数预设（默认: {{ .DefaultModel }})。",
+          "partial": "从配置模板中查找提示预设，并截断输入文本到第一行块。",
+          "pselector": "从配置模板中查找并使用提示预设作为指令。",
+          "reason": "切换推理模式（针对支持此功能的预设）。",
+          "url": "覆盖 API 端点 URL。"
+        },
+        "footer": "可用预设:\n{{ .ModelParamList }}",
+        "usage": "用法: telocity os \"<prompt>\" [output_file] [选项]"
+      },
+      "rd": {
+        "description": "启动本地 Web 服务器，以分页、无干扰的方式显示文本文件。",
+        "flags": {},
+        "usage": "用法: telocity rd [source_path]"
+      },
+      "rm": {
+        "description": "管理和删除已下载的模型分词器和配置文件。",
+        "flags": {
+          "all": "删除所有目标模型或二进制文件。",
+          "bin": "目标模型编译二进制文件 (.bin)。",
+          "force": "强制删除，不提示确认。",
+          "model": "目标模型配置文件 (.json 和 _config.json)。"
+        },
+        "usage": "用法: telocity rm [model_name] [选项]"
+      },
+      "sp": {
+        "description": "将大型文本文件拆分为更小的部分而不破坏行。如果省略目标目录，则自动创建子目录。",
+        "flags": {
+          "size": "每个部分的最大大小（MB），默认: {{ .Size }}。"
+        },
+        "usage": "用法: telocity sp <source_path> [target_directory] [选项]"
+      },
+      "st": {
+        "description": "删除或提取指定分隔符之间的内容。如果使用 '-'，则从标准输入读取，如果省略目标路径，则输出到 stdout。",
+        "flags": {
+          "brainrot": "规范化段落间距为双换行符。",
+          "compress": "在输出中压缩并移除连续的空行。",
+          "enddelimiter": "结束分隔符。",
+          "extracttag": "提取分隔符之间的内容而不是删除它。",
+          "params": "从预设中使用起始/结束分隔符。",
+          "startdelimiter": "起始分隔符。",
+          "unformat": "移除基本 Markdown 格式（粗体/斜体）。"
+        },
+        "footer": "可用带标签的预设:\n{{ .ReasoningTagParamList }}",
+        "usage": "用法: telocity st [选项] [source_path] [target_path]"
+      },
+      "tc": {
+        "description": "使用模型特定的已下载分词器计算源 JSONL 文件中的确切令牌数。",
+        "flags": {
+          "params": "要使用模型预设的分词器（默认: {{ .DefaultModel }})。"
+        },
+        "footer": "\n可用分词器:\n{{ .TokenParamList }}",
+        "usage": "用法: telocity tc <source_jsonl_path> [选项]"
+      },
+      "tc2": {
+        "description": "计算明文文件按连续行边界块分割的令牌消耗统计。",
+        "flags": {
+          "chunksize": "每个处理块段的行数手动覆盖限制。",
+          "params": "要加载并执行计算的 Target 分词器配置预设。"
+        },
+        "usage": "用法: telocity tc2 <file> [选项]"
+      }
+    },
+    "generic": {
+      "commandDescriptions": {
+        "avg": "计算文件的平均行长度。",
+        "bg": "为翻译提示生成 JSONL 批次文件。",
+        "bg2": "为通用转换提示生成 JSONL 批次文件。",
+        "br": "原生 JSONL 批次运行器和导出器。",
+        "cfg": "管理应用程序配置和本地化。",
+        "cm": "并排比较和合并两个文件。",
+        "jd": "分析、合并或拆分结构化 JSON 文件。",
+        "mg": "递归合并目录中的文本文件。",
+        "or": "显示 OpenRouter API 密钥限制和统计信息。",
+        "os": "执行带有可选文件/媒体上下文的单个提示。",
+        "rd": "启动本地 Web 服务器用于分页阅读。",
+        "rm": "删除已下载的模型分词器二进制文件。",
+        "sp": "按大小将大型文件拆分为更小的部分。",
+        "st": "删除或提取分隔符之间的文本。",
+        "tc": "计算 JSONL 批次请求文件中的令牌数。",
+        "tc2": "按段块计算原始纯文本文件的令牌数。"
+      },
+      "commandHeader": "命令:",
+      "flags": { "version": "显示应用程序版本。" },
+      "footer": "使用 `telocity <command> --help` 查看任何命令的更多信息。",
+      "globalOptionsHeader": "全局选项:",
+      "header": "telocity: 用于 LLM 批量处理文本的工具。",
+      "usage": "用法: telocity <command> [选项]"
+    },
+    "optionsHeader": "选项"
+  },
+  "languages": {
+    "_LLM_INSTRUCTIONS_ALIASES": "为每个语言条目扩展 'aliases' 数组时，规则如下：\n为用户提供简体中文（China）可能输入的全面小写搜索关键词列表。包含：\n1. 编码：标准 2 字母和 3 字母 ISO 编码（例如 'ja', 'jpn', 'fr', 'fra'）。\n2. 名称：语言英文名称、原生脚本（例如 '日本語', 'Español'）和目标翻译语言（例如 'フランス語'）。\n3. 地区：目标翻译语言中的基础国家或地区名称（例如 'フランス', '西班牙', 'spain'）。\n4. 键盘输入与脚本：对于非拉丁脚本，包括标准罗马化及键盘 IME 输入字符串（例如 'xibanyayu', 'zhongwen'；日语：'にほんご', 'nihongo'）。对于拉丁脚本，包括带变音符号的变体（例如 'espanol', 'francais'）。\n5. 替代名称：常见的替代命名约定或地区方言（例如 'mandarin', 'castellano'）。\n确保所有值均为小写、唯一、严格相关且目标语言上下文中语言学的真实。避免跨语言污染和音译错误（例如不要将 'Tagalog' 翻译为 '他ガログ'）。",
+    "ARABIC": {
+      "aliases": [
+        "al-arabiyyah",
+        "ar",
+        "ara",
+        "arab",
+        "arabia",
+        "arabic",
+        "العربية"
+      ],
+      "name": "Arabic"
+    },
+    "BENGALI": {
+      "aliases": [
+        "bangla",
+        "bangladesh",
+        "ben",
+        "bengal",
+        "bengali",
+        "bn",
+        "বাংলা"
+      ],
+      "name": "Bengali"
+    },
+    "BURMESE": {
+      "aliases": [
+        "bur",
+        "burma",
+        "burmese",
+        "my",
+        "mya",
+        "myanmar",
+        "myanmasa",
+        "မြန်မာစာ"
+      ],
+      "name": "Burmese"
+    },
+    "CANTONESE": {
+      "aliases": [
+        "cantonese",
+        "guangdong",
+        "gwongdungwa",
+        "hk",
+        "hong kong",
+        "macau",
+        "yue",
+        "广东话",
+        "廣東話"
+      ],
+      "name": "Cantonese"
+    },
+    "CHINESE": {
+      "aliases": [
+        "chi",
+        "china",
+        "chinese",
+        "cn",
+        "mandarin",
+        "putonghua",
+        "zh",
+        "zho",
+        "zhongwen",
+        "中文",
+        "普通话",
+        "汉语",
+        "漢語"
+      ],
+      "name": "Chinese"
+    },
+    "CZECH": {
+      "aliases": [
+        "ces",
+        "cesky",
+        "cestina",
+        "čeština",
+        "cs",
+        "cz",
+        "cze",
+        "czech",
+        "czech republic",
+        "czechia"
+      ],
+      "name": "Czech"
+    },
+    "DETECTED": {
+      "aliases": [
+        "auto",
+        "auto detect",
+        "auto-detect",
+        "autodetect",
+        "detect",
+        "detected",
+        "lang",
+        "orig",
+        "original",
+        "source",
+        "sourcelang",
+        "src"
+      ],
+      "name": "source language"
+    },
+    "DUTCH": {
+      "aliases": [
+        "belgium",
+        "dut",
+        "dutch",
+        "holland",
+        "nederlands",
+        "netherlands",
+        "nl",
+        "nld"
+      ],
+      "name": "Dutch"
+    },
+    "ENGLISH": {
+      "aliases": [
+        "america",
+        "britain",
+        "en",
+        "eng",
+        "english",
+        "uk",
+        "united kingdom",
+        "united states",
+        "us",
+        "usa"
+      ],
+      "name": "English"
+    },
+    "FILIPINO": {
+      "aliases": [
+        "fil",
+        "filipino",
+        "ph",
+        "philippines",
+        "pilipino",
+        "tagalog",
+        "tgl",
+        "tl"
+      ],
+      "name": "Filipino"
+    },
+    "FRENCH": {
+      "aliases": [
+        "fr",
+        "fra",
+        "francais",
+        "français",
+        "france",
+        "fre",
+        "french"
+      ],
+      "name": "French"
+    },
+    "GERMAN": {
+      "aliases": [
+        "austria",
+        "de",
+        "deu",
+        "deutsch",
+        "deutschland",
+        "ger",
+        "german",
+        "germany",
+        "switzerland"
+      ],
+      "name": "German"
+    },
+    "GUJARATI": {
+      "aliases": ["gu", "guj", "gujarat", "gujarati", "india", "ગુજરાતી"],
+      "name": "Gujarati"
+    },
+    "HEBREW": {
+      "aliases": ["he", "heb", "hebrew", "israel", "ivrit", "iw", "עברית"],
+      "name": "Hebrew"
+    },
+    "HINDI": {
+      "aliases": ["hi", "hin", "hindi", "hindustani", "india", "हिंदी", "हिन्दी"],
+      "name": "Hindi"
+    },
+    "INDONESIAN": {
+      "aliases": [
+        "bahasa",
+        "bahasa indonesia",
+        "id",
+        "ind",
+        "indo",
+        "indonesia",
+        "indonesian"
+      ],
+      "name": "Indonesian"
+    },
+    "ITALIAN": {
+      "aliases": ["it", "ita", "italia", "italian", "italiano", "italy"],
+      "name": "Italian"
+    },
+    "JAPANESE": {
+      "aliases": [
+        "ja",
+        "japan",
+        "japanese",
+        "jp",
+        "jpn",
+        "nihongo",
+        "nippon",
+        "にほんご",
+        "日本語"
+      ],
+      "name": "Japanese"
+    },
+    "KAZAKH": {
+      "aliases": [
+        "kaz",
+        "kazakh",
+        "kazakhstan",
+        "kk",
+        "qazaq",
+        "қазақ",
+        "қазақша"
+      ],
+      "name": "Kazakh"
+    },
+    "KHMER": {
+      "aliases": ["cambodia", "cambodian", "khm", "khmer", "km", "ភាសាខ្មែរ"],
+      "name": "Khmer"
+    },
+    "KOREAN": {
+      "aliases": [
+        "hangugo",
+        "ko",
+        "kor",
+        "korea",
+        "korean",
+        "kr",
+        "north korea",
+        "south korea",
+        "조선말",
+        "한국어"
+      ],
+      "name": "Korean"
+    },
+    "MALAY": {
+      "aliases": [
+        "bahasa malaysia",
+        "bahasa melayu",
+        "brunei",
+        "malay",
+        "malaysia",
+        "may",
+        "ms",
+        "msa",
+        "singapore"
+      ],
+      "name": "Malay"
+    },
+    "MARATHI": {
+      "aliases": ["india", "maharashtra", "mar", "marathi", "mr", "मराठी"],
+      "name": "Marathi"
+    },
+    "MONGOLIAN": {
+      "aliases": ["mn", "mon", "mongol", "mongolia", "mongolian", "монгол"],
+      "name": "Mongolian"
+    },
+    "PERSIAN": {
+      "aliases": [
+        "afghanistan",
+        "dari",
+        "fa",
+        "farsi",
+        "fas",
+        "iran",
+        "per",
+        "persian",
+        "tajik",
+        "tajikistan",
+        "فارسی"
+      ],
+      "name": "Persian"
+    },
+    "POLISH": {
+      "aliases": ["pl", "pol", "poland", "polish", "polski", "polszczyzna"],
+      "name": "Polish"
+    },
+    "PORTUGUESE": {
+      "aliases": [
+        "brasil",
+        "brazil",
+        "por",
+        "port",
+        "portugal",
+        "portugues",
+        "português",
+        "portuguese",
+        "pt"
+      ],
+      "name": "Portuguese"
+    },
+    "RUSSIAN": {
+      "aliases": ["ru", "rus", "russia", "russian", "russkiy", "русский"],
+      "name": "Russian"
+    },
+    "SIMPLIFIED_CHINESE": {
+      "aliases": [
+        "china",
+        "hans",
+        "jiantizhongwen",
+        "sc",
+        "simplified chinese",
+        "singapore",
+        "zh-cn",
+        "zh-hans",
+        "简体",
+        "简体中文"
+      ],
+      "name": "Simplified Chinese"
+    },
+    "SPANISH": {
+      "aliases": [
+        "castellano",
+        "es",
+        "espana",
+        "españa",
+        "espanol",
+        "español",
+        "latam",
+        "mexico",
+        "spa",
+        "spain",
+        "spanish"
+      ],
+      "name": "Spanish"
+    },
+    "TAMIL": {
+      "aliases": [
+        "india",
+        "singapore",
+        "sri lanka",
+        "ta",
+        "tam",
+        "tamil",
+        "தமிழ்"
+      ],
+      "name": "Tamil"
+    },
+    "TELUGU": {
+      "aliases": [
+        "andhra pradesh",
+        "india",
+        "te",
+        "tel",
+        "telangana",
+        "telugu",
+        "తెలుగు"
+      ],
+      "name": "Telugu"
+    },
+    "THAI": {
+      "aliases": ["phasa thai", "th", "tha", "thai", "thailand", "ภาษาไทย"],
+      "name": "Thai"
+    },
+    "TIBETAN": {
+      "aliases": ["bo", "bod", "bod-skad", "tib", "tibet", "tibetan", "བོད་སྐད་"],
+      "name": "Tibetan"
+    },
+    "TRADITIONAL_CHINESE": {
+      "aliases": [
+        "fantizhongwen",
+        "hant",
+        "hong kong",
+        "taiwan",
+        "tc",
+        "traditional chinese",
+        "zh-hant",
+        "zh-hk",
+        "zh-tw",
+        "繁体中文",
+        "繁體",
+        "繁體中文"
+      ],
+      "name": "Traditional Chinese"
+    },
+    "TURKISH": {
+      "aliases": [
+        "tr",
+        "tur",
+        "turkce",
+        "türkçe",
+        "turkey",
+        "turkish",
+        "turkiye",
+        "türkiye"
+      ],
+      "name": "Turkish"
+    },
+    "UKRAINIAN": {
+      "aliases": [
+        "ua",
+        "uk",
+        "ukr",
+        "ukraine",
+        "ukrainian",
+        "ukrayinska",
+        "українська"
+      ],
+      "name": "Ukrainian"
+    },
+    "URDU": {
+      "aliases": ["india", "pakistan", "ur", "urd", "urdu", "اردو"],
+      "name": "Urdu"
+    },
+    "UYGHUR": {
+      "aliases": [
+        "ug",
+        "uig",
+        "uighur",
+        "uyghur",
+        "xinjiang",
+        "ئۇيغۇر",
+        "ئۇيغۇرچە"
+      ],
+      "name": "Uyghur"
+    },
+    "VIETNAMESE": {
+      "aliases": [
+        "tieng viet",
+        "tiếng việt",
+        "vi",
+        "vie",
+        "vietnam",
+        "vietnamese",
+        "vn"
+      ],
+      "name": "Vietnamese"
+    }
+  },
+  "m": {
+    "c": {
+      "avg": {
+        "averageBytesPerLine": "每个非空行的平均字节数: {{ .AvgBytes }}",
+        "averageCharsPerLine": "每个非空行的平均字符数（字形）: {{ .AvgChars }}"
+      },
+      "br": {
+        "exportedSuccessfully": "成功导出到 '{{ .TargetPath }}'。"
+      },
+      "cfg": {
+        "cfgDeletedSuccessfully": "配置文件成功删除。",
+        "localeSuccessfullyChanged": "本地化成功更改为 {{ .Locale }}。"
+      },
+      "cm": {
+        "success": "成功将 {{ .Lines }} 行段并排生成文本到 -> {{ .Target }}"
+      },
+      "jd": {
+        "fullyAligned": "两个 JSON 结构完全对齐。未找到缺失的键。",
+        "mergedSuccess": "成功将翻译键从 '{{ .TranslationFile }}' 合并到 '{{ .TargetFile }} '。",
+        "partCreated": "创建部分 {{ .PartNumber }}: {{ .PartPath }}",
+        "savedSuccess": "成功将缺失键的输出保存到 '{{ .OutputPath }} '。",
+        "splitSuccess": "成功将 JSON 文件拆分为 {{ .Count }} 个部分。"
+      },
+      "models": {
+        "completion": "遗留 v1/completions 预设。请编辑配置文件以自定义。",
+        "dual": "混合指令/推理预设（通过 -r 切换）。",
+        "effort": "带有 effort 参数支持的推理预设。",
+        "fallback": "适用于任何 OpenAI 兼容 API 的通用预设。",
+        "genericprep": "通用预设，在用户文本前预添加提示。",
+        "genericsys": "通用预设，使用系统提示。",
+        "instruct": "标准指令预设。",
+        "noHelp": "此预设没有帮助文本。",
+        "reasoning": "专用推理预设。"
+      },
+      "or": {
+        "audioCompletionTokens": "  - 音频（完成）",
+        "audioPromptTokens": "  - 音频（提示）",
+        "batchStatsHeader": "=== OpenRouter 批次统计: {{ .FileName }} ===",
+        "byokIncluded": "BYOK 已包含在限制中",
+        "byokUsageAllTime": "BYOK 使用（累计）",
+        "byokUsageDaily": "BYOK 使用（每日）",
+        "byokUsageMonthly": "BYOK 使用（每月）",
+        "byokUsageWeekly": "BYOK 使用（每周）",
+        "cachedTokens": "  - 缓存",
+        "cacheWriteTokens": "  - 缓存写入",
+        "costsSection": "预估费用",
+        "creditsSection": "积分与限制",
+        "failedRequests": "失败/格式错误",
+        "failedSection": "失败/格式错误请求",
+        "generalSection": "通用",
+        "header": "OpenRouter API 密钥状态与限制",
+        "imageCompletionTokens": "  - 图像（完成）",
+        "isFreeTier": "免费层级状态",
+        "label": "密钥标签",
+        "limit": "积分限制",
+        "limitRemaining": "剩余余额",
+        "limitReset": "重置周期",
+        "malformed": "格式错误",
+        "modelsSection": "模型",
+        "no": "否",
+        "notAvailable": "N/A",
+        "providersSection": "提供者",
+        "reasoningTokens": "  - 推理",
+        "streamTerminatedError": "流以 finish_reason: error 终止",
+        "successfulRequests": "成功",
+        "tokensSection": "令牌",
+        "totalCompletionTokens": "总完成令牌",
+        "totalCost": "总费用",
+        "totalPromptTokens": "总提示令牌",
+        "totalRequests": "总请求",
+        "totalTokens": "总令牌",
+        "unknownError": "未知错误",
+        "unlimited": "无限",
+        "upstreamCompletionCost": "上游完成费用",
+        "upstreamInferenceCost": "上游推理费用",
+        "upstreamPromptCost": "上游提示费用",
+        "usageAllTime": "使用（累计）",
+        "usageDaily": "使用（每日）",
+        "usageMonthly": "使用（每月）",
+        "usageSection": "API 使用详情",
+        "usageWeekly": "使用（每周）",
+        "videoPromptTokens": "  - 视频（提示）",
+        "yes": "是"
+      },
+      "rd": {
+        "closeBtn": "关闭",
+        "confirmDelete": "您确定要删除此电子书到本地浏览器库吗？",
+        "contentLoadError": "错误: 无法加载内容。",
+        "deleteBtn": "删除",
+        "ebookLoaded": "已加载电子书。",
+        "emptyLibrary": "您的库目前为空。请导入一本书开始。",
+        "fontSizeLabel": "字体大小",
+        "importLabel": "导入电子书 (.txt, .jsonl)",
+        "instructions": "⇦ · h · ⇧+␣   │   ⇨ · l · ␣   (⇳ 滚动)",
+        "libraryModeLoaded": "阅读器在库模式下启动（未提供源文件）。",
+        "libraryTitle": "存储的书",
+        "loadBtn": "库",
+        "loadingMsg": "加载中...",
+        "nextBtn": "下一→",
+        "notFound": "404 未找到",
+        "portInUse": "端口 {{ .Port }} 正在使用，尝试备用端口 {{ .NextPort }}...",
+        "previousBtn": "←Prev",
+        "readingFile": "正在读取文件: '{{ .sourcePath }}'",
+        "recalcProgressMsg": "重新计算布局...",
+        "recalcTitle": "重新计算分页布局",
+        "reflowingMsg": "重新流动...",
+        "seekingPageMsg": "正在查找页面 ",
+        "serverRunningAt": "电子书阅读器在 {{ .url }} 运行",
+        "sizeHXLarge": "HX-Large",
+        "sizeLarge": "Large",
+        "sizeMedium": "Medium",
+        "sizeMediumL": "Medium-L",
+        "sizeNormal": "Normal",
+        "sizeSmall": "Small",
+        "sizeTHXLarge": "THX-Large",
+        "sizeTXLarge": "TX-Large",
+        "sizeVSmall": "V-Small",
+        "sizeXLarge": "X-Large",
+        "syncBtn": "同步",
+        "syncLabel": "与桌面 CLI 同步",
+        "themeToggleTitle": "切换主题",
+        "title": "Telocity 阅读器"
+      },
+      "rm": {
+        "filesDeletedSuccessfully": "所有目标文件成功删除。",
+        "filesToDelete": "将删除以下文件：",
+        "noFilesToDelete": "未找到要删除的文件。"
+      },
+      "sp": {
+        "fileSplitSuccess": "成功拆分文件: '{{ .SourcePath }}'",
+        "partCreated": "  - 部分 {{ .PartNumber }} 已创建: {{ .PartPath }}"
+      },
+      "st": {
+        "blockDeleted": "分隔符之间的内容已删除。",
+        "blockExtracted": "分隔符之间的内容已提取。",
+        "compressed": "已压缩空行。",
+        "newlinesNormalized": "文件内容已规范化并保存。"
+      },
+      "tc": {
+        "aboveTripleHeader": "三重中位数令牌异常（> 3x 中位数）：",
+        "anomalyRow": "第 {{ .Line }} 行 {{ .CustomId }}: {{ .Tokens }} 令牌",
+        "availableModelsForDownload": "可下载的模型: {{ .AvailableModels }}",
+        "avgTc": "每个请求平均令牌数:",
+        "doubleToTripleHeader": "双中位数令牌异常（2x - 3x 中位数）：",
+        "downloadingModelFiles": "正在下载模型文件 '{{ .ModelName }}'...",
+        "downloadSuccess": "成功下载模型文件 '{{ .ModelName }}':",
+        "medianTc": "每个请求中位数令牌数:",
+        "tc": "总令牌数:",
+        "workerOomRetry": "[TokenWorkerPool] 工作崩溃/OOM。调整内存限制并重试块...（剩余 {{ .Retries }} 次重试）",
+        "writingFilesTo": "正在将文件写入 {{ .StateDir }}..."
+      },
+      "tc2": {
+        "aboveTripleHeader": "包含超过中位数 300% 令牌数的关键异常块：",
+        "anomalyRow": "块 {{ .Line }} {{ .CustomId }} -> {{ .Tokens }} 令牌",
+        "avgTc": "每个块的平均令牌数:",
+        "doubleToTripleHeader": "包含超过中位数 200% 令牌数的异常块：",
+        "medianTc": "每个块的中位数令牌数:",
+        "tc": "总令牌数:"
+      }
+    },
+    "lcli": {
+      "deletionAborted": "删除已中止。",
+      "deletionConfirm": "此操作不可逆。您确定要删除吗？ (y/N): ",
+      "redacted": "[已脱敏]",
+      "yN": "y"
+    },
+    "lllm": {
+      "anotherInstanceIsProcessing": "另一个实例正在处理此文件。请等待其完成或删除 .lock 文件。",
+      "apiDebugTemplate": "DEBUG [API 响应状态]: {{ .Status }}\nDEBUG [API 原始错误体]: {{ .Body }}",
+      "batchProgress": "处理批次: {{ .Completed }}/{{ .Total }}...",
+      "closingTag": "关闭标签",
+      "ctrlCPressed": "\n按下 Ctrl+C。正在完成当前批次并保存进度。按再次按强制退出。\n",
+      "ctrlCPressed2": "\n已请求终止。请等待。\n",
+      "filesMerged": "文件成功合并到: '{{ .MergedFileName }} '。",
+      "generatingRequests": "正在生成 {{ .Count }} 个请求用于批次处理...",
+      "openingTag": "打开标签",
+      "processedChunkOf": "已处理块 {{ .Processed }} of {{ .Total }}",
+      "processingComplete": "此文件的处理已完成。",
+      "progressSavedTerminating": "进度已保存。终止。",
+      "quittingWithoutSaving": "\n强制退出。已保存部分进度并将剩余请求标记为失败。\n",
+      "retrying": "[尝试 {{ .Attempt }}] 块失败。重试中...",
+      "retryWithTemp": "[尝试 {{ .Attempt }}] 块失败。重试时温度 {{ .Temp }}...",
+      "sourceEmpty": "源文件为空或仅包含空白字符。未生成输出。",
+      "terminatedForcefully": "\n强制终止。部分进度和剩余失败已保存。\n",
+      "wroteEntries": "成功写入 {{ .Count }} 条记录到 '{{ .TargetPath }}'"
+    }
+  }
+}

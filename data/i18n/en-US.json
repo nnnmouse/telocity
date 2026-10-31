@@ -1,0 +1,993 @@
+{
+  "e": {
+    "c": {
+      "cfg": {
+        "editorNotFound": "No suitable text editor could be launched automatically. Please set your $EDITOR environment variable to a preferred text editor.",
+        "failedToWriteLocale": "Failed to write the locale file: {{ .ErrorMessage }}",
+        "invalidLocale": "Invalid locale: '{{ .Lang }}'."
+      },
+      "cm": {
+        "diffLineCount": "The input files contain a different number of non-blank lines.",
+        "diffLineCount1": " - Input 1 ({{ .File1 }}): {{ .Lines1 }} lines.",
+        "diffLineCount2": " - Input 2 ({{ .File2 }}): {{ .Lines2 }} lines.",
+        "invalidWidth": "Invalid column width: '{{ .Width }}'. Width must be a positive integer.",
+        "missingArgs": "Missing required arguments. Expected: <file1> <file2> <target>"
+      },
+      "co": {
+        "coError": "Could not load module for command '{{ .Command }}'. Skipping completion generation."
+      },
+      "jd": {
+        "emptyJson": "The target JSON contains no elements to split.",
+        "invalidJson": "Failed to parse JSON from '{{ .FilePath }}'.",
+        "invalidSplitSize": "Invalid split size parameter: '{{ .Size }}'. Must be a positive integer."
+      },
+      "mg": {
+        "extensionRequired": "A file extension is required. Provide it using the -e or --extension flag."
+      },
+      "or": {
+        "apiKeyRequired": "An OpenRouter API key is required. Provide it via --apikey, a preset configuration using --params, or the TELOCITYKEY environment variable.",
+        "contentFilterTriggered": "Response blocked by content filter (finish_reason: content_filter)",
+        "fetchFailed": "Failed to fetch OpenRouter key info. Status: {{ .Status }}. Response: {{ .Error }}",
+        "invalidResponse": "Failed to retrieve key status. Verify that the loaded configuration contains a valid OpenRouter API key.",
+        "jsonParseFailed": "Failed to parse JSON line: {{ .Error }}",
+        "maxTokensReached": "Maximum tokens limit reached (finish_reason: length)",
+        "missingResponseField": "The response field is missing or null.",
+        "requestTimedOut": "The request timed out after {{ .Seconds }} seconds.",
+        "responseExecutionFailedOrCancelled": "Response execution was {{Reason}} (status: incomplete)"
+      },
+      "rd": {
+        "noPortAvailable": "Could not find an available port after 4 attempts.",
+        "unkServError": "A server runtime error occurred: {{ .Unk }}"
+      },
+      "rm": {
+        "binRequired": "A model name or the --all flag is required when using --bin.",
+        "modelRequired": "A model name or the --all flag is required when using --model."
+      },
+      "sp": {
+        "invalidSplitSize": "Invalid split size: '{{ .Size }}'. Size must be a positive number."
+      },
+      "st": {
+        "delimiterPairRequired": "Both start and end delimiters are required."
+      },
+      "tc": {
+        "failedToDownload": "Failed to download '{{ .ModelUrl }}': {{ .Status }} {{ .StatusText }}",
+        "invalidJsonlSource": "The input file is not a valid JSONL source file.",
+        "modelDownloadError": "An error occurred during model download: {{ .ErrorMessage }}",
+        "modelNotFoundForDownload": "The model '{{ .ModelName }}' could not be found.",
+        "poolShuttingDown": "Worker pool is shutting down.",
+        "tokenizerDoesNotExist": "A tokenizer for the preset '{{ .PresetName }}' does not exist.",
+        "tokenizerFilesNotFound": "Failed to load tokenizer files for '{{ .TokenizerName }}'.",
+        "workerCrashedCode": "Worker crashed with code {{ .Code }}."
+      }
+    },
+    "lcli": {
+      "booleanWithValue": "Option '{{ .Option }}' does not take an argument.",
+      "causePrefix": "Cause:",
+      "cfgCouldNotBeLoaded": "The configuration file could not be loaded from '{{ .UserConfigPath }}'.",
+      "commandNotImplemented": "Command not implemented: '{{ .CommandAlias }}'.",
+      "missingValue": "The argument for option '{{ .Option }}' is missing.",
+      "notInteractive": "Interactive confirmation is not supported in unattended mode.",
+      "processingAborted": "Processing aborted.",
+      "unexpectedPositional": "Unexpected positional argument: '{{ .Argument }}'.",
+      "unknownErrorOccurred": "An unknown error occurred.",
+      "unknownOption": "Unknown option: '{{ .Option }}'."
+    },
+    "lllm": {
+      "accountWideError": "[FATAL] Account-wide error {{ .Status }} encountered. Cancelling batch run immediately.",
+      "audioNotSupportedModality": "Audio modality is not supported in the Responses or Completions APIs.",
+      "availableLanguagesList": "Available options for this model: {{ .List }}",
+      "contentFilterTriggered": "Generation stopped because the output triggered the backend's content safety filters.",
+      "emptyFile": "The file is empty or contains only whitespace.",
+      "endpointRequired": "Configuration error: Explicit 'endpoint' parameter is missing. All model configurations and execution presets must explicitly declare a target endpoint.",
+      "failedLock": "Failed to acquire the lock file.",
+      "failedToParseStreamChunk": "Failed to parse stream chunk: {{ .Error }}",
+      "failedToSaveProgress": "Failed to save batch progress.",
+      "failureMeansDeathStopped": "Failure encountered and failureMeansDeath is active. Stopping batch processing.",
+      "fileNotFound": "File not found: '{{ .FilePath }}'.",
+      "hardTimeOut": "Hard timeout exceeded. The request took too long to complete.",
+      "idleTimeOut": "Idle timeout exceeded. No data received from the server.",
+      "initializingBatch": "An error occurred while initializing batch processing.",
+      "invalidEndpoint": "The configured endpoint '{{ .Endpoint }}' is invalid. Available endpoints: {{ .Available }}.",
+      "invalidFileSize": "File size exceeds the maximum limit of {{ .MAX_SIZE_MB }} MB.",
+      "invalidLanguageInput": "The language '{{ .Input }}' could not be resolved. Did you mean '{{ .Closest }}'?",
+      "invalidLanguageInputNoSuggestion": "The language '{{ .Input }}' could not be resolved.",
+      "invalidReasoningType": "Invalid reasoning type '{{ .Type }}' for model preset '{{ .Model }}'.",
+      "invalidRegex": "Invalid regular expression pattern '{{ .Pattern }}': {{ .Error }}",
+      "jsonlContentFilter": "[ERROR: Response blocked by content filter (finish_reason: content_filter)]",
+      "jsonlContentFilterIncomplete": "[ERROR: Response blocked by content filter (status: incomplete, reason: content_filter)]",
+      "jsonlError": "[ERROR: {{ .Message }}]",
+      "jsonlExecutionIncomplete": "[ERROR: Response execution {{ .Reason }} (status: incomplete, reason: {{ .Reason }})]",
+      "jsonlGenError": "An error occurred during JSONL file generation.",
+      "jsonlMalformedLine": "[MALFORMED LINE]",
+      "jsonlMaxTokensIncomplete": "[ERROR: Maximum tokens limit reached (status: incomplete, reason: {{ .Reason }})]",
+      "jsonlMaxTokensLength": "[ERROR: Maximum tokens limit reached (finish_reason: length)]",
+      "jsonlStatusError": "[ERROR (Status {{ .Status }}): {{ .Message }}]",
+      "jsonlStreamTerminatedError": "[ERROR: Stream terminated with finish_reason error]",
+      "jsonlUnrecognizedFormat": "[ERROR: Unrecognized or unknown response format for {{ .CustomId }}]",
+      "llmAPICall": "Error during API call: ",
+      "maxFailReached": "Batch processing aborted. The maximum allowed raw failed attempt threshold of {{ .MaxFail }} has been reached.",
+      "maxTokensLimitReached": "Generation truncated because the maximum output token limit was reached.",
+      "mediaNotSupportedCompletions": "Media (audio/images) is not supported in the Completions API.",
+      "networkErrorOpenAI": "A network error occurred while calling '{{ .URL }}'.",
+      "networkErrorReason": " Reason: {{ .Code }}",
+      "noFilesFound": "No files found matching the criteria (extension: .{{ .Extension }}, filters applied).",
+      "openaiApiError": "API call failed with status {{ .Status }}: {{ .Message }}",
+      "partFileCollision": "Part file collision",
+      "promptBlockedWarning": "[WARNING] Prompt blocked by possible safety/guardrails (HTTP 403). Bypassing retries.",
+      "promptMissing": "No prompts were provided via the CLI or configuration file. Aborting.",
+      "responseNull": "The API response body is null.",
+      "sourceAndTargetMustBeDifferent": "Source and target paths must be different.",
+      "sourceRequired": "Source path is required.",
+      "sourceTargetRequired": "Source and target paths are required.",
+      "streamEndedPrematurely": "Stream ended prematurely without [DONE] signal.",
+      "streamInterrupted": "Stream interrupted with error: {{ .ErrorContent }}",
+      "streamTerminatedError": "Stream terminated due to error (finish_reason: error)",
+      "targetFileExists": "The target path already exists: '{{ .TargetPath }}'.",
+      "tExceeded": "Idle timeout exceeded",
+      "undefinedParam": "The requested parameter preset '{{ .ParamKey }}' is undefined.",
+      "undefinedPromptPreset": "The requested prompt preset '{{ .PresetKey }}' was not found or is empty in the configuration templates.",
+      "unknownOpenAIError": "An unknown error occurred while communicating with the API.",
+      "unknownStatusCodeError": "Unknown status code error"
+    },
+    "v": {
+      "audioNotFound": "Audio file not found: '{{ .Audio }}'.",
+      "imageNotFound": "Warning: Image file not found, skipping '{{ .Image }}'.",
+      "invalidAllowH2": "The HTTP/2 option must be a boolean value (true or false), received: {{ .Value }}.",
+      "invalidAPIKey": "Invalid API key provided: {{ .APIKey }}",
+      "invalidArgArray": "Invalid argument array provided: {{ .OptionValue }}",
+      "invalidAudioOption": "Invalid audio object.",
+      "invalidBatchSize": "Invalid batch size. Must be an integer between 1 and 1000. Provided: {{ .BatchSize }}",
+      "invalidChunkSize": "Invalid chunk size. Must be an integer between 1 and 500000. Provided: {{ .ChunkSize }}",
+      "invalidDataURI": "Invalid image format. Expected a data URI string starting with 'data:', but received: {{ .Value }}",
+      "invalidDelayValue": "Delay or RetryDelay must be a non-negative number.",
+      "invalidExtraBodyType": "The 'extra_body' parameter must be a valid JSON object structure, but received: {{ .Value }}",
+      "invalidImageArray": "Invalid image input. Expected an array of data URIs, but received: {{ .Value }}",
+      "invalidIndex": "Invalid starting index. Must be a non-negative integer. Provided: {{ .Index }}",
+      "invalidMaxTokensRange": "The max_tokens parameter must be a positive integer greater than or equal to 1.",
+      "invalidModel": "Invalid model name provided: {{ .Model }}",
+      "invalidOption": "Invalid option value: {{ .Value }}.",
+      "invalidParallelSize": "Invalid concurrency limit. Must be an integer between 1 and 128. Provided: {{ .Parallel }}",
+      "invalidPenaltyRange": "Frequency/Presence penalty must be a number between -2.0 and 2.0.",
+      "invalidPrompt": "Invalid prompt provided. Must be a non-empty string.",
+      "invalidSessionId": "Invalid session_id.",
+      "invalidTemperatureRange": "Temperature must be a number between 0.0 and 2.0.",
+      "invalidTempValueRange": "Temperature value {{ .Value }} must be a number between 0.0 and 2.0.",
+      "invalidTempValues": "Option 'tempValues' must be an array of numbers, received {{ .Value }}.",
+      "invalidTopKRange": "Top_k must be a positive integer.",
+      "invalidTopPRange": "Top_p must be a number between 0.0 and 1.0.",
+      "invalidURL": "Invalid URL provided: {{ .URL }}",
+      "invalidURLScheme": "Invalid URL scheme. Must start with http:// or https://. Provided: {{ .URL }}",
+      "mutuallyExclusiveMedia": "Cannot use both audio and images at the same time.",
+      "mutuallyExclusivePrompts": "Multiple prompt sources provided. Please supply at most one prompt source (CLI positional argument, --pselector, or --partial).",
+      "seedMustBePositiveInteger": "Seed must be a positive integer.",
+      "unsupportedAudioType": "Unsupported audio type '{{ .Ext }}' for file '{{ .Audio }}'. Supported: mp3, mp4, mpeg, mpga, m4a, wav, webm.",
+      "unsupportedImageType": "Warning: The image glob pattern '{{ .Args }}' did not match any supported files.",
+      "unsupportedImageType2": "Skipping unsupported image type '{{ .Ext }}' for file: '{{ .Image }}'."
+    }
+  },
+  "help": {
+    "commands": {
+      "avg": {
+        "description": "Calculates the average number of characters (graphemes) and bytes per non-empty line in a file.",
+        "flags": {},
+        "usage": "Usage: telocity avg <source_path>"
+      },
+      "bg": {
+        "description": "Generates a structured JSONL request batch from a source text file for translation tasks.",
+        "flags": {
+          "chunksize": "Number of lines per chunk/request. (default: {{ .ChunkSize }})",
+          "context": "Additional context or a file path containing context to include in the prompt for each chunk.",
+          "model": "Overrides the model specified in the parameter set.",
+          "params": "Parameter set to use for prompt and model configuration. (default: {{ .DefaultModel }})",
+          "reason": "Toggle reasoning mode for presets that support it (inverts the default setting).",
+          "regex": "Regular expression pattern used to segment the source file into chunks, instead of line-based chunk size.",
+          "source": "Source language for translation prompts.",
+          "target": "Target language for translation prompts."
+        },
+        "footer": "\nAvailable Parameter Sets:\n{{ .ModelParamList }}\n\nAvailable JSONL Formats:\n{{ .FormatsList }}",
+        "usage": "Usage: telocity bg [options] <source_file> <target_jsonl_file>"
+      },
+      "bg2": {
+        "description": "Generates a structured JSONL request batch for general text transformations. If the source file is omitted or set to '-', standard input (stdin) is processed.",
+        "flags": {
+          "chunksize": "Number of characters per chunk/request. (default: {{ .ChunkSize }})",
+          "model": "Overrides the model specified in the parameter set.",
+          "params": "Parameter set to use for prompt and model configuration. (default: {{ .DefaultModel }})",
+          "prompt": "The prompt (or file path containing the prompt) to prepend to each chunk. Overrides the preset's prepend prompt.",
+          "pselector": "Lookup and use a prompt preset from the configuration templates as the instruction.",
+          "reason": "Toggle reasoning mode for presets that support it (inverts the default setting).",
+          "sysprompt": "System prompt or a file path containing the system prompt to use. Overrides the preset's system prompt."
+        },
+        "footer": "\nAvailable Parameter Sets:\n{{ .ModelParamList }}\n\nAvailable JSONL Formats:\n{{ .FormatsList }}",
+        "usage": "Usage: telocity bg2 [options] [source_file] <target_jsonl_file>"
+      },
+      "br": {
+        "description": "Executes a JSONL batch job natively, managing retries and structured outputs, or exports a completed JSONL to plain text. If the target path is omitted, it is automatically derived from the source path.",
+        "flags": {
+          "apikey": "API Key.",
+          "batchsize": "Override JSONL batch size (default: {{ .BatchSize }}).",
+          "export": "Export an already completed output JSONL file to a standard text file.",
+          "model": "Model override.",
+          "parallel": "Override JSONL concurrent requests limit (default: {{ .Parallel }}).",
+          "params": "Model preset to pull settings from (default: {{ .DefaultModel }}).",
+          "reason": "Toggle reasoning mode for presets that support it (inverts the default setting).",
+          "retry": "Retry only the failed requests from a previous run. Takes the target output file of the retry run as an argument.",
+          "stream": "Enables real-time streaming to the terminal if batch size is 1. (Note: Streaming bypasses backend metadata preservation).",
+          "url": "Base API URL (appends JSONL endpoint automatically)."
+        },
+        "footer": "Available Presets:\n{{ .ModelParamList }}",
+        "usage": "Usage: telocity br [options] <source_jsonl> [target]"
+      },
+      "cfg": {
+        "description": "Manages the application configuration and active locale.",
+        "flags": {
+          "edit": "Open the user configuration file in the default editor.",
+          "lang": "Set the application language.",
+          "remove": "Delete the user configuration files (prompts for confirmation)."
+        },
+        "footer": "Supported locales:\n{{ .LocaleList }}",
+        "usage": "Usage: telocity cfg [options]"
+      },
+      "cm": {
+        "description": "Compares and merges two text files side-by-side into a single output file.",
+        "flags": {
+          "force": "Force the merge even if the two input files have a different number of lines.",
+          "width": "Set the width (in columns) for each half of the output. (default: {{ .Width }})"
+        },
+        "usage": "Usage: telocity cm <file1> <file2> <target> [options]"
+      },
+      "jd": {
+        "description": "Compares structured JSON translation keys, merges new translations, or safely splits files while preserving hierarchical paths.",
+        "flags": {
+          "merge": "Updates the target JSON in-place with localized values from a secondary translation map.",
+          "size": "Maximum size in KB of each split file (defaults to 20).",
+          "split": "Safely splits a hierarchical JSON file into multiple parts while preserving object path structures."
+        },
+        "usage": "Usage: telocity jd <source_json> <target_json/target_dir> [output_json] [options]"
+      },
+      "mg": {
+        "description": "Recursively finds and merges text files from a source directory. Supports glob filtering via flags or .mginclude/.mgignore files.",
+        "flags": {
+          "exclude": "Glob patterns to exclude (colon-separated, e.g., \"tests/**:node_modules/**\") or a path to a file containing patterns.",
+          "extension": "The file extension to look for (required).",
+          "failed": "Merges successful retries back into the original output file. Requires <original_jsonl> <retry_jsonl> [output_file].",
+          "include": "Glob patterns to include (colon-separated, e.g., \"src/**:libs/**\") or a path to a file containing patterns.",
+          "noignore": "Do not read or apply rules from local .mgignore files.",
+          "params": "The parameter config preset to use for resolving target strategy and JSONL formats."
+        },
+        "usage": "Usage: telocity mg <source_directory> [target_directory] [options]"
+      },
+      "or": {
+        "description": "Fetches and displays OpenRouter API key limits, daily usage, and remaining credits.",
+        "flags": {
+          "apikey": "The OpenRouter API key to query. Overrides all other key configurations.",
+          "help": "Display help information for this command.",
+          "params": "Preset configuration key used to look up the API key fallback."
+        },
+        "usage": "Usage: telocity or [options]"
+      },
+      "os": {
+        "description": "Executes a single, one-shot prompt against an LLM. The prompt can be literal text or a file path. Supports context from standard input (stdin), text files, images, and audio.",
+        "flags": {
+          "apikey": "Provide an API key for the request.",
+          "audio": "Path to an audio file for audio context. Supported formats: mp3, mp4, mpeg, mpga, m4a, wav, webm.",
+          "chunksize": "The chunk size used to truncate the input text.",
+          "file": "Path to a text file to be appended to the prompt as context.",
+          "image": "Path to image(s) for visual context. Supports glob patterns and colon-separated lists (e.g., \"img1.jpg:*.png\"). Supported formats: png, jpg/jpeg, gif, webp.",
+          "model": "Override the model name specified in the preset.",
+          "outfile": "Path to save the LLM's output, offering an alternative to the positional [output_file] argument.",
+          "params": "Select a model parameter preset (default: {{ .DefaultModel }}).",
+          "partial": "Lookup a prompt preset and truncate the input text to the first chunk of lines.",
+          "pselector": "Lookup and use a prompt preset from the configuration templates as the instruction.",
+          "reason": "Toggle reasoning mode for presets that support it (inverts the default setting).",
+          "url": "Override the API endpoint URL."
+        },
+        "footer": "Available Presets:\n{{ .ModelParamList }}",
+        "usage": "Usage: telocity os \"<prompt>\" [output_file] [options]"
+      },
+      "rd": {
+        "description": "Launches a local web server to display a text file in a paginated, distraction-free reader.",
+        "flags": {},
+        "usage": "Usage: telocity rd [source_path]"
+      },
+      "rm": {
+        "description": "Manages and removes downloaded model tokenizers and configuration files.",
+        "flags": {
+          "all": "Remove all targeted models or binaries.",
+          "bin": "Target model compiled binary files (.bin).",
+          "force": "Force deletion without confirmation.",
+          "model": "Target model configuration files (.json and _config.json)."
+        },
+        "usage": "Usage: telocity rm [model_name] [options]"
+      },
+      "sp": {
+        "description": "Splits a large text file into smaller parts without breaking lines. If the target directory is omitted, a subfolder is automatically created.",
+        "flags": {
+          "size": "The maximum size of each part in megabytes (default: {{ .Size }})."
+        },
+        "usage": "Usage: telocity sp <source_path> [target_directory] [options]"
+      },
+      "st": {
+        "description": "Strips or extracts content between specified delimiters. Reads from standard input (stdin) if '-' is used, and outputs to stdout if the target path is omitted.",
+        "flags": {
+          "brainrot": "Normalizes paragraph spacing to double newlines.",
+          "compress": "Compresses and removes consecutive empty lines in the output.",
+          "enddelimiter": "The ending delimiter.",
+          "extracttag": "Extract content between delimiters instead of removing it.",
+          "params": "Use start/end delimiters from a preset.",
+          "startdelimiter": "The starting delimiter.",
+          "unformat": "Removes basic markdown formatting (bold/italics)"
+        },
+        "footer": "Available Presets with Tags:\n{{ .ReasoningTagParamList }}",
+        "usage": "Usage: telocity st [options] [source_path] [target_path]"
+      },
+      "tc": {
+        "description": "Counts the exact number of tokens in a source JSONL file using a model-specific downloaded tokenizer.",
+        "flags": {
+          "params": "The model preset whose tokenizer to use (default: {{ .DefaultModel }})."
+        },
+        "footer": "\nAvailable Tokenizers:\n{{ .TokenParamList }}",
+        "usage": "Usage: telocity tc <source_jsonl_path> [options]"
+      },
+      "tc2": {
+        "description": "Calculate token consumption statistics for a plaintext file split into consecutive line-bounded chunks.",
+        "flags": {
+          "chunksize": "Manual line override limit for each processing chunk segment.",
+          "params": "The target tokenizer configuration profile to load and execute calculations with."
+        },
+        "usage": "Usage: telocity tc2 <file> [options]"
+      }
+    },
+    "generic": {
+      "commandDescriptions": {
+        "avg": "Calculates average line length of a file.",
+        "bg": "Generates a JSONL batch file for translation prompts.",
+        "bg2": "Generates a JSONL batch file for generic transformation prompts.",
+        "br": "Native JSONL batch runner and exporter.",
+        "cfg": "Manages application configuration and localization.",
+        "cm": "Compares and merges two files side-by-side.",
+        "jd": "Analyzes, merges, or splits structured JSON files.",
+        "mg": "Recursively merges text files from a directory.",
+        "or": "Displays OpenRouter API key limits and statistics.",
+        "os": "Executes a single prompt with optional file/media context.",
+        "rd": "Launches a local web server for paginated reading.",
+        "rm": "Removes downloaded model tokenizer binaries.",
+        "sp": "Splits a large file into smaller parts by size.",
+        "st": "Strips or extracts text between delimiters.",
+        "tc": "Counts tokens in a JSONL batch request file.",
+        "tc2": "Counts tokens in a raw plaintext file by segment chunks."
+      },
+      "commandHeader": "Commands:",
+      "flags": { "version": "Show application version." },
+      "footer": "For more information on any command, use `telocity <command> --help`.",
+      "globalOptionsHeader": "Global Options:",
+      "header": "telocity: A tool for batch processing text with LLMs.",
+      "usage": "Usage: telocity <command> [options]"
+    },
+    "optionsHeader": "Options"
+  },
+  "languages": {
+    "_LLM_INSTRUCTIONS_ALIASES": "RULES FOR GENERATING ALIASES:\nFor each language entry, expand the 'aliases' array with a comprehensive list of lowercase search terms a user speaking the target language might input. Include:\n1. CODES: Standard 2-letter and 3-letter ISO codes (e.g., 'ja', 'jpn', 'fr', 'fra').\n2. NAMES: The language name in English, in its native script (e.g., '日本語', 'Español'), and in the target translation language (e.g., 'フランス語').\n3. REGIONS: The base country or region name in the target translation language (e.g., 'フランス', '西班牙', 'spain').\n4. TYPING & SCRIPTS: For non-Latin scripts, include standard romanizations and keyboard IME input strings (e.g., pinyin 'xibanyayu', 'zhongwen'; hiragana/romaji 'にほんご', 'nihongo'). For Latin scripts, include accent-stripped variants (e.g., 'espanol', 'francais').\n5. ALTERNATES: Common alternate naming conventions or regional dialects (e.g., 'mandarin', 'castellano').\nEnsure all values are lowercase, unique, strictly relevant, and linguistically authentic to the target language context. Avoid cross-language contamination and phonetic translation errors (e.g., do not translate Tagalog as '他ガログ').",
+    "ARABIC": {
+      "aliases": [
+        "al-arabiyyah",
+        "ar",
+        "ara",
+        "arab",
+        "arabia",
+        "arabic",
+        "العربية"
+      ],
+      "name": "Arabic"
+    },
+    "BENGALI": {
+      "aliases": [
+        "bangla",
+        "bangladesh",
+        "ben",
+        "bengal",
+        "bengali",
+        "bn",
+        "বাংলা"
+      ],
+      "name": "Bengali"
+    },
+    "BURMESE": {
+      "aliases": [
+        "bur",
+        "burma",
+        "burmese",
+        "my",
+        "mya",
+        "myanmar",
+        "myanmasa",
+        "မြန်မာစာ"
+      ],
+      "name": "Burmese"
+    },
+    "CANTONESE": {
+      "aliases": [
+        "cantonese",
+        "guangdong",
+        "gwongdungwa",
+        "hk",
+        "hong kong",
+        "macau",
+        "yue",
+        "广东话",
+        "廣東話"
+      ],
+      "name": "Cantonese"
+    },
+    "CHINESE": {
+      "aliases": [
+        "chi",
+        "china",
+        "chinese",
+        "cn",
+        "mandarin",
+        "putonghua",
+        "zh",
+        "zho",
+        "zhongwen",
+        "中文",
+        "普通话",
+        "汉语",
+        "漢語"
+      ],
+      "name": "Chinese"
+    },
+    "CZECH": {
+      "aliases": [
+        "ces",
+        "cesky",
+        "cestina",
+        "čeština",
+        "cs",
+        "cz",
+        "cze",
+        "czech",
+        "czech republic",
+        "czechia"
+      ],
+      "name": "Czech"
+    },
+    "DETECTED": {
+      "aliases": [
+        "auto",
+        "auto detect",
+        "auto-detect",
+        "autodetect",
+        "detect",
+        "detected",
+        "lang",
+        "orig",
+        "original",
+        "source",
+        "sourcelang",
+        "src"
+      ],
+      "name": "source language"
+    },
+    "DUTCH": {
+      "aliases": [
+        "belgium",
+        "dut",
+        "dutch",
+        "holland",
+        "nederlands",
+        "netherlands",
+        "nl",
+        "nld"
+      ],
+      "name": "Dutch"
+    },
+    "ENGLISH": {
+      "aliases": [
+        "america",
+        "britain",
+        "en",
+        "eng",
+        "english",
+        "uk",
+        "united kingdom",
+        "united states",
+        "us",
+        "usa"
+      ],
+      "name": "English"
+    },
+    "FILIPINO": {
+      "aliases": [
+        "fil",
+        "filipino",
+        "ph",
+        "philippines",
+        "pilipino",
+        "tagalog",
+        "tgl",
+        "tl"
+      ],
+      "name": "Filipino"
+    },
+    "FRENCH": {
+      "aliases": [
+        "fr",
+        "fra",
+        "francais",
+        "français",
+        "france",
+        "fre",
+        "french"
+      ],
+      "name": "French"
+    },
+    "GERMAN": {
+      "aliases": [
+        "austria",
+        "de",
+        "deu",
+        "deutsch",
+        "deutschland",
+        "ger",
+        "german",
+        "germany",
+        "switzerland"
+      ],
+      "name": "German"
+    },
+    "GUJARATI": {
+      "aliases": ["gu", "guj", "gujarat", "gujarati", "india", "ગુજરાતી"],
+      "name": "Gujarati"
+    },
+    "HEBREW": {
+      "aliases": ["he", "heb", "hebrew", "israel", "ivrit", "iw", "עברית"],
+      "name": "Hebrew"
+    },
+    "HINDI": {
+      "aliases": ["hi", "hin", "hindi", "hindustani", "india", "हिंदी", "हिन्दी"],
+      "name": "Hindi"
+    },
+    "INDONESIAN": {
+      "aliases": [
+        "bahasa",
+        "bahasa indonesia",
+        "id",
+        "ind",
+        "indo",
+        "indonesia",
+        "indonesian"
+      ],
+      "name": "Indonesian"
+    },
+    "ITALIAN": {
+      "aliases": ["it", "ita", "italia", "italian", "italiano", "italy"],
+      "name": "Italian"
+    },
+    "JAPANESE": {
+      "aliases": [
+        "ja",
+        "japan",
+        "japanese",
+        "jp",
+        "jpn",
+        "nihongo",
+        "nippon",
+        "にほんご",
+        "日本語"
+      ],
+      "name": "Japanese"
+    },
+    "KAZAKH": {
+      "aliases": [
+        "kaz",
+        "kazakh",
+        "kazakhstan",
+        "kk",
+        "qazaq",
+        "қазақ",
+        "қазақша"
+      ],
+      "name": "Kazakh"
+    },
+    "KHMER": {
+      "aliases": ["cambodia", "cambodian", "khm", "khmer", "km", "ភាសាខ្មែរ"],
+      "name": "Khmer"
+    },
+    "KOREAN": {
+      "aliases": [
+        "hangugo",
+        "ko",
+        "kor",
+        "korea",
+        "korean",
+        "kr",
+        "north korea",
+        "south korea",
+        "조선말",
+        "한국어"
+      ],
+      "name": "Korean"
+    },
+    "MALAY": {
+      "aliases": [
+        "bahasa malaysia",
+        "bahasa melayu",
+        "brunei",
+        "malay",
+        "malaysia",
+        "may",
+        "ms",
+        "msa",
+        "singapore"
+      ],
+      "name": "Malay"
+    },
+    "MARATHI": {
+      "aliases": ["india", "maharashtra", "mar", "marathi", "mr", "मराठी"],
+      "name": "Marathi"
+    },
+    "MONGOLIAN": {
+      "aliases": ["mn", "mon", "mongol", "mongolia", "mongolian", "монгол"],
+      "name": "Mongolian"
+    },
+    "PERSIAN": {
+      "aliases": [
+        "afghanistan",
+        "dari",
+        "fa",
+        "farsi",
+        "fas",
+        "iran",
+        "per",
+        "persian",
+        "tajik",
+        "tajikistan",
+        "فارسی"
+      ],
+      "name": "Persian"
+    },
+    "POLISH": {
+      "aliases": ["pl", "pol", "poland", "polish", "polski", "polszczyzna"],
+      "name": "Polish"
+    },
+    "PORTUGUESE": {
+      "aliases": [
+        "brasil",
+        "brazil",
+        "por",
+        "port",
+        "portugal",
+        "portugues",
+        "português",
+        "portuguese",
+        "pt"
+      ],
+      "name": "Portuguese"
+    },
+    "RUSSIAN": {
+      "aliases": ["ru", "rus", "russia", "russian", "russkiy", "русский"],
+      "name": "Russian"
+    },
+    "SIMPLIFIED_CHINESE": {
+      "aliases": [
+        "china",
+        "hans",
+        "jiantizhongwen",
+        "sc",
+        "simplified chinese",
+        "singapore",
+        "zh-cn",
+        "zh-hans",
+        "简体",
+        "简体中文"
+      ],
+      "name": "Simplified Chinese"
+    },
+    "SPANISH": {
+      "aliases": [
+        "castellano",
+        "es",
+        "espana",
+        "españa",
+        "espanol",
+        "español",
+        "latam",
+        "mexico",
+        "spa",
+        "spain",
+        "spanish"
+      ],
+      "name": "Spanish"
+    },
+    "TAMIL": {
+      "aliases": [
+        "india",
+        "singapore",
+        "sri lanka",
+        "ta",
+        "tam",
+        "tamil",
+        "தமிழ்"
+      ],
+      "name": "Tamil"
+    },
+    "TELUGU": {
+      "aliases": [
+        "andhra pradesh",
+        "india",
+        "te",
+        "tel",
+        "telangana",
+        "telugu",
+        "తెలుగు"
+      ],
+      "name": "Telugu"
+    },
+    "THAI": {
+      "aliases": ["phasa thai", "th", "tha", "thai", "thailand", "ภาษาไทย"],
+      "name": "Thai"
+    },
+    "TIBETAN": {
+      "aliases": ["bo", "bod", "bod-skad", "tib", "tibet", "tibetan", "བོད་སྐད་"],
+      "name": "Tibetan"
+    },
+    "TRADITIONAL_CHINESE": {
+      "aliases": [
+        "fantizhongwen",
+        "hant",
+        "hong kong",
+        "taiwan",
+        "tc",
+        "traditional chinese",
+        "zh-hant",
+        "zh-hk",
+        "zh-tw",
+        "繁体中文",
+        "繁體",
+        "繁體中文"
+      ],
+      "name": "Traditional Chinese"
+    },
+    "TURKISH": {
+      "aliases": [
+        "tr",
+        "tur",
+        "turkce",
+        "türkçe",
+        "turkey",
+        "turkish",
+        "turkiye",
+        "türkiye"
+      ],
+      "name": "Turkish"
+    },
+    "UKRAINIAN": {
+      "aliases": [
+        "ua",
+        "uk",
+        "ukr",
+        "ukraine",
+        "ukrainian",
+        "ukrayinska",
+        "українська"
+      ],
+      "name": "Ukrainian"
+    },
+    "URDU": {
+      "aliases": ["india", "pakistan", "ur", "urd", "urdu", "اردو"],
+      "name": "Urdu"
+    },
+    "UYGHUR": {
+      "aliases": [
+        "ug",
+        "uig",
+        "uighur",
+        "uyghur",
+        "xinjiang",
+        "ئۇيغۇر",
+        "ئۇيغۇرچە"
+      ],
+      "name": "Uyghur"
+    },
+    "VIETNAMESE": {
+      "aliases": [
+        "tieng viet",
+        "tiếng việt",
+        "vi",
+        "vie",
+        "vietnam",
+        "vietnamese",
+        "vn"
+      ],
+      "name": "Vietnamese"
+    }
+  },
+  "m": {
+    "c": {
+      "avg": {
+        "averageBytesPerLine": "Average bytes per non-empty line: {{ .AvgBytes }}",
+        "averageCharsPerLine": "Average characters (graphemes) per non-empty line: {{ .AvgChars }}"
+      },
+      "br": {
+        "exportedSuccessfully": "Successfully exported to '{{ .TargetPath }}'."
+      },
+      "cfg": {
+        "cfgDeletedSuccessfully": "Configuration file(s) deleted successfully.",
+        "localeSuccessfullyChanged": "Locale successfully changed to {{ .Locale }}."
+      },
+      "cm": {
+        "success": "Successfully generated side-by-side text out of {{ .Lines }} line segments into -> {{ .Target }}"
+      },
+      "jd": {
+        "fullyAligned": "Both JSON structures are fully aligned. No missing keys found.",
+        "mergedSuccess": "Successfully merged translation keys from '{{ .TranslationFile }}' into '{{ .TargetFile }}'.",
+        "partCreated": "Created part {{ .PartNumber }}: {{ .PartPath }}",
+        "savedSuccess": "Successfully saved missing keys output to '{{ .OutputPath }}'.",
+        "splitSuccess": "Successfully split JSON file into {{ .Count }} parts."
+      },
+      "models": {
+        "completion": "Legacy v1/completions preset. Edit the configuration file to customize.",
+        "dual": "Hybrid Instruct/Reasoning preset (toggled via -r).",
+        "effort": "Reasoning preset with effort parameter support.",
+        "fallback": "A generic preset for any OpenAI-compatible API.",
+        "genericprep": "A generic preset that prepends the prompt to the user's text.",
+        "genericsys": "A generic preset that uses a system prompt.",
+        "instruct": "Standard instruct-based preset.",
+        "noHelp": "No help text available for this preset.",
+        "reasoning": "Dedicated reasoning preset."
+      },
+      "or": {
+        "audioCompletionTokens": "  - Audio (Completion)",
+        "audioPromptTokens": "  - Audio (Prompt)",
+        "batchStatsHeader": "=== OpenRouter Batch Stats: {{ .FileName }} ===",
+        "byokIncluded": "BYOK Included in Limit",
+        "byokUsageAllTime": "BYOK Usage (All-Time)",
+        "byokUsageDaily": "BYOK Usage (Daily)",
+        "byokUsageMonthly": "BYOK Usage (Monthly)",
+        "byokUsageWeekly": "BYOK Usage (Weekly)",
+        "cachedTokens": "  - Cached",
+        "cacheWriteTokens": "  - Cache Write",
+        "costsSection": "Estimated Costs",
+        "creditsSection": "Credits & Limits",
+        "failedRequests": "Failed/Malformed",
+        "failedSection": "Failed/Malformed Requests",
+        "generalSection": "General",
+        "header": "OpenRouter API Key Status & Limits",
+        "imageCompletionTokens": "  - Image (Completion)",
+        "isFreeTier": "Free Tier Status",
+        "label": "Key Label",
+        "limit": "Credit Limit",
+        "limitRemaining": "Remaining Balance",
+        "limitReset": "Reset Period",
+        "malformed": "Malformed",
+        "modelsSection": "Models",
+        "no": "No",
+        "notAvailable": "N/A",
+        "providersSection": "Providers",
+        "reasoningTokens": "  - Reasoning",
+        "streamTerminatedError": "Stream terminated with finish_reason: error",
+        "successfulRequests": "Successful",
+        "tokensSection": "Tokens",
+        "totalCompletionTokens": "Total Completion Tokens",
+        "totalCost": "Total Cost",
+        "totalPromptTokens": "Total Prompt Tokens",
+        "totalRequests": "Total Requests",
+        "totalTokens": "Total Tokens",
+        "unknownError": "Unknown Error",
+        "unlimited": "Unlimited",
+        "upstreamCompletionCost": "Upstream Completion Cost",
+        "upstreamInferenceCost": "Upstream Inference Cost",
+        "upstreamPromptCost": "Upstream Prompt Cost",
+        "usageAllTime": "Usage (All-Time)",
+        "usageDaily": "Usage (Daily)",
+        "usageMonthly": "Usage (Monthly)",
+        "usageSection": "API Usage Details",
+        "usageWeekly": "Usage (Weekly)",
+        "videoPromptTokens": "  - Video (Prompt)",
+        "yes": "Yes"
+      },
+      "rd": {
+        "closeBtn": "Close",
+        "confirmDelete": "Are you sure you want to delete this book from your local browser library?",
+        "contentLoadError": "Error: Could not load content.",
+        "deleteBtn": "Delete",
+        "ebookLoaded": "Loaded ebook.",
+        "emptyLibrary": "Your library is currently empty. Import a book to begin.",
+        "fontSizeLabel": "Font Size",
+        "importLabel": "Import Book (.txt, .jsonl)",
+        "instructions": "⇦ · h · ⇧+␣   │   ⇨ · l · ␣   (⇳ scroll)",
+        "libraryModeLoaded": "Reader started in Library Mode (no source file provided).",
+        "libraryTitle": "Stored Books",
+        "loadBtn": "Library",
+        "loadingMsg": "Loading...",
+        "nextBtn": "Next→",
+        "notFound": "404 Not Found",
+        "portInUse": "Port {{ .Port }} in use, trying alternative port {{ .NextPort }}...",
+        "previousBtn": "←Prev",
+        "readingFile": "Reading file: '{{ .sourcePath }}'",
+        "recalcProgressMsg": "Recalculating layout...",
+        "recalcTitle": "Recalculate pagination layout",
+        "reflowingMsg": "Reflowing...",
+        "seekingPageMsg": "Seeking page ",
+        "serverRunningAt": "Ebook reader is running at {{ .url }}",
+        "sizeHXLarge": "HX-Large",
+        "sizeLarge": "Large",
+        "sizeMedium": "Medium",
+        "sizeMediumL": "Medium-L",
+        "sizeNormal": "Normal",
+        "sizeSmall": "Small",
+        "sizeTHXLarge": "THX-Large",
+        "sizeTXLarge": "TX-Large",
+        "sizeVSmall": "V-Small",
+        "sizeXLarge": "X-Large",
+        "syncBtn": "Sync",
+        "syncLabel": "Sync with Desktop CLI",
+        "themeToggleTitle": "Toggle theme",
+        "title": "Telocity Reader"
+      },
+      "rm": {
+        "filesDeletedSuccessfully": "All targeted files deleted successfully.",
+        "filesToDelete": "The following files will be deleted:",
+        "noFilesToDelete": "No files found to delete."
+      },
+      "sp": {
+        "fileSplitSuccess": "Successfully split file: '{{ .SourcePath }}'",
+        "partCreated": "  - Part {{ .PartNumber }} created: {{ .PartPath }}"
+      },
+      "st": {
+        "blockDeleted": "Content between delimiters deleted.",
+        "blockExtracted": "Content between delimiters extracted.",
+        "compressed": "Empty lines compressed.",
+        "newlinesNormalized": "File content normalized and saved."
+      },
+      "tc": {
+        "aboveTripleHeader": "Above Triple Median Tokens Anomaly (> 3x Median):",
+        "anomalyRow": "  Line {{ .Line }} {{ .CustomId }}: {{ .Tokens }} tokens",
+        "availableModelsForDownload": "Available models for download: {{ .AvailableModels }}",
+        "avgTc": "Average token count per request:",
+        "doubleToTripleHeader": "Double to Triple Median Tokens Anomaly (2x - 3x Median):",
+        "downloadingModelFiles": "Downloading model files for '{{ .ModelName }}'...",
+        "downloadSuccess": "Successfully downloaded files for '{{ .ModelName }}':",
+        "medianTc": "Median token count per request:",
+        "tc": "Total token count:",
+        "workerOomRetry": "[TokenWorkerPool] Worker crashed/OOM. Adjusting memory limits and retrying chunk... ({{ .Retries }} retries left)",
+        "writingFilesTo": "Writing files to {{ .StateDir }}..."
+      },
+      "tc2": {
+        "aboveTripleHeader": "Critical outlier chunks containing over 300% of the median chunk size:",
+        "anomalyRow": "Chunk {{ .Line }} {{ .CustomId }} -> {{ .Tokens }} tokens",
+        "avgTc": "Average Tokens Per Chunk:",
+        "doubleToTripleHeader": "Outlier chunks containing over 200% of the median chunk size:",
+        "medianTc": "Median Tokens Per Chunk:",
+        "tc": "Total Token Count:"
+      }
+    },
+    "lcli": {
+      "deletionAborted": "Deletion aborted.",
+      "deletionConfirm": "This action is irreversible. Are you sure you want to delete? (y/N): ",
+      "redacted": "[REDACTED]",
+      "yN": "y"
+    },
+    "lllm": {
+      "anotherInstanceIsProcessing": "Another instance is already processing this file. Please wait for it to finish or remove the .lock file.",
+      "apiDebugTemplate": "DEBUG [API Response Status]: {{ .Status }}\nDEBUG [API Raw Error Body]: {{ .Body }}",
+      "batchProgress": "Processing batch: {{ .Completed }}/{{ .Total }}...",
+      "closingTag": "Closing tag",
+      "ctrlCPressed": "\nCtrl+C pressed. Finishing current batch and saving progress. Press again to force quit.\n",
+      "ctrlCPressed2": "\nTermination already requested. Please wait.\n",
+      "filesMerged": "Files successfully merged into: '{{ .MergedFileName }}'.",
+      "generatingRequests": "Generating {{ .Count }} requests for batch processing...",
+      "openingTag": "Opening tag",
+      "processedChunkOf": "Processed chunk {{ .Processed }} of {{ .Total }}",
+      "processingComplete": "Processing for this file is already complete.",
+      "progressSavedTerminating": "Progress saved. Terminating.",
+      "quittingWithoutSaving": "\nForce quitting. Saving partial progress and marking remaining requests as failed.\n",
+      "retrying": "[Attempt {{ .Attempt }}] Chunk failed. Retrying...",
+      "retryWithTemp": "[Attempt {{ .Attempt }}] Chunk failed. Retrying with temperature {{ .Temp }}...",
+      "sourceEmpty": "Source file is empty or contains only whitespace. No output generated.",
+      "terminatedForcefully": "\nTerminated forcefully. Partial progress and remaining failures have been saved.\n",
+      "wroteEntries": "Successfully wrote {{ .Count }} entries to '{{ .TargetPath }}'"
+    }
+  }
+}

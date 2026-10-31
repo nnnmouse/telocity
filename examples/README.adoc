@@ -1,0 +1,13 @@
+= random stuff and ramblings
+
+Use link:https://github.com/mostlygeek/llama-swap[llama-swap] luke. llama.cpp might have a router mode to manage multiple models but it's still an unreliable ghetto if you are handling several parallel requests (somehow, llama-server's standalone non-routing mode handles that fine. Hopefully it will continue to stay that way?). config.yaml has my current config as an example for running with my script presets. I had moved to the llama.cpp's built in router right around as I started using local models less.. only realizing during a local test now that it was a mistake. Friends don't let friends make the same mistakes. llama-swap is good and it also lets you mix in other inference backends.
+
+Personally I think I'll mainly use local models for testing, DeepSeek V4 Flash is very cheap after all.
+
+For CUDA users and note to self, run llama.cpp with this when in doubt after encountering abnormal model behaviors:
+[source,bash]
+----
+export GGML_CUDA_DISABLE_GRAPHS=1
+----
+
+Only then bisect if no obvious fault lies in there.

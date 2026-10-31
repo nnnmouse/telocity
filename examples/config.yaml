@@ -1,0 +1,163 @@
+globalTTL: 600
+macros:
+  "llamacpp": >
+    /usr/bin/llama
+    serve
+    --port ${PORT}
+    --load-mode mlock
+    --fit off
+    --n-gpu-layers all
+    --kv-unified
+    --flash-attn on
+    -t 6
+    --repeat-penalty 1.0
+    --min-p 0.0
+    --timeout 600
+    --reasoning-format deepseek
+    --reasoning-budget-message "
+
+
+    [REASONING TOKEN BUDGET LIMIT EXCEEDED] Considering the limited time by the user, I have to give the solution based on the thinking directly now.
+    "
+
+  "np1": "--parallel 1"
+  "np4": "--parallel 4"
+
+  "mtp": "--spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-ngl all"
+  "ngrammod": "--spec-type ngram-mod --spec-ngram-mod-n-match 24 --spec-ngram-mod-n-min 48 --spec-ngram-mod-n-max 64"
+
+  "defvis": "--image-min-tokens 560 --image-max-tokens 1120 --batch-size 2048 --ubatch-size 2048"
+
+  "brd": "--cache-type-k q8_0 --cache-type-v q8_0"
+  "brdconfirmed": "--cache-type-k q4_0 --cache-type-v q4_0"
+
+  "lowctx": "--ctx-size 16384"
+  "defctx": "--ctx-size 32768"
+  "mediumctx": "--ctx-size 65536"
+  "largectx": "--ctx-size 131072"
+  "xlargectx": "--ctx-size 262144"
+
+  "cachey": "--cache-ram 8192 --ctx-checkpoints 10"
+  "cachen": "--cache-ram 0 --ctx-checkpoints 0"
+
+  "defsampindex": "--temp 0 --top-k 20 --top-p 0.8"
+  "index": "${cachen} ${defsampindex}"
+
+  "defsampspark": "--temp 1.0 --top-k 0 --top-p 0.95"
+  "spark": "${cachey} ${brd} ${defsampspark}"
+
+  "defsampling": "--temp 1.0 --top-k 20 --top-p 0.95"
+  "ling": "${cachey} ${brd} ${defsampling}"
+
+  "defsampqwen": "--temp 0.6 --top-k 20 --top-p 0.95"
+  "qwen": "${cachen} ${defsampqwen}"
+
+  "defsampgemma": "--temp 1.0 --top-k 64 --top-p 0.95"
+  "gemma": "${defvis} ${cachey} ${brd} ${defsampgemma}"
+
+  "model_index2b": "/path/to/models/Index-Translate-2B.Q8_0.gguf"
+  "mmproj_index2b": "/path/to/models/Index-Translate-2B.mmproj-f16.gguf"
+
+  "model_index9b": "/path/to/models/Index-Translate-9B.Q4_K_M.gguf"
+
+  "model_spark": "/path/to/models/Spark-X2.6-4B-Q4_K_L.gguf"
+
+  "model_ling": "/path/to/models/Ling-3.0-tiny-Q4_K_L.gguf"
+
+  "model_qwen": "/path/to/models/Qwen_Qwen3.5-4B-Q4_K_L.gguf"
+  "mmproj_qwen": "/path/to/models/mmproj-Qwen_Qwen3.5-4B-f16.gguf"
+
+  "model_gemma_e4b": "/path/to/models/gemma-4-e4b-it-qat-ud-q4_k_xl.gguf"
+  "model_gemma_e4b_mtp": "/path/to/models/mtp-gemma-4-e4b-it.gguf"
+  "mmproj_gemma_e4b": "/path/to/models/mmproj-gemma-4-e4b-it.gguf"
+
+  "model_gemma_e2b": "/path/to/models/gemma-4-e2b-it-qat-ud-q4_k_xl.gguf"
+  "model_gemma_e2b_mtp": "/path/to/models/mtp-gemma-4-e2b-it.gguf"
+  "mmproj_gemma_e2b": "/path/to/models/mmproj-gemma-4-e2b-it.gguf"
+
+models:
+  "index2b":
+    concurrencyLimit: 4
+    cmd: |
+      ${llamacpp}
+      ${np4}
+      ${mtp}
+      ${mediumctx}
+      ${index}
+      --model ${model_index2b}
+      --mmproj ${mmproj_index2b}
+
+  "index9b":
+    concurrencyLimit: 4
+    cmd: |
+      ${llamacpp}
+      ${np4}
+      ${mtp}
+      ${defctx}
+      ${index}
+      --model ${model_index9b}
+
+  "spark":
+    concurrencyLimit: 1
+    cmd: |
+      ${llamacpp}
+      ${np1}
+      ${largectx}
+      ${spark}
+      --model ${model_spark}
+
+  "ling":
+    concurrencyLimit: 4
+    cmd: |
+      ${llamacpp}
+      ${np4}
+      ${xlargectx}
+      ${ling}
+      --model ${model_ling}
+
+  "qwen":
+    concurrencyLimit: 4
+    cmd: |
+      ${llamacpp}
+      ${np4}
+      ${mtp}
+      ${mediumctx}
+      ${qwen}
+      --model ${model_qwen}
+
+  "gemma":
+    concurrencyLimit: 4
+    cmd: |
+      ${llamacpp}
+      ${np4}
+      ${mtp}
+      ${mediumctx}
+      ${gemma}
+      --model ${model_gemma_e4b}
+      --model-draft ${model_gemma_e4b_mtp}
+      --mmproj ${mmproj_gemma_e4b}
+
+  "gemmamini":
+    concurrencyLimit: 4
+    cmd: |
+      ${llamacpp}
+      ${np4}
+      ${mtp}
+      ${mediumctx}
+      ${gemma}
+      --model ${model_gemma_e2b}
+      --model-draft ${model_gemma_e2b_mtp}
+      --mmproj ${mmproj_gemma_e2b}
+
+groups:
+  "single_model_group":
+    swap: true
+    exclusive: true
+    members:
+      - "index2b"
+      - "index9b"
+      - "spark"
+      - "ling"
+      - "qwen"
+      - "gemma"
+      - "gemmamini"
