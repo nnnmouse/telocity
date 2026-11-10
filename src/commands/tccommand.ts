@@ -63,6 +63,10 @@ export default class TcCommand implements Command {
         "https://huggingface.co/Qwen/Qwen3.5-4B/resolve/main/tokenizer.json",
         "https://huggingface.co/Qwen/Qwen3.5-4B/resolve/main/tokenizer_config.json",
       ],
+      index: [
+        "https://huggingface.co/IndexTeam/Index-Translate-9B/resolve/main/tokenizer.json",
+        "https://huggingface.co/IndexTeam/Index-Translate-9B/resolve/main/tokenizer_config.json",
+      ],
       gemma: [
         "https://huggingface.co/google/gemma-4-E4B-it/resolve/main/tokenizer.json",
         "https://huggingface.co/google/gemma-4-E4B-it/resolve/main/tokenizer_config.json",

@@ -15,10 +15,8 @@
   "SOURCE_LANGUAGE": "source language",
   "TARGET_LANGUAGE": "English",
   "TEMPLATES": {
-    "GEMMA1": "gemma",
     "DEEPSEEKOR": "deepseek/deepseek-v4-flash",
     "YOURKEY1": "yourkey1",
-    "YOURKEY2": "yourkey2",
     "INDEXTRANSLATE": "请将以下{{ .LanguageSource }}文本翻译为{{ .LanguageTarget }}，直接输出翻译结果，不要进行任何解释。\n\n{{ .TextToInject }}",
     "GENERIC_EN_INSTRUCTIONS": "{{ .ContextualInformation }}### Translation Instructions\n\nPlease translate the following text into {{ .LanguageTarget }}. Adhere strictly to the following principles during translation:\n\n1. **Meaning & Style:** Accurately convey the core meaning, narrative voice, and emotional nuances of the source text, faithfully preserving the author's distinctive style.\n\n2. **Terminology & Consistency:** Ensure consistent translation of recurring proper nouns, titles, honorifics, and key concepts. Proper nouns (such as names and places) should be accurately transliterated or romanized according to standard conventions rather than anglicized, while titles and honorifics should be adapted naturally to the target language.\n\n3. **Context & Adaptation:** For humor, hyperbole, or culturally specific expressions, prioritize capturing their intended spirit and impact over a literal, word-for-word translation.\n\n4. **Fluency & Naturalness:** Ensure the final translation is seamless and natural, utilizing proper syntax so it flows as if originally written by a native speaker of the target language.\n\n### Output Constraints\n\nOutput ONLY the final translated text. Do not include any introductory remarks, explanations, footnotes, or conversational replies.\n\n### Source Text to Translate:\n\n{{ .TextToInject }}",
     "ALT_GENERIC_EN_INSTRUCTIONS": "{{ .ContextualInformation }}### Translation Instructions\n\nPlease translate the following {{ .LanguageSource }} text into {{ .LanguageTarget }}. Adhere strictly to the following principles during translation:\n\n1. **Meaning & Style:** Accurately convey the core meaning, narrative voice, and emotional nuances of the source text, faithfully preserving the author's distinctive style.\n\n2. **Terminology & Consistency:** Ensure consistent translation of recurring proper nouns, titles, honorifics, and key concepts. Proper nouns (such as names and places) should be accurately transliterated or romanized according to standard conventions rather than anglicized, while titles and honorifics should be adapted naturally to the target language.\n\n3. **Context & Adaptation:** For humor, hyperbole, or culturally specific expressions, prioritize capturing their intended spirit and impact over a literal, word-for-word translation.\n\n4. **Fluency & Naturalness:** Ensure the final translation is seamless and natural, utilizing proper syntax so it flows as if originally written by a native speaker of the target language.\n\n### Output Constraints\n\nOutput ONLY the final translated text. Do not include any introductory remarks, explanations, footnotes, or conversational replies.\n\n### Source Text to Translate:\n\n{{ .TextToInject }}",
@@ -118,6 +116,68 @@
         }
       }
     },
+    "qwen": {
+      "reasoningType": "reason_and_instruct",
+      "metadata": {
+        "helptext_key": "models.dual",
+        "stripTags": { "start": "<think>", "end": "</think>" },
+        "display": true,
+        "defaultReasoning": true,
+        "localJSONL": true,
+        "stripEmpty": true,
+        "markdownBrainRot": true,
+        "forceStream": false,
+        "substitutionPrefix": "EN"
+      },
+      "instruct": {
+        "prompt": {
+          "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
+        },
+        "model": {
+          "chunkSize": 100,
+          "batchSize": 32,
+          "parallel": 4,
+          "rpm": 1000,
+          "maxAttempts": 3,
+          "maxFail": 50,
+          "tempValues": [0.3, 0.5, 0.75, 1],
+          "temperature": [true, 0],
+          "top_k": [true, 20],
+          "top_p": [true, 0.8],
+          "presence_penalty": [false, 1.5],
+          "hardTimeout": 5,
+          "model": [true, "qwen"],
+          "chat_template_kwargs": [true, { "enable_thinking": false }],
+          "grammar": [
+            true,
+            "root ::= char+\nchar ::= latin9 | cjk-punct\nlatin9 ::= [\\u0020-\\u007E\\u00A0-\\u00FF\\u20AC\\t\\r\\n]\ncjk-punct ::= [\\u2000-\\u206F\\u3000-\\u303F\\uFF00-\\uFFEF]"
+          ]
+        }
+      },
+      "reasoning": {
+        "prompt": {
+          "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
+        },
+        "model": {
+          "chunkSize": 100,
+          "batchSize": 32,
+          "parallel": 4,
+          "rpm": 1000,
+          "maxAttempts": 3,
+          "maxFail": 50,
+          "temperature": [true, 1],
+          "top_k": [true, 20],
+          "top_p": [true, 0.95],
+          "presence_penalty": [false, 1.5],
+          "hardTimeout": 10,
+          "model": [true, "qwen"],
+          "chat_template_kwargs": [true, { "enable_thinking": true }],
+          "thinking_budget_tokens": [true, 8192],
+          "reasoning_control": [true, true],
+          "grammar": [false, ""]
+        }
+      }
+    },
     "gemma": {
       "reasoningType": "reason_and_instruct",
       "metadata": {
@@ -148,7 +208,7 @@
           "top_p": [true, 0.95],
           "presence_penalty": [false, 1.5],
           "hardTimeout": 5,
-          "model": [true, "{{GEMMA1}}"],
+          "model": [true, "gemma"],
           "chat_template_kwargs": [true, { "enable_thinking": false }],
           "grammar": [
             true,
@@ -172,7 +232,7 @@
           "top_p": [true, 0.95],
           "presence_penalty": [false, 1.5],
           "hardTimeout": 10,
-          "model": [true, "{{GEMMA1}}"],
+          "model": [true, "gemma"],
           "chat_template_kwargs": [true, { "enable_thinking": true }],
           "thinking_budget_tokens": [true, 8192],
           "reasoning_control": [true, true],

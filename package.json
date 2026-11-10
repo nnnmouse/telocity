@@ -1,6 +1,6 @@
 {
   "name": "telocity",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "private": true,
   "description": "A CLI script for basic local LLM interactions.",
   "author": "nnnmouse",
