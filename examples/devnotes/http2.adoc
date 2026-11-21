@@ -1,0 +1,29 @@
+A lot of backends out there and clients only support http/2 with TLS enabled. It's really pass:[*******] but since the situation is like this I don't bother with support for clearnet h2c either, not worth having.
+
+For local testing, download link:https://github.com/Filosottile/mkcert[mkcert] then:
+
+[source,bash]
+----
+mkcert -install
+mkcert localhost 127.0.0.1 ::1
+----
+
+Copy the certs into your backend folder, run llama-swap with `-tls-cert-file localhost.pem -tls-key-file localhost-key.pem`
+
+And add this line to your bashrc:
+
+[source,bash]
+----
+export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
+----
+
+It's really more of a note to self: there's not much reason to use http/2 locally but it's good to dogfood this path with some local use since I don't use a higher level library.
+
+== Testing HTTP/2 with llama-swap
+
+Launch with:
+
+[source,bash]
+----
+llama-swap.exe --config /path/to/config.yaml -tls-cert-file /path/to/localhost.pem -tls-key-file /path/to/localhost-key.pem
+----

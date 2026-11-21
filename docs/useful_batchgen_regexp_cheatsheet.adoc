@@ -1,0 +1,26 @@
+== Quick Reference Cheat Sheet for -x, --regex in batchgen (telocity bg).
+
+[cols="2,2,3", options="header"]
+|===
+| Use Case | Pattern | Example Match
+
+| Chinese Chapters (Arabic)
+| `^第\d+章`
+| `第15章`
+
+| Chinese Chapters (Mixed)
+| `^第[0-9一二三四五六七八九十百千零]+章`
+| `第十五章` or `第15章`
+
+| Standard English Chapters
+| `^Chapter \d+`
+| `Chapter 14`
+
+| English (Colons & Mixed Casing)
+| `^[Cc]hapter\s+\d+:`
+| `chapter 105:` or `Chapter 1:`
+
+| Markdown Section Headers
+| `^##`
+| `## Section Title`
+|===

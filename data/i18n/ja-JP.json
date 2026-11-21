@@ -1,0 +1,1181 @@
+{
+  "e": {
+    "c": {
+      "cfg": {
+        "editorNotFound": "適切なテキストエディターを自動で起動できませんでした。任意のテキストエディターを$EDITOR環境変数に設定してください。",
+        "failedToWriteLocale": "ロケールファイルの書き込みに失敗しました: {{ .ErrorMessage }}",
+        "invalidLocale": "無効なロケールです: '{{ .Lang }}'."
+      },
+      "cm": {
+        "diffLineCount": "入力ファイルは、空ではない行の数が異なります。",
+        "diffLineCount1": " - 入力1 ({{ .File1 }}): {{ .Lines1 }}行。",
+        "diffLineCount2": " - 入力2 ({{ .File2 }}): {{ .Lines2 }}行。",
+        "invalidWidth": "無効なカラム幅です: '{{ .Width }}'. 幅は正の整数である必要があります。",
+        "missingArgs": "必須の引数が不足しています。予期される形式: <file1> <file2> <target>"
+      },
+      "co": {
+        "coError": "コマンド '{{ .Command }}' のモジュールをロードできませんでした。補完の生成をスキップします。"
+      },
+      "jd": {
+        "emptyJson": "ターゲットのJSONに分割する要素がありません。",
+        "invalidJson": "'{{ .FilePath }}' のJSONの解析に失敗しました。",
+        "invalidSplitSize": "無効な分割サイズパラメータです: '{{ .Size }}'. 正の整数である必要があります。"
+      },
+      "mg": {
+        "extensionRequired": "ファイル拡張子が必要です。-e または --extension フラグを使用して指定してください。"
+      },
+      "or": {
+        "apiKeyRequired": "OpenRouter APIキーが必要です。--apikey、--paramsを使用したプリセット設定、またはTELOCITYKEY環境変数経由で提供してください。",
+        "contentFilterTriggered": "コンテンツフィルターによって応答がブロックされました (finish_reason: content_filter)",
+        "fetchFailed": "OpenRouterキー情報の取得に失敗しました。ステータス: {{ .Status }}. レスポンス: {{ .Error }}",
+        "invalidResponse": "キーの状態の取得に失敗しました。ロードされた設定に有効なOpenRouter APIキーが含まれているか確認してください。",
+        "jsonParseFailed": "JSON行の解析に失敗しました: {{ .Error }}",
+        "maxTokensReached": "最大トークン制限に達しました (finish_reason: length)",
+        "missingResponseField": "レスポンスフィールドがありません。またはnullです。",
+        "requestTimedOut": "リクエストは{{ .Seconds }}秒後にタイムアウトしました。",
+        "responseExecutionFailedOrCancelled": "応答の実行が {{Reason}} でキャンセルまたは失敗しました (status: incomplete)"
+      },
+      "rd": {
+        "noPortAvailable": "4回の試行後も利用可能なポートが見つかりませんでした。",
+        "unkServError": "サーバーランタイムエラーが発生しました: {{ .Unk }}"
+      },
+      "rm": {
+        "binRequired": "--binを使用する場合、モデル名または --all フラグが必要です。",
+        "modelRequired": "--modelを使用する場合、モデル名または --all フラグが必要です。"
+      },
+      "sp": {
+        "invalidSplitSize": "無効な分割サイズです: '{{ .Size }}'. サイズは正の数値である必要があります。"
+      },
+      "st": {
+        "delimiterPairRequired": "開始デリミタと終了デリミタの両方が必要です。"
+      },
+      "tc": {
+        "failedToDownload": "'{{ .ModelUrl }}' のダウンロードに失敗しました: {{ .Status }} {{ .StatusText }}",
+        "invalidJsonlSource": "入力ファイルは有効なJSONLソースファイルではありません。",
+        "modelDownloadError": "モデルのダウンロード中にエラーが発生しました: {{ .ErrorMessage }}",
+        "modelNotFoundForDownload": "モデル '{{ .ModelName }}' が見つかりませんでした。",
+        "poolShuttingDown": "ワーカープールをシャットダウンしています。",
+        "tokenizerDoesNotExist": "プリセット '{{ .PresetName }}' のトークナイザーが存在しません。",
+        "tokenizerFilesNotFound": "'{{ .TokenizerName }}' のトークナイザーファイルをロードできませんでした。",
+        "workerCrashedCode": "ワーカーがコード {{ .Code }} でクラッシュしました。"
+      }
+    },
+    "lcli": {
+      "booleanWithValue": "オプション '{{ .Option }}' は引数を必要としません。",
+      "causePrefix": "原因:",
+      "cfgCouldNotBeLoaded": "'{{ .UserConfigPath }}' から設定ファイルを読み込めませんでした。",
+      "commandNotImplemented": "コマンド '{{ .CommandAlias }}' は実装されていません。",
+      "missingValue": "オプション '{{ .Option }}' の引数がありません。",
+      "notInteractive": "対話的な確認は未処理モードではサポートされていません。",
+      "processingAborted": "処理が中止されました。",
+      "unexpectedPositional": "予期しない位置引数: '{{ .Argument }}'.",
+      "unknownErrorOccurred": "不明なエラーが発生しました。",
+      "unknownOption": "不明なオプション: '{{ .Option }}'."
+    },
+    "lllm": {
+      "accountWideError": "[FATAL] アカウント全体の特定のエラー {{ .Status }} が検出されました。バッチ実行を直ちにキャンセルします。",
+      "audioNotSupportedModality": "レスポンスまたはコンプリーションAPIでは、音声モダリティはサポートされていません。",
+      "availableLanguagesList": "このモデルで利用可能な言語オプション: {{ .List }}",
+      "contentFilterTriggered": "生成がバックエンドのコンテンツセーフティフィルターによって停止されました。",
+      "emptyFile": "ファイルが空であるか、空白のみを含んでいます。",
+      "endpointRequired": "設定エラー: 明示的な 'endpoint' パラメータがありません。すべてのモデル設定および実行プリセットは、ターゲットエンドポイントを明示的に宣言する必要があります。",
+      "failedLock": "ロックファイルの取得に失敗しました。",
+      "failedToParseStreamChunk": "ストリームのチャンクの解析に失敗しました: {{ .Error }}",
+      "failedToSaveProgress": "バッチの進捗を保存できませんでした。",
+      "failureMeansDeathStopped": "失敗が発生し、failureMeansDeathがアクティブになっています。バッチ処理を停止します。",
+      "fileNotFound": "ファイルが見つかりません: '{{ .FilePath }}'.",
+      "hardTimeOut": "ハードタイムアウトを超過しました。リクエストが完了するのに時間がかかりすぎました。",
+      "idleTimeOut": "アイドルタイムアウトを超過しました。サーバーからデータを受信しませんでした。",
+      "initializingBatch": "バッチ処理の初期化中にエラーが発生しました。",
+      "invalidEndpoint": "設定されたエンドポイント '{{ .Endpoint }}' は無効です。利用可能なエンドポイント: {{ .Available }}.",
+      "invalidFileSize": "ファイルサイズが最大制限の{{ .MAX_SIZE_MB }} MBを超えています。",
+      "invalidLanguageInput": "言語 '{{ .Input }}' を解決できませんでした。 '{{ .Closest }}' の間違いではありませんか？",
+      "invalidLanguageInputNoSuggestion": "言語 '{{ .Input }}' を解決できませんでした。",
+      "invalidReasoningType": "モデルプリセット '{{ .Model }}' に対する不正な推論タイプ '{{ .Type }}'.",
+      "invalidRegex": "無効な正規表現パターン '{{ .Pattern }}': {{ .Error }}",
+      "jsonlContentFilter": "[ERROR: コンテンツフィルターによってブロックされました (finish_reason: content_filter)]",
+      "jsonlContentFilterIncomplete": "[ERROR: コンテンツフィルターによってブロックされました (status: incomplete, reason: content_filter)]",
+      "jsonlError": "[ERROR: {{ .Message }}]",
+      "jsonlExecutionIncomplete": "[ERROR: 応答実行 {{ .Reason }} (status: incomplete, reason: {{ .Reason }})]",
+      "jsonlGenError": "JSONLファイル生成中にエラーが発生しました。",
+      "jsonlMalformedLine": "[MALFORMED LINE]",
+      "jsonlMaxTokensIncomplete": "[ERROR: 最大トークン制限に達しました (status: incomplete, reason: {{ .Reason }})]",
+      "jsonlMaxTokensLength": "[ERROR: 最大トークン制限に達しました (finish_reason: length)]",
+      "jsonlStatusError": "[ERROR (Status {{ .Status }})): {{ .Message }}]",
+      "jsonlStreamTerminatedError": "[ERROR: ストリームが finish_reason エラーにより終了しました]",
+      "jsonlUnrecognizedFormat": "[ERROR: {{ .CustomId }} の認識できない、または不明なレスポンス形式]",
+      "llmAPICall": "API呼び出し中にエラーが発生しました: ",
+      "maxFailReached": "バッチ処理を中止しました。最大許可された生失敗試行回数 {{ .MaxFail }} に達しました。",
+      "maxTokensLimitReached": "最大出力トークン制限に達したため、生成を切り捨てました。",
+      "mediaNotSupportedCompletions": "コンプリーションAPIではメディア（オーディオ/画像）はサポートされていません。",
+      "networkErrorOpenAI": "'{{ .URL }}' の呼び出し中にネットワークエラーが発生しました。",
+      "networkErrorReason": " 理由: {{ .Code }}",
+      "noFilesFound": "条件に一致するファイルが見つかりませんでした (拡張子: .{{ .Extension }}, 適用されたフィルタ)。",
+      "openaiApiError": "API呼び出しがステータス {{ .Status }} で失敗しました: {{ .Message }}",
+      "partFileCollision": "パートファイル衝突",
+      "promptBlockedWarning": "[WARNING] プロンプトがセキュリティ/ガードレール上の可能性によりブロックされました (HTTP 403)。リトライをスキップします。",
+      "promptMissing": "CLIまたは設定ファイルを通じてプロンプトが提供されませんでした。中止します。",
+      "responseNull": "APIのレスポンスボディがnullです。",
+      "sourceAndTargetMustBeDifferent": "ソースとターゲットのパスは異なる必要があります。",
+      "sourceRequired": "ソースパスが必要です。",
+      "sourceTargetRequired": "ソースとターゲットのパスが必要です。",
+      "streamEndedPrematurely": "未 [DONE] シグナルでストリームが早々に終了しました。",
+      "streamInterrupted": "エラー {{ .ErrorContent }} でストリームが中断されました",
+      "streamTerminatedError": "エラーによりストリームが終了しました (finish_reason: error)",
+      "targetFileExists": "ターゲットパスは既に存在します: '{{ .TargetPath }}'.",
+      "tExceeded": "アイドルタイムアウトを超過しました",
+      "undefinedParam": "リクエストされたパラメータプリセット '{{ .ParamKey }}' が未定義です。",
+      "undefinedPromptPreset": "要求されたプロンプトプリセット '{{ .PresetKey }}' が設定テンプレート内で見つからないか、空です。",
+      "unknownOpenAIError": "APIとの通信中に不明なエラーが発生しました。",
+      "unknownStatusCodeError": "不明なステータスコードエラー"
+    },
+    "v": {
+      "audioNotFound": "オーディオファイルが見つかりません: '{{ .Audio }}'.",
+      "imageNotFound": "警告: 画像ファイルが見つかりませんでした。'{{ .Image }}' をスキップします。",
+      "invalidAllowH2": "HTTP/2オプションは真偽値(true または false)である必要があります。受け取った値: {{ .Value }}.",
+      "invalidAPIKey": "無効なAPIキーが提供されました: {{ .APIKey }}",
+      "invalidArgArray": "無効な引数配列が提供されました: {{ .OptionValue }}",
+      "invalidAudioOption": "無効なオーディオオブジェクトです。",
+      "invalidBatchSize": "無効なバッチサイズです。1から1000までの整数である必要があります。提供された値: {{ .BatchSize }}",
+      "invalidChunkSize": "無効なチャンクサイズです。1から500,000までの整数である必要があります。提供された値: {{ .ChunkSize }}",
+      "invalidDataURI": "無効な画像形式です。'data:'で始まるデータURI文字列が期待されましたが、受け取った値: {{ .Value }} です。",
+      "invalidDelayValue": "遅延またはRetryDelayは非負の数値である必要があります。",
+      "invalidExtraBodyType": "'extra_body' パラメータは有効なJSONオブジェクト構造である必要がありますが、受け取った値: {{ .Value }} です。",
+      "invalidImageArray": "無効な画像入力です。データURIの配列が期待されましたが、受け取った値: {{ .Value }} です。",
+      "invalidIndex": "無効な開始インデックスです。非負の整数である必要があります。提供された値: {{ .Index }}",
+      "invalidMaxTokensRange": "max_tokensパラメータは1以上の正の整数である必要があります。",
+      "invalidModel": "無効なモデル名が提供されました: {{ .Model }}",
+      "invalidOption": "無効なオプション値: {{ .Value }}.",
+      "invalidParallelSize": "無効な同時実行制限です。1から128までの整数である必要があります。提供された値: {{ .Parallel }}",
+      "invalidPenaltyRange": "頻度/存在ペナルティは-2.0から2.0の間の数値である必要があります。",
+      "invalidPrompt": "無効なプロンプトが提供されました。空ではない文字列である必要があります。",
+      "invalidSessionId": "無効な session_id です。",
+      "invalidTemperatureRange": "Temperatureは0.0から2.0の間の数値である必要があります。",
+      "invalidTempValueRange": "Temperature値 {{ .Value }} は0.0から2.0の間の数値である必要があります。",
+      "invalidTempValues": "オプション 'tempValues' は数値の配列である必要があります。受け取った値: {{ .Value }}。",
+      "invalidTopKRange": "Top_kは正の整数である必要があります。",
+      "invalidTopPRange": "Top_pは0.0から1.0の間の数値である必要があります。",
+      "invalidURL": "無効なURLが提供されました: {{ .URL }}",
+      "invalidURLScheme": "無効なURLスキームです。http:// または https:// で始まる必要があります。提供された値: {{ .URL }}。",
+      "mutuallyExclusiveMedia": "オーディオと画像を同時に使用することはできません。",
+      "mutuallyExclusivePrompts": "複数のプロンプトソースが提供されました。プロンプトソースは最大1つのみ指定してください (CLIの位置引数、--pselector、または--partial)。",
+      "seedMustBePositiveInteger": "シードは正の整数である必要があります。",
+      "unsupportedAudioType": "ファイル '{{ .Audio }}' のサポートされていないオーディオタイプ '{{ .Ext }}'. サポートされている形式: mp3, mp4, mpeg, mpga, m4a, wav, webm。",
+      "unsupportedImageType": "警告: 画像グロブパターン '{{ .Args }}' はサポートされているファイルを一致させませんでした。",
+      "unsupportedImageType2": "ファイル '{{ .Image }}' のサポートされていない画像タイプ '{{ .Ext }}' をスキップします。"
+    }
+  },
+  "help": {
+    "commands": {
+      "avg": {
+        "description": "ファイル内の各非空行の平均文字数（グラフェム）とバイト数を計算します。",
+        "flags": {},
+        "usage": "使用法: telocity avg <ソースパス>"
+      },
+      "bg": {
+        "description": "ソーステキストファイルから翻訳タスク用の構造化されたJSONLリクエストバッチを生成します。",
+        "flags": {
+          "chunksize": "チャンク/リクエストあたりの行数。(デフォルト: {{ .ChunkSize }})",
+          "context": "各チャンクのプロンプトに含める追加のコンテキスト、またはコンテキストを含むファイルパス。",
+          "model": "パラメータセットで指定されたモデルを上書きします。",
+          "params": "プロンプトとモデル構成に使用するパラメータセット。(デフォルト: {{ .DefaultModel }})",
+          "reason": "対応するプリセットの推論モードを切り替えます（デフォルト設定を反転させます）。",
+          "regex": "行ベースのチャンクサイズではなく、ソースファイルをチャンクに分割するための正規表現パターン。",
+          "source": "翻訳プロンプトのソース言語。",
+          "target": "翻訳プロンプトのターゲット言語。"
+        },
+        "footer": "\n利用可能なパラメータセット:\n{{ .ModelParamList }}\n\n利用可能なJSONLフォーマット:\n{{ .FormatsList }}",
+        "usage": "使用法: telocity bg [オプション] <ソースファイル> <ターゲット_jsonl_ファイル>"
+      },
+      "bg2": {
+        "description": "一般的なテキスト変換のための構造化されたJSONLリクエストバッチを生成します。ソースファイルが省略されている、または'-'に設定されている場合、標準入力 (stdin) が処理されます。",
+        "flags": {
+          "chunksize": "チャンク/リクエストあたりの文字数。(デフォルト: {{ .ChunkSize }})",
+          "model": "パラメータセットで指定されたモデルを上書きします。",
+          "params": "プロンプトとモデル構成に使用するパラメータセット。(デフォルト: {{ .DefaultModel }})",
+          "prompt": "各チャンクにプレフィックスとして付加するプロンプト（またはプロンプトを含むファイルパス）。プリセットのプレフィックスプロンプトを上書きします。",
+          "pselector": "構成テンプレートからプロンプトプリセットを検索し、指示として使用します。",
+          "reason": "対応するプリセットの推論モードを切り替えます（デフォルト設定を反転させます）。",
+          "sysprompt": "使用するシステムプロンプト、またはそのシステムプロンプトを含むファイルパス。プリセットのシステムプロンプトを上書きします。"
+        },
+        "footer": "\n利用可能なパラメータセット:\n{{ .ModelParamList }}\n\n利用可能なJSONLフォーマット:\n{{ .FormatsList }}",
+        "usage": "使用法: telocity bg2 [オプション] [ソースファイル] <ターゲット_jsonl_ファイル>"
+      },
+      "br": {
+        "description": "JSONLバッチジョブをネイティブに実行し、リトライと構造化された出力を管理するか、完了したJSONLをプレーンテキストにエクスポートします。ターゲットパスが省略された場合、ソースパスから自動的に派生します。",
+        "flags": {
+          "apikey": "APIキー。",
+          "batchsize": "JSONLバッチサイズを上書きします (デフォルト: {{ .BatchSize }}).",
+          "export": "すでに完了した出力JSONLファイルを標準のテキストファイルにエクスポートします。",
+          "model": "モデルの上書き。",
+          "parallel": "JSONLの同時実行リクエスト制限を上書きします (デフォルト: {{ .Parallel }}).",
+          "params": "設定をプルするためのモデルプリセット (デフォルト: {{ .DefaultModel }}).",
+          "reason": "対応するプリセットの推論モードを切り替えます（デフォルト設定を反転させます）。",
+          "retry": "以前の実行から失敗したリクエストのみをリトライします。リトライ実行のターゲット出力ファイルを引数として取ります。",
+          "stream": "バッチサイズが1の場合、ターミナルへのリアルタイムストリーミングを有効にします。(注: ストリーミングはバックエンドのメタデータ保存をバイパスします)。",
+          "url": "ベースAPI URL (自動的にJSONLエンドポイントを付加します)。"
+        },
+        "footer": "利用可能なプリセット:\n{{ .ModelParamList }}",
+        "usage": "使用法: telocity br [オプション] <ソース_jsonl> [ターゲット]"
+      },
+      "cfg": {
+        "description": "アプリケーションの設定とアクティブなロケールを管理します。",
+        "flags": {
+          "edit": "デフォルトのエディターでユーザー設定ファイルを開きます。",
+          "lang": "アプリケーションの言語を設定します。",
+          "remove": "ユーザー設定ファイルを削除します（確認を求められます）。"
+        },
+        "footer": "サポートされているロケール:\n{{ .LocaleList }}",
+        "usage": "使用法: telocity cfg [オプション]"
+      },
+      "cm": {
+        "description": "2つのテキストファイルを並べて比較し、1つの出力ファイルにマージします。",
+        "flags": {
+          "force": "2つの入力ファイルに行数が異なる場合でもマージを強制します。",
+          "width": "出力の各半分に使用する幅（カラム）を設定します。(デフォルト: {{ .Width }})"
+        },
+        "usage": "使用法: telocity cm <file1> <file2> <target> [オプション]"
+      },
+      "jd": {
+        "description": "構造化されたJSON翻訳キーを比較したり、新しい翻訳をマージしたり、階層パスを保持しながらファイルを安全に分割したりします。",
+        "flags": {
+          "merge": "二次的な翻訳マップからのローカライズされた値を使用して、ターゲットJSONをインプレースで更新します。",
+          "size": "分割される各ファイルの最大サイズをKB単位で指定します (デフォルトは20)。",
+          "split": "オブジェクトパス構造を保持しながら、階層的なJSONファイルを複数の部分に安全に分割します。"
+        },
+        "usage": "使用法: telocity jd <ソース_json> <ターゲット_json/target_dir> [出力_json] [オプション]"
+      },
+      "mg": {
+        "description": "ソースディレクトリからテキストファイルを再帰的に見つけ、マージします。フラグ、または .mginclude/.mgignore ファイル経由でグロブフィルタリングをサポートします。",
+        "flags": {
+          "exclude": "除外するグロブパターン（コロン区切り、例: \"tests/**:node_modules/**\"）またはパターンを含むファイルへのパス。",
+          "extension": "探すファイル拡張子 (必須)。",
+          "failed": "正常なリトライを元の出力ファイルにマージします。入力として <original_jsonl> <retry_jsonl> [出力ファイル] が必要です。",
+          "include": "含めるグロブパターン（コロン区切り、例: \"src/**:libs/**\"）またはパターンを含むファイルへのパス。",
+          "noignore": "ローカルの .mgignore ファイルからの読み取りや適用を行いません。",
+          "params": "ターゲット戦略とJSONLフォーマットを解決するために使用するパラメータ設定プリセット。"
+        },
+        "usage": "使用法: telocity mg <ソース_ディレクトリ> [ターゲット_ディレクトリ] [オプション]"
+      },
+      "or": {
+        "description": "OpenRouter APIキーの制限、日次使用量、残りのクレジットを表示します。",
+        "flags": {
+          "apikey": "クエリ用のOpenRouter APIキー。他のすべてのキー設定を上書きします。",
+          "help": "このコマンドに関するヘルプ情報を表示します。",
+          "params": "APIキーのフォールバックをルックアップするために使用されるプリセット設定キー。"
+        },
+        "usage": "使用法: telocity or [オプション]"
+      },
+      "os": {
+        "description": "LLMに対して単一のプロンプトを実行します。プロンプトはリテラルのテキストまたはファイルパスである可能性があります。標準入力 (stdin)、テキストファイル、画像、オーディオからのコンテキストをサポートします。",
+        "flags": {
+          "apikey": "リクエスト用のAPIキーを提供します。",
+          "audio": "オーディオコンテキスト用のオーディオファイルのパス。サポートされている形式: mp3, mp4, mpeg, mpga, m4a, wav, webm。",
+          "chunksize": "入力テキストを切り詰めるために使用されるチャンクサイズ。",
+          "file": "プロンプトにコンテキストとして追加するためのテキストファイルのパス。",
+          "image": "視覚的コンテキスト用の画像のパス。グロブパターンおよびコロン区切りのリストをサポートします (例: \"img1.jpg:*.png\"). サポートされている形式: png, jpg/jpeg, gif, webp。",
+          "model": "プリセットで指定されたモデル名を上書きします。",
+          "outfile": "LLMの出力を保存するパス。位置引数の [output_file] の代替オプション。",
+          "params": "モデルのパラメータプリセットを選択します (デフォルト: {{ .DefaultModel }}).",
+          "partial": "プロンプトプリセットをルックアップし、入力テキストを最初のチャンクの行まで切り詰めます。",
+          "pselector": "構成テンプレートからプロンプトプリセットを検索し、指示として使用します。",
+          "reason": "対応するプリセットの推論モードを切り替えます（デフォルト設定を反転させます）。",
+          "url": "APIエンドポイントURLを上書きします。"
+        },
+        "footer": "利用可能なプリセット:\n{{ .ModelParamList }}",
+        "usage": "使用法: telocity os \"<プロンプト>\" [出力ファイル] [オプション]"
+      },
+      "rd": {
+        "description": "テキストファイルをページ化された、集中力を妨げないリーダーで表示するためにローカルウェブサーバーを起動します。",
+        "flags": {},
+        "usage": "使用法: telocity rd [ソースパス]"
+      },
+      "rm": {
+        "description": "ダウンロードされたモデルのトークナイザーと設定ファイルを管理し、削除します。",
+        "flags": {
+          "all": "ターゲットとなるすべてのモデルまたはバイナリを削除します。",
+          "bin": "ターゲットモデルのコンパイル済みバイナリファイル (.bin)。",
+          "force": "確認なしで強制削除を実行します。",
+          "model": "ターゲットモデルの設定ファイル (.json および _config.json)。"
+        },
+        "usage": "使用法: telocity rm [モデル名] [オプション]"
+      },
+      "sp": {
+        "description": "大きなテキストファイルを改行を分割せずに小さなパートに分割します。ターゲットディレクトリが省略された場合、自動的にサブフォルダが作成されます。",
+        "flags": {
+          "size": "各パートの最大サイズをメガバイト単位で指定します (デフォルト: {{ .Size }})."
+        },
+        "usage": "使用法: telocity sp <ソースパス> [ターゲット_ディレクトリ] [オプション]"
+      },
+      "st": {
+        "description": "指定されたデリミタ間のコンテンツを削除または抽出します。'-' が使用された場合は標準入力 (stdin) から読み込み、ターゲットパスが省略された場合は標準出力 (stdout) に出力します。",
+        "flags": {
+          "brainrot": "段落の間隔をダブルニューラインに正規化します。",
+          "compress": "出力内の連続する空行を圧縮して削除します。",
+          "enddelimiter": "終了デリミタ。",
+          "extracttag": "デリミタ間のコンテンツを削除するのではなく、抽出します。",
+          "params": "プリセットから開始/終了デリミタを使用します。",
+          "startdelimiter": "開始デリミタ。",
+          "unformat": "基本的なMarkdown形式（太字/斜体）を削除します。"
+        },
+        "footer": "タグ付きの利用可能なプリセット:\n{{ .ReasoningTagParamList }}",
+        "usage": "使用法: telocity st [オプション] [ソース_パス] [ターゲット_パス]"
+      },
+      "tc": {
+        "description": "モデル固有のダウンロードされたトークナイザーを使用して、ソースJSONLファイル内の正確なトークン数をカウントします。",
+        "flags": {
+          "params": "使用するモデルプリセットのトークナイザーを指定します (デフォルト: {{ .DefaultModel }})."
+        },
+        "footer": "\n利用可能なトークナイザー:\n{{ .TokenParamList }}",
+        "usage": "使用法: telocity tc <ソース_jsonl_パス> [オプション]"
+      },
+      "tc2": {
+        "description": "連続する行境界チャンクに分割されたプレーンテキストファイルのトークン消費統計を計算します。",
+        "flags": {
+          "chunksize": "各処理チャンクセグメントのための手動行オーバーライド制限。",
+          "params": "ロードして計算を実行するターゲットのトークナイザー構成プロファイル。"
+        },
+        "usage": "使用法: telocity tc2 <ファイル> [オプション]"
+      }
+    },
+    "generic": {
+      "commandDescriptions": {
+        "avg": "ファイルの平均行長を計算します。",
+        "bg": "翻訳プロンプト用のJSONLバッチファイルを生成します。",
+        "bg2": "汎用的な変換プロンプト用のJSONLバッチファイルを生成します。",
+        "br": "ネイティブなJSONLバッチ実行およびエクスポート機能。",
+        "cfg": "アプリケーションの設定とローカライズを管理します。",
+        "cm": "2つのファイルを並べて比較し、マージします。",
+        "jd": "構造化されたJSONファイルを解析、マージ、または分割します。",
+        "mg": "ディレクトリ内のテキストファイルを再帰的にマージします。",
+        "or": "OpenRouter APIキーの制限と統計を表示します。",
+        "os": "オプションのファイル/メディアコンテキスト付きで単一のプロンプトを実行します。",
+        "rd": "ページ化された読み取りのためのローカルウェブサーバーを起動します。",
+        "rm": "ダウンロードされたモデルのトークナイザーバイナリを削除します。",
+        "sp": "大きなファイルをサイズによって小さなパートに分割します。",
+        "st": "デリミタ間のテキストを削除または抽出します。",
+        "tc": "JSONLバッチリクエストファイル内のトークン数をカウントします。",
+        "tc2": "チャンクに分割された生のプレーンテキストファイルのトークン数をカウントします。"
+      },
+      "commandHeader": "コマンド:",
+      "flags": {
+        "version": "アプリケーションのバージョンを表示します。"
+      },
+      "footer": "コマンドの詳細については、`telocity <command> --help` を使用してください。",
+      "globalOptionsHeader": "グローバルオプション:",
+      "header": "telocity: LLMを使用したテキストバッチ処理のためのツール。",
+      "usage": "使用法: telocity <コマンド> [オプション]"
+    },
+    "optionsHeader": "オプション"
+  },
+  "languages": {
+    "_LLM_INSTRUCTIONS_ALIASES": "エイリアス生成のルール:\n各言語エントリーについて、ターゲット言語を話すユーザーが入力する可能性のある包括的な検索用語のリストで 'aliases' 配列を拡張してください。含めるべき項目:\n1. コード: 標準の2文字および3文字のISOコード (例: 'ja', 'jpn', 'es', 'spa')。\n2. 名称: 英語での言語名、ネイティブスクリプトでの言語名 (例: '日本語', 'Español')、およびターゲット翻訳言語での言語名 (例: 'フランス語')。\n3. 地域: ターゲット翻訳言語での基盤となる国または地域名 (例: 'フランス', 'スペイン', 'spain')。\n4. 入力と文字: 非ラテン文字については、標準的なローマ字表記とキーボードIME入力文字列を含めてください (例: 中国語のピンイン 'xibanyayu', 'zhongwen'、日本語のひらがな/ローマ字 'にほんご', 'nihongo')。ラテン文字については、アクセントを削除したバリアントを含めてください (例: 'espanol', 'francais')。\n5. 代替名称: 一般的な代替の名称や地域の方言 (例: 'mandarin', 'castellano')。\nすべての値を小文字にし、ユニークで、厳密に関連しており、ターゲット言語の文脈において言語的に真正なものであることを確認してください。異言語間の混入や音訳の誤りを避け（例：タガログ語を '他ガログ' と翻訳しないでください）。",
+    "ARABIC": {
+      "aliases": [
+        "al-arabiyyah",
+        "ar",
+        "ara",
+        "arab",
+        "arabia",
+        "arabic",
+        "العربية",
+        "العربية"
+      ],
+      "name": "アラビア語"
+    },
+    "BENGALI": {
+      "aliases": [
+        "bangla",
+        "bangladesh",
+        "ben",
+        "bengal",
+        "bengali",
+        "bn",
+        "বাংলা",
+        "বাংলা",
+        "ベンガル語",
+        "ベンガル"
+      ],
+      "name": "ベンガル語"
+    },
+    "BURMESE": {
+      "aliases": [
+        "bur",
+        "burma",
+        "burmese",
+        "my",
+        "mya",
+        "myanmar",
+        "myanmasa",
+        "မြန်မာစာ",
+        "မြန်မာ",
+        "ミャンマー語",
+        "ミャンマー"
+      ],
+      "name": "ミャンマー語"
+    },
+    "CANTONESE": {
+      "aliases": [
+        "cantonese",
+        "guangdong",
+        "gwongdungwa",
+        "hk",
+        "hong kong",
+        "macau",
+        "yue",
+        "广东話",
+        "廣東話",
+        "広東語",
+        "広東"
+      ],
+      "name": "広東語"
+    },
+    "CHINESE": {
+      "aliases": [
+        "chi",
+        "china",
+        "chinese",
+        "cn",
+        "mandarin",
+        "putonghua",
+        "zh",
+        "zho",
+        "zhongwen",
+        "中文",
+        "普通話",
+        "汉语",
+        "漢語",
+        "中国語",
+        "中国"
+      ],
+      "name": "中国語"
+    },
+    "CZECH": {
+      "aliases": [
+        "ces",
+        "cesky",
+        "cestina",
+        "čeština",
+        "cs",
+        "cz",
+        "cze",
+        "czech",
+        "czech republic",
+        "czechia",
+        "チェコ語",
+        "チェコ"
+      ],
+      "name": "チェコ語"
+    },
+    "DETECTED": {
+      "aliases": [
+        "auto",
+        "auto detect",
+        "auto-detect",
+        "autodetect",
+        "detect",
+        "detected",
+        "lang",
+        "orig",
+        "original",
+        "source",
+        "sourcelang",
+        "src",
+        "自動",
+        "検出された",
+        "検出"
+      ],
+      "name": "検出された言語"
+    },
+    "DUTCH": {
+      "aliases": [
+        "belgium",
+        "dut",
+        "dutch",
+        "holland",
+        "nederlands",
+        "netherlands",
+        "nl",
+        "nld",
+        "オランダ語",
+        "オランダ"
+      ],
+      "name": "オランダ語"
+    },
+    "ENGLISH": {
+      "aliases": [
+        "america",
+        "britain",
+        "en",
+        "eng",
+        "english",
+        "uk",
+        "united kingdom",
+        "united states",
+        "us",
+        "usa",
+        "英語",
+        "イギリス",
+        "アメリカ"
+      ],
+      "name": "英語"
+    },
+    "FILIPINO": {
+      "aliases": [
+        "fil",
+        "filipino",
+        "ph",
+        "philippines",
+        "pilipino",
+        "tagalog",
+        "tgl",
+        "tl",
+        "フィリピン語",
+        "フィリピン"
+      ],
+      "name": "フィリピン語"
+    },
+    "FRENCH": {
+      "aliases": [
+        "fr",
+        "fra",
+        "francais",
+        "français",
+        "france",
+        "fre",
+        "french",
+        "フランス語",
+        "フランス",
+        "フランス"
+      ],
+      "name": "フランス語"
+    },
+    "GERMAN": {
+      "aliases": [
+        "austria",
+        "de",
+        "deu",
+        "deutsch",
+        "deutschland",
+        "ger",
+        "german",
+        "germany",
+        "switzerland",
+        "ドイツ語",
+        "ドイツ",
+        "オーストリア",
+        "ドイツ"
+      ],
+      "name": "ドイツ語"
+    },
+    "GUJARATI": {
+      "aliases": [
+        "gu",
+        "guj",
+        "gujarat",
+        "gujarati",
+        "india",
+        "ગુજરાતી",
+        "グジャラート語",
+        "グジャラート"
+      ],
+      "name": "グジャラート語"
+    },
+    "HEBREW": {
+      "aliases": [
+        "he",
+        "heb",
+        "hebrew",
+        "israel",
+        "ivrit",
+        "iw",
+        "עברית",
+        "עברית",
+        "ヘブライ語",
+        "イスラエル",
+        "イスラエル"
+      ],
+      "name": "ヘブライ語"
+    },
+    "HINDI": {
+      "aliases": [
+        "hi",
+        "hin",
+        "hindi",
+        "hindustani",
+        "india",
+        "हिंदी",
+        "हिन्दी",
+        "ヒンディー語",
+        "インド",
+        "インド"
+      ],
+      "name": "ヒンディー語"
+    },
+    "INDONESIAN": {
+      "aliases": [
+        "bahasa",
+        "bahasa indonesia",
+        "id",
+        "ind",
+        "indo",
+        "indonesia",
+        "indonesian",
+        "インドネシア語",
+        "インドネシア"
+      ],
+      "name": "インドネシア語"
+    },
+    "ITALIAN": {
+      "aliases": [
+        "it",
+        "ita",
+        "italia",
+        "italian",
+        "italiano",
+        "italy",
+        "イタリア語",
+        "イタリア"
+      ],
+      "name": "イタリア語"
+    },
+    "JAPANESE": {
+      "aliases": [
+        "ja",
+        "japan",
+        "japanese",
+        "jp",
+        "jpn",
+        "nihongo",
+        "nippon",
+        "にほんご",
+        "日本語",
+        "日本語",
+        "日本",
+        "日本"
+      ],
+      "name": "日本語"
+    },
+    "KAZAKH": {
+      "aliases": [
+        "kaz",
+        "kazakh",
+        "kazakhstan",
+        "kk",
+        "qazaq",
+        "қазақ",
+        "қазақша",
+        "カザフ語",
+        "カザフスタン",
+        "カザフスタン"
+      ],
+      "name": "カザフ語"
+    },
+    "KHMER": {
+      "aliases": [
+        "cambodia",
+        "cambodian",
+        "khm",
+        "khmer",
+        "km",
+        "ភាសាខ្មែរ",
+        "クメール語",
+        "カンボジア",
+        "カンボジア"
+      ],
+      "name": "クメール語"
+    },
+    "KOREAN": {
+      "aliases": [
+        "hangugo",
+        "ko",
+        "kor",
+        "korea",
+        "korean",
+        "kr",
+        "north korea",
+        "south korea",
+        "조선말",
+        "한국어",
+        "韓国語",
+        "韓国"
+      ],
+      "name": "韓国語"
+    },
+    "MALAY": {
+      "aliases": [
+        "bahasa malaysia",
+        "bahasa melayu",
+        "brunei",
+        "malay",
+        "malaysia",
+        "may",
+        "ms",
+        "msa",
+        "singapore",
+        "マレー語",
+        "マレーシア",
+        "マレーシア"
+      ],
+      "name": "マレー語"
+    },
+    "MARATHI": {
+      "aliases": [
+        "india",
+        "maharashtra",
+        "mar",
+        "marathi",
+        "mr",
+        "मराठी",
+        "マラーティー語",
+        "マハーラーシュトラ州",
+        "インド"
+      ],
+      "name": "マラーティー語"
+    },
+    "MONGOLIAN": {
+      "aliases": [
+        "mn",
+        "mon",
+        "mongol",
+        "mongolia",
+        "mongolian",
+        "монгол",
+        "モンゴル語",
+        "モンゴル",
+        "モンゴル"
+      ],
+      "name": "モンゴル語"
+    },
+    "PERSIAN": {
+      "aliases": [
+        "afghanistan",
+        "dari",
+        "fa",
+        "farsi",
+        "fas",
+        "iran",
+        "per",
+        "persian",
+        "tajik",
+        "tajikistan",
+        "فارسی",
+        "ペルシア語",
+        "イラン",
+        "イラン"
+      ],
+      "name": "ペルシア語"
+    },
+    "POLISH": {
+      "aliases": [
+        "pl",
+        "pol",
+        "poland",
+        "polish",
+        "polski",
+        "polszczyzna",
+        "ポーランド語",
+        "ポーランド"
+      ],
+      "name": "ポーランド語"
+    },
+    "PORTUGUESE": {
+      "aliases": [
+        "brasil",
+        "brazil",
+        "por",
+        "port",
+        "portugal",
+        "portugues",
+        "português",
+        "portuguese",
+        "pt",
+        "ポルトガル語",
+        "ブラジル",
+        "ポルトガル"
+      ],
+      "name": "ポルトガル語"
+    },
+    "RUSSIAN": {
+      "aliases": [
+        "ru",
+        "rus",
+        "russia",
+        "russian",
+        "russkiy",
+        "русский",
+        "ロシア語",
+        "ロシア"
+      ],
+      "name": "ロシア語"
+    },
+    "SIMPLIFIED_CHINESE": {
+      "aliases": [
+        "china",
+        "hans",
+        "jiantizhongwen",
+        "sc",
+        "simplified chinese",
+        "singapore",
+        "zh-cn",
+        "zh-hans",
+        "简体",
+        "简体中文",
+        "簡体字",
+        "中国語"
+      ],
+      "name": "簡体字中国語"
+    },
+    "SPANISH": {
+      "aliases": [
+        "castellano",
+        "es",
+        "espana",
+        "españa",
+        "espanol",
+        "español",
+        "latam",
+        "mexico",
+        "spa",
+        "spain",
+        "spanish",
+        "スペイン語",
+        "スペイン"
+      ],
+      "name": "スペイン語"
+    },
+    "TAMIL": {
+      "aliases": [
+        "india",
+        "singapore",
+        "sri lanka",
+        "ta",
+        "tam",
+        "tamil",
+        "தமிழ்",
+        "タミル語",
+        "インド"
+      ],
+      "name": "タミル語"
+    },
+    "TELUGU": {
+      "aliases": [
+        "andhra pradesh",
+        "india",
+        "te",
+        "tel",
+        "telangana",
+        "telugu",
+        "తెలుగు",
+        "テルフー語",
+        "インド"
+      ],
+      "name": "テルフー語"
+    },
+    "THAI": {
+      "aliases": [
+        "phasa thai",
+        "th",
+        "tha",
+        "thai",
+        "thailand",
+        "ภาษาไทย",
+        "タイ語",
+        "タイ"
+      ],
+      "name": "タイ語"
+    },
+    "TIBETAN": {
+      "aliases": [
+        "bo",
+        "bod",
+        "bod-skad",
+        "tib",
+        "tibet",
+        "tibetan",
+        "བོད་སྐད་",
+        "チベット語",
+        "チベット"
+      ],
+      "name": "チベット語"
+    },
+    "TRADITIONAL_CHINESE": {
+      "aliases": [
+        "fantizhongwen",
+        "hant",
+        "hong kong",
+        "taiwan",
+        "tc",
+        "traditional chinese",
+        "zh-hant",
+        "zh-hk",
+        "zh-tw",
+        "繁体中文",
+        "繁體",
+        "繁体中文",
+        "伝統的な中国語",
+        "中国"
+      ],
+      "name": "伝統的な中国語"
+    },
+    "TURKISH": {
+      "aliases": [
+        "tr",
+        "tur",
+        "turkce",
+        "türkçe",
+        "turkey",
+        "turkish",
+        "turkiye",
+        "türkiye",
+        "トルコ語",
+        "トルコ"
+      ],
+      "name": "トルコ語"
+    },
+    "UKRAINIAN": {
+      "aliases": [
+        "ua",
+        "uk",
+        "ukr",
+        "ukraine",
+        "ukrainian",
+        "ukrayinska",
+        "українська",
+        "ウクライナ語",
+        "ウクライナ",
+        "ウクライナ"
+      ],
+      "name": "ウクライナ語"
+    },
+    "URDU": {
+      "aliases": [
+        "india",
+        "pakistan",
+        "ur",
+        "urd",
+        "urdu",
+        "اردو",
+        "ウルドゥー語",
+        "パキスタン",
+        "インド"
+      ],
+      "name": "ウルドゥー語"
+    },
+    "UYGHUR": {
+      "aliases": [
+        "ug",
+        "uig",
+        "uighur",
+        "uyghur",
+        "xinjiang",
+        "ئۇيغۇر",
+        "ئۇيغۇرچە",
+        "ウィグル語",
+        "新疆ウイグル自治区"
+      ],
+      "name": "ウィグル語"
+    },
+    "VIETNAMESE": {
+      "aliases": [
+        "tieng viet",
+        "tiếng việt",
+        "vi",
+        "vie",
+        "vietnam",
+        "vietnamese",
+        "vn",
+        "ベトナム語",
+        "ベトナム"
+      ],
+      "name": "ベトナム語"
+    }
+  },
+  "m": {
+    "c": {
+      "avg": {
+        "averageBytesPerLine": "非空行あたりの平均バイト数: {{ .AvgBytes }}",
+        "averageCharsPerLine": "非空行あたりの平均文字数（グラフェム）: {{ .AvgChars }}"
+      },
+      "br": {
+        "exportedSuccessfully": "成功裏に '{{ .TargetPath }}' にエクスポートされました。"
+      },
+      "cfg": {
+        "cfgDeletedSuccessfully": "設定ファイルは正常に削除されました。",
+        "localeSuccessfullyChanged": "ロケールは {{ .Locale }} に正常に変更されました。"
+      },
+      "cm": {
+        "success": "各 {{ .Lines }} 行セグメントを正常に並べてテキストとして生成し、-> {{ .Target }} に出力しました。"
+      },
+      "jd": {
+        "fullyAligned": "両方のJSON構造が完全に一致しています。欠落しているキーは見つかりませんでした。",
+        "mergedSuccess": "'{{ .TranslationFile }}' から翻訳キーを '{{ .TargetFile }}' へ正常にマージしました。",
+        "partCreated": "パート {{ .PartNumber }} を作成しました: {{ .PartPath }}",
+        "savedSuccess": "欠落したキーの出力を '{{ .OutputPath }}' に正常に保存しました。",
+        "splitSuccess": "JSONファイルを {{ .Count }} 個のパートに正常に分割しました。"
+      },
+      "models": {
+        "completion": "レガシーな v1/completions プリセット。設定ファイルを編集してカスタマイズしてください。",
+        "dual": "ハイブリッドなInstruct/Reasoningプリセット (-r で切り替え可能)。",
+        "effort": "effortパラメータをサポートする推論プリセット。",
+        "fallback": "OpenAI互換API用の汎用プリセット。",
+        "genericprep": "ユーザーのテキストにプロンプトをプレフィックスとして付加する汎用プリセット。",
+        "genericsys": "システムプロンプトを使用する汎用プリセット。",
+        "instruct": "標準的なInstructベースのプリセット。",
+        "noHelp": "このプリセットのヘルプテキストはありません。",
+        "reasoning": "専用の推論プリセット。"
+      },
+      "or": {
+        "audioCompletionTokens": "  - オーディオ (Completion)",
+        "audioPromptTokens": "  - オーディオ (Prompt)",
+        "batchStatsHeader": "=== OpenRouter バッチ統計: {{ .FileName }} ===",
+        "byokIncluded": "BYOK 制限に含まれる",
+        "byokUsageAllTime": "BYOK 使用量 (全期間)",
+        "byokUsageDaily": "BYOK 使用量 (日次)",
+        "byokUsageMonthly": "BYOK 使用量 (月次)",
+        "byokUsageWeekly": "BYOK 使用量 (週次)",
+        "cachedTokens": "  - キャッシュ",
+        "cacheWriteTokens": "  - キャッシュ書き込み",
+        "costsSection": "推定コスト",
+        "creditsSection": "クレジットと制限",
+        "failedRequests": "失敗/不正",
+        "failedSection": "失敗/不正なリクエスト",
+        "generalSection": "一般情報",
+        "header": "OpenRouter APIキーの状態と制限",
+        "imageCompletionTokens": "  - 画像 (Completion)",
+        "isFreeTier": "無料枠ステータス",
+        "label": "キーラベル",
+        "limit": "クレジット制限",
+        "limitRemaining": "残高",
+        "limitReset": "リセット期間",
+        "malformed": "不正",
+        "modelsSection": "モデル",
+        "no": "なし",
+        "notAvailable": "該当なし",
+        "providersSection": "プロバイダー",
+        "reasoningTokens": "  - 推論",
+        "streamTerminatedError": "ストリームが finish_reason: error で終了しました",
+        "successfulRequests": "成功",
+        "tokensSection": "トークン",
+        "totalCompletionTokens": "合計コンプリーショントークン",
+        "totalCost": "合計コスト",
+        "totalPromptTokens": "合計プロンプトトークン",
+        "totalRequests": "合計リクエスト",
+        "totalTokens": "合計トークン",
+        "unknownError": "不明なエラー",
+        "unlimited": "無制限",
+        "upstreamCompletionCost": "アップストリームコンプリーションコスト",
+        "upstreamInferenceCost": "アップストリーム推論コスト",
+        "upstreamPromptCost": "アップストリームプロンプトコスト",
+        "usageAllTime": "使用量 (全期間)",
+        "usageDaily": "使用量 (日次)",
+        "usageMonthly": "使用量 (月次)",
+        "usageSection": "API使用量の詳細",
+        "usageWeekly": "使用量 (週次)",
+        "videoPromptTokens": "  - ビデオ (Prompt)",
+        "yes": "はい"
+      },
+      "rd": {
+        "closeBtn": "閉じる",
+        "confirmDelete": "この本をローカルブラウザライブラリから削除しますか？よろしいですか？",
+        "contentLoadError": "エラー: コンテンツを読み込めませんでした。",
+        "deleteBtn": "削除",
+        "ebookLoaded": "電子書籍を読み込みました。",
+        "emptyLibrary": "ライブラリは現在空です。本をインポートして開始してください。",
+        "fontSizeLabel": "フォントサイズ",
+        "importLabel": "本をインポート (.txt, .jsonl)",
+        "instructions": "⇦ · h · ⇧+␣   │   ⇨ · l · ␣   (⇳ スクロール)",
+        "libraryModeLoaded": "リーダーをライブラリモードで開始しました（ソースファイルは提供されませんでした）。",
+        "libraryTitle": "保存された本",
+        "loadBtn": "ライブラリ",
+        "loadingMsg": "読み込み中...",
+        "nextBtn": "次→",
+        "notFound": "404 見つかりません",
+        "portInUse": "ポート {{ .Port }} が使用中です。代替ポート {{ .NextPort }} を試しています...",
+        "previousBtn": "←前へ",
+        "readingFile": "ファイルから読込中: '{{ .sourcePath }}'",
+        "recalcProgressMsg": "レイアウトを再計算中...",
+        "recalcTitle": "ページネーションレイアウトの再計算",
+        "reflowingMsg": "再フロー中...",
+        "seekingPageMsg": "ページ {{ .Page }} を探しています",
+        "serverRunningAt": "電子書籍リーダーは {{ .url }} で実行中です",
+        "sizeHXLarge": "HX-Large",
+        "sizeLarge": "Large",
+        "sizeMedium": "Medium",
+        "sizeMediumL": "Medium-L",
+        "sizeNormal": "Normal",
+        "sizeSmall": "Small",
+        "sizeTHXLarge": "THX-Large",
+        "sizeTXLarge": "TX-Large",
+        "sizeVSmall": "V-Small",
+        "sizeXLarge": "X-Large",
+        "syncBtn": "同期",
+        "syncLabel": "デスクトップCLIとの同期",
+        "themeToggleTitle": "テーマの切り替え",
+        "title": "Telocity Reader"
+      },
+      "rm": {
+        "filesDeletedSuccessfully": "ターゲットとなるすべてのファイルが正常に削除されました。",
+        "filesToDelete": "以下のファイルが削除されます:",
+        "noFilesToDelete": "削除するファイルは見つかりませんでした。"
+      },
+      "sp": {
+        "fileSplitSuccess": "ファイルを正常に分割しました: '{{ .SourcePath }}'",
+        "partCreated": "  - パート {{ .PartNumber }} を作成しました: {{ .PartPath }}"
+      },
+      "st": {
+        "blockDeleted": "デリミタ間のコンテンツを削除しました。",
+        "blockExtracted": "デリミタ間のコンテンツを抽出しました。",
+        "compressed": "空行を圧縮しました。",
+        "newlinesNormalized": "ファイル内容を正規化し、保存しました。"
+      },
+      "tc": {
+        "aboveTripleHeader": "トリプル中央値トークン異常（中央値の3倍超）:",
+        "anomalyRow": "  行 {{ .Line }} {{ .CustomId }}: {{ .Tokens }} トークン",
+        "availableModelsForDownload": "ダウンロード可能なモデル: {{ .AvailableModels }}",
+        "avgTc": "リクエストごとの平均トークン数:",
+        "doubleToTripleHeader": "中央値の2倍〜3倍のトークン異常（2x - 3x 中央値）:",
+        "downloadingModelFiles": "'{{ .ModelName }}' のモデルファイルをダウンロードしています...",
+        "downloadSuccess": "'{{ .ModelName }}' のファイルを正常にダウンロードしました:",
+        "medianTc": "リクエストごとの中央値トークン数:",
+        "tc": "合計トークン数:",
+        "workerOomRetry": "[TokenWorkerPool] ワーカーがクラッシュ/OOM。メモリ制限を調整してチャンクをリトライします... ({{ .Retries }} 回リトライ残り)",
+        "writingFilesTo": "{{ .StateDir }} にファイルを書き込んでいます..."
+      },
+      "tc2": {
+        "aboveTripleHeader": "中央値チャンクサイズの300%以上を含むクリティカルな外れ値チャンク:",
+        "anomalyRow": "チャンク {{ .Line }} {{ .CustomId }} -> {{ .Tokens }} トークン",
+        "avgTc": "チャンクごとの平均トークン:",
+        "doubleToTripleHeader": "中央値チャンクサイズの200%以上を含む外れ値チャンク:",
+        "medianTc": "チャンクごとの中央値トークン:",
+        "tc": "合計トークン数:"
+      }
+    },
+    "lcli": {
+      "deletionAborted": "削除を中止しました。",
+      "deletionConfirm": "この操作は元に戻せません。削除してもよろしいですか？ (y/N): ",
+      "redacted": "[REDACTED]",
+      "yN": "y"
+    },
+    "lllm": {
+      "anotherInstanceIsProcessing": "別のインスタンスがこのファイルを処理中です。完了するまで待つか、.lock ファイルを削除してください。",
+      "apiDebugTemplate": "DEBUG [APIレスポンスステータス]: {{ .Status }}\nDEBUG [API生エラーボディ]: {{ .Body }}",
+      "batchProgress": "バッチ処理中: {{ .Completed }}/{{ .Total }}...",
+      "closingTag": "終了タグ",
+      "ctrlCPressed": "\nCtrl+Cが押されました。現在のバッチを終了し、進捗を保存します。再入力で強制終了します。\n",
+      "ctrlCPressed2": "\n終了は既に要求されています。しばらくお待ちください。\n",
+      "filesMerged": "ファイルが正常にマージされました: '{{ .MergedFileName }}'.",
+      "generatingRequests": "バッチ処理のために {{ .Count }} 個のリクエストを生成中...",
+      "openingTag": "開始タグ",
+      "processedChunkOf": "処理済みチャンク {{ .Processed }} / {{ .Total }} ",
+      "processingComplete": "このファイルに対する処理は既に完了しています。",
+      "progressSavedTerminating": "進捗を保存し、終了します。",
+      "quittingWithoutSaving": "\n強制終了します。部分的な進捗を保存し、残りのリクエストを失敗としてマークします。\n",
+      "retrying": "[試行 {{ .Attempt }}] チャンクが失敗しました。リトライ中...",
+      "retryWithTemp": "[試行 {{ .Attempt }}] チャンクが失敗しました。温度 {{ .Temp }} でリトライ中...",
+      "sourceEmpty": "ソースファイルは空であるか、空白のみを含んでいます。出力は生成されませんでした。",
+      "terminatedForcefully": "\n強制終了しました。部分的な進捗と残りの失敗が保存されました。\n",
+      "wroteEntries": "'{{ .TargetPath }}' に {{ .Count }} 件のエントリを正常に書き込みました"
+    }
+  }
+}

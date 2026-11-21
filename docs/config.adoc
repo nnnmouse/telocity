@@ -1,0 +1,131 @@
+== Configuration File
+
+The config.json lives in the system standard application data directory (e.g., %APPDATA%\telocity on Windows, or ~/.config/telocity on Linux). If it doesn't exist yet, running any command will generate it using the default template.
+
+=== Global Settings
+
+The baseline fallbacks. If a CLI flag or a specific preset doesn't override them, the program falls back to these.
+
+  - DEFAULT_MODEL: The preset key from PARAM_CONFIGS to use if -p is not passed.
+  - DEFAULT_REASONING: (boolean) Whether to default to the reasoning variant of a preset (if available) instead of instruct.
+  - HARD_TIMEOUT & IDLE_TIMEOUT: (numbers) Network timeouts measured in minutes. IDLE triggers if the stream stalls, HARD is the absolute max time a single request is allowed to live.
+  - CHUNK_SIZE: How many lines of text to send to the LLM per request. Max 500,000.
+  - BATCH_SIZE: How many requests to process at once, must be higher than PARALLEL for the script to build a pool of requests so that anytime one has ended another is immediately processed. Progress is only saved after the complete batch is processed if you do a soft interrupt (single CTRL+C), set at a ratio with CHUNK that you would be comfortable to lose in case anything happened. Max 1,000.
+  - PARALLEL: How many requests to run concurrently. Max 128.
+  - URL: Your absolute destination API URL. Because the system utilizes raw URLs without dynamic suffix manipulation or path-appending, this must be a fully qualified, absolute URL (e.g., `https://api.openai.com/v1/chat/completions` or `https://openrouter.ai/api/v1/chat/completions`).
+  - ENDPOINT: The API execution protocol and payload strategy. Options are "chatcompletions", "completions", "responses", "deepseek", "openrouter-chat", "openrouter-responses". The system maps this directly to the corresponding strategy for request compilation and response parsing, while calling your configured absolute URL exactly as-is.
+  - RPM: (number) The global speed limit for the application, defined as Requests Per Minute. The script will safely pace and stagger concurrent requests to ensure this limit is never exceeded.
+  - MAX_FAIL: (number) The global default maximum allowed cumulative failures before an entire batch run is aborted. Defaults to `5` if entirely omitted.
+  - RETRY_DELAY: (number) The base wait time in milliseconds if a request fails (scales exponentially on subsequent retries).
+  - SOURCE_LANGUAGE & TARGET_LANGUAGE: Strings injected into prompts when translating.
+  - FAILURE_MEANS_DEATH: (boolean) Fallback value. If true, any single request failure immediately cancels the batch instead of retrying up to `maxAttempts`. The system will cleanly write a marked failure record to the output file and commit all current progress before exiting.
+
+=== TEMPLATES
+
+The TEMPLATES block is a simple text replacement feature.
+
+You can define any key-value pair here. If you use {{YOUR_KEY}} anywhere else in your string configs (like inside prompts or model names), it gets swapped out recursively when the config loads.
+
+It also supports internal script variables injected at runtime, such as:
+
+  - {{ .LanguageSource }}
+  - {{ .LanguageTarget }}
+  - {{ .TextToInject }} (Where the actual file chunk goes)
+  - {{ .ContextualInformation }}
+
+Additionally, when a preset utilizes a `substitutionPrefix` metadata field, the resolver dynamically generates key-value substitutions at runtime (e.g., swapping `{{CN_FRENCH}}` with `"法语"` or `{{CN_DETECTED}}` with `"检测到的语言"`). These values are recursively replaced during the config initialization phase.
+
+=== PARAM_CONFIGS (Presets)
+
+This is where you define as many custom presets as you want under PARAM_CONFIGS. When you pass -p mypreset in the CLI, it looks here.
+
+Each preset needs a reasoningType to tell the script how to handle it:
+
+  - "instruct_only": Standard model. Define your settings inside a default object.
+  - "reason_only": A model that only reasons. Define your settings inside a default object.
+  - "reason_and_instruct": A dual-capability model (like Gemma and Qwen). Requires two separate objects: instruct and reasoning. The script switches between them based on whether you pass the -r flag.
+
+==== Metadata
+
+You can optionally include a metadata object in a preset:
+
+  - helptext_key: "key_or_raw_string" - Defines the description shown in the CLI help menu. If the value matches an internal localization key hierarchy (e.g., `models.fallback`), it dynamically loads the corresponding translated string. If no match is found, it falls back to displaying the value as a literal raw string, allowing users to define custom descriptions directly inside their personal configurations without modifying translation files.
+  - stripTags: { "start": "<think>", "end": "</think>" } - Tells the st (strip) command exactly which tags to hunt down and remove from the final file, mainly useful when dealing with raw LLM output like with llama.cpp run with --reasoning-format none.
+  - display: true/false - Whether to show this preset in the CLI help menu.
+  - stripEmpty: true/false - Filters out empty or whitespace-only lines from both the input text (before sending it to the LLM) and the generated output text.
+  - markdownBrainRot: true/false - Forces all single newlines to become double newlines (`\n\n`). It also implicitly enables the `stripEmpty` behavior to guarantee clean boundaries. By default, this expansion is applied to BOTH the input text and the LLM's generated output.
+  - Combining both: If BOTH `stripEmpty` and `markdownBrainRot` are set to `true`, a special asymmetric formatting rule triggers: the input text will receive the full markdown treatment (empty lines stripped + single newlines doubled to force the AI to see distinct paragraph blocks), but the output text will ONLY have its empty lines stripped (preventing the AI's response from being artificially double-spaced on the way out).
+  - localJSONL: true/false - Used by the `bg` (batchgen) command to determine whether to inject telocity-specific settings (like rpm, retryDelay, maxAttempts, maxFail) into the generated JSONL requests. The compiled lines output standardized relative path fragments (e.g., `/v1/chat/completions`) in the root `url` field, while embedding the raw, absolute target URL inside the custom `telocity.url` metadata parameter for the local batch executor.
+  - defaultReasoning: true/false - Overrides the global `DEFAULT_REASONING` configuration setting specifically for this preset. Determines whether to default to the `reasoning` variant instead of `instruct` for `"reason_and_instruct"` models.
+  - substitutionPrefix: "PREFIX" - Tells the system to intercept CLI `--source` and `--target` language inputs, match them against the universal `"languages"` dictionary in your localized i18n file (utilizing normalization and approximate Levenshtein spelling recovery), and map them dynamically to exact prefixed template variables (e.g., `CN_FRENCH`). If no prefix is defined, the command falls back to using the raw CLI input strings.
+  - forceStream: true/false - Forces network streaming (SSE) under the hood even during parallel or non-verbose batch runs. This allows the system to leverage platform-level stream cancellation (such as with OpenRouter) to immediately halt remote model processing and stop billing when requests are aborted, timed out, or interrupted mid-run.
+  - injectORSessionId: true/false - (OpenRouter exclusive) Automatically compiles and appends a safe, unique, and date-stamped session ID into OpenRouter requests, making it easier to monitor and audit transaction groupings.
+  - allowH2: true/false - Enables or disables HTTP/2 network transport protocol negotiation at the preset level. If set to `false`, the client bypasses TLS ALPN negotiation and immediately falls back to HTTP/1.1 for all connections. Defaults to `true` if omitted.
+
+==== Prompt Arrays
+
+Inside your instruct, reasoning, or default blocks, you define a prompt object.
+Prompts use a tuple syntax so you can easily toggle them on/off without deleting lines:
+
+[source,json]
+"prompt": { "defPrep": [true, "Your prompt here\n\n{{ .TextToInject }}", "user"] }
+
+  - [0] Enable/disable toggle (true or false) for the preset prompt.
+  - [1] The prompt string (supports templating).
+  - [2] The role ("system" or "user").
+
+Available prompt keys:
+
+  - defSys: The system prompt.
+  - defPrep: The user prompt (prepended to the text chunk).
+  - defPrefill: Assistant prefill (forces the AI to start its response with specific text).
+
+==== Model Parameters
+
+Inside the model object of a preset variant, you define the actual inference parameters.
+
+Just like prompts, API payload parameters (like temperature, top_p, etc.) use a [boolean, value] array syntax so you can quickly toggle overrides on or off.
+Local batching parameters (like chunk size) are just standard numbers.
+
+Local script boundaries:
+
+  - chunkSize: Lines per chunk/request (1 - 500,000)
+  - batchSize: Requests per batch (1 - 1,000)
+  - parallel: Concurrent requests in the batch pool (1 - 128)
+  - rpm: Requests Per Minute speed limit.
+  - retryDelay: ms base wait on failure
+  - maxAttempts: Max retries on failure (min 1)
+  - maxFail: The maximum allowed cumulative failures before the entire batch processing run is aborted. Follows a dynamic lowest-common-denominator calculation across active and pending chunks during batch execution.
+  - tempValues: An array of target temperature values to use sequentially on subsequent retries (representing values from 0.0 to 2.0), clamping to the final value if retries exceed the array size.
+  - hardTimeout / idleTimeout: Minutes until network timeout.
+  - failureMeansDeath: Boolean. If true, any single request failure immediately cancels processing instead of retrying up to `maxAttempts`. The system will cleanly write a marked failure record to the output file and commit all current progress before exiting.
+  - forceStream: Boolean. Specific variant override to force stream transport under the hood, enabling early cancellation and billing cut-offs.
+  - injectORSessionId: Boolean. Variant level override to toggle automated session ID injection.
+  - allowH2: Boolean. Specific variant-level override to toggle HTTP/2 transport protocol negotiation. Supercedes preset-level metadata settings, defaulting to `true` if entirely omitted.
+  - url: String. Overrides the destination API URL specifically for this variant/preset. Because the system does not append default suffixes, this must be configured as a fully qualified, absolute raw URL path.
+  - apiKey: String. Specific API key override for this preset or model variant.
+  - endpoint: String. Specific variant endpoint override. Options are "chatcompletions", "completions", "responses", "deepseek", "openrouter-chat", or "openrouter-responses". This strictly dictates the payload serialization and SSE parsing behavior, utilizing your absolute raw URL exactly as-is without suffix-manipulation.
+
+API Payload overrides (Tuple format [true, value]):
+
+  - model: The model string to request from the API.
+  - max_tokens: Integer >= 1. The maximum number of tokens to generate before gracefully stopping.
+  - temperature: 0.0 to 2.0.
+  - top_p: 0.0 to 1.0.
+  - top_k: Integer (e.g., 20, 64).
+  - presence_penalty: -2.0 to 2.0.
+  - seed: Integer >= 1.
+  - grammar: A valid GBNF grammar string to force specific output formats (llama.cpp).
+
+API-Specific Quirks & Reasoning toggles (Tuple format [true, value]): Different backends handle reasoning/thinking differently. The script supports injecting these:
+
+  - chat_template_kwargs: Object. Used mostly for llama.cpp to force thought generation on/off or set effort for gpt-oss. (e.g., {"enable_thinking": true}).
+  - reasoning_effort: String. Supported by official OpenAI v1/chat/completions endpoints ("none", "low", "medium", "high", "xhigh").
+  - reasoning: Object. Used for the official OpenAI v1/responses endpoint (e.g., {"effort": "high"}).
+  - thinking: Object. DeepSeek exclusive reasoning toggle (e.g., {"type": "enabled"}).
+  - provider: Object. OpenRouter exclusive routing, ordering, and fallback configurations.
+  - session_id: String. Explicitly specifies a custom transaction grouping label (typically automated if `injectORSessionId` is enabled).
+  - enable_thinking: Boolean. Endpoints like the official alibaba API.
+  - response_format: Object to force JSON Schema outputs.
+  - thinking_budget_tokens: Integer >= -1. Restricts or sets the maximum token budget allocated strictly to thought generation (llama.cpp).
+  - reasoning_control: Boolean. Explicitly enables or disables reasoning toggles inside supporting runtime environments (llama.cpp).

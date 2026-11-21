@@ -1,0 +1,34 @@
+globalTTL: 600
+unloadTimeout: 15
+healthCheckTimeout: 500
+includeAliasesInList: true
+sendLoadingState: true
+
+models:
+  "gemma":
+    aliases:
+      - "index9b"
+      - "spark"
+      - "ling"
+      - "qwen"
+      - "index2b"
+      - "gemmamini"
+
+    checkEndpoint: /health
+
+    timeouts:
+      responseHeader: 600
+
+    cmd: |
+      /usr/bin/llama
+      serve
+      --host 127.0.0.1
+      --port ${PORT}
+      --models-preset /path/to/models/llama.ini
+      --models-max 1
+      --timeout 600
+      --reasoning-budget-message "
+
+
+      [REASONING TOKEN BUDGET LIMIT EXCEEDED] Considering the limited time by the user, I have to give the solution based on the thinking directly now.
+      "

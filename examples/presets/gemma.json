@@ -1,0 +1,66 @@
+{
+  "gemma": {
+    "reasoningType": "reason_and_instruct",
+    "metadata": {
+      "helptext_key": "models.dual",
+      "stripTags": { "start": "<|channel>thought", "end": "<channel|>" },
+      "display": true,
+      "defaultReasoning": true,
+      "localJSONL": true,
+      "stripEmpty": true,
+      "markdownBrainRot": true,
+      "forceStream": false,
+      "substitutionPrefix": "EN"
+    },
+    "instruct": {
+      "prompt": {
+        "defPrep": [
+          true,
+          "{{GENERIC_EN_ACGN_INSTRUCTIONS}}\n\n{{GENERIC_EN_ACGN_INSTRUCTIONS}}",
+          "user"
+        ]
+      },
+      "model": {
+        "chunkSize": 100,
+        "batchSize": 32,
+        "parallel": 4,
+        "rpm": 1000,
+        "maxAttempts": 3,
+        "tempIncrement": 0.3,
+        "temperature": [true, 0],
+        "top_k": [true, 64],
+        "top_p": [true, 0.95],
+        "presence_penalty": [false, 1.5],
+        "hardTimeout": 5,
+        "model": [true, "{{GEMMA1}}"],
+        "chat_template_kwargs": [true, { "enable_thinking": false }],
+        "grammar": [
+          true,
+          "root ::= char+\nchar ::= latin9 | cjk-punct\nlatin9 ::= [\\u0020-\\u007E\\u00A0-\\u00FF\\u20AC\\t\\r\\n]\ncjk-punct ::= [\\u2000-\\u206F\\u3000-\\u303F\\uFF00-\\uFFEF]"
+        ]
+      }
+    },
+    "reasoning": {
+      "prompt": {
+        "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
+      },
+      "model": {
+        "chunkSize": 100,
+        "batchSize": 32,
+        "parallel": 4,
+        "rpm": 1000,
+        "maxAttempts": 3,
+        "temperature": [true, 1],
+        "top_k": [true, 64],
+        "top_p": [true, 0.95],
+        "presence_penalty": [false, 1.5],
+        "hardTimeout": 10,
+        "model": [true, "{{GEMMA1}}"],
+        "chat_template_kwargs": [true, { "enable_thinking": true }],
+        "thinking_budget_tokens": [true, 8192],
+        "reasoning_control": [true, true],
+        "grammar": [false, ""]
+      }
+    }
+  }
+}
