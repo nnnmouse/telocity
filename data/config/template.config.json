@@ -370,7 +370,7 @@
           "hardTimeout": 20,
           "url": "http://localhost:8081/v1/chat/completions",
           "endpoint": "chatcompletions",
-          "model": [true, "gemma"],
+          "model": [true, "nemotron"],
           "chat_template_kwargs": [true, { "enable_thinking": true }],
           "thinking_budget_tokens": [false, 8192],
           "reasoning_control": [false, true],

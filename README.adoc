@@ -1,7 +1,7 @@
 = telocity
 
 A CLI thing for poking at local LLMs. Only works with plain text files (use link:https://github.com/kovidgoyal/calibre[calibre]'s ebook-convert, luke) Not a srs script, just a playground for myself.  
-Script's strings are a testbed for tiny local llm translation, all UI strings other than `en-US.json` are translated with link:https://huggingface.co/unsloth/gemma-4-E4B-it-qat-GGUF[unsloth/gemma-4-E4B-it-qat-GGUF], `scripts/make_project_translations.ts` shows how it's done, default preset settings were used (preset will only be written to your own config if TDEVELOPER env var is set).
+Script's strings are a testbed for tiny local llm translation, all UI strings other than `en-US.json` are translated with link:https://huggingface.co/unsloth/NVIDIA-Nemotron-3.5-Bolt-E4B-GGUF[unsloth/NVIDIA-Nemotron-3.5-Bolt-E4B-GGUF], `scripts/make_project_translations.ts` shows how it's done, default preset settings were used (preset will only be written to your own config if TDEVELOPER env var is set).
 
 == Installation
 
