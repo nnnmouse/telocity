@@ -43,6 +43,173 @@
     "cnsummary": "### 任务\n\n针对下方的文本样本，撰写一份以故事叙事和情节推进为核心的详细中文摘要。\n\n### 规则\n\n1. 重点关注剧情发展、核心事件以及关键人物的成长与变化。\n\n2. 仅输出摘要正文。请勿包含任何寒暄、前言、格式说明或结束语。\n\n### 待摘要文本：\n\n{{ .TextToInject }}"
   },
   "PARAM_CONFIGS": {
+    "indextranslate": {
+      "reasoningType": "instruct_only",
+      "metadata": {
+        "helptext_key": "models.instruct",
+        "display": true,
+        "localJSONL": true,
+        "stripEmpty": true,
+        "markdownBrainRot": true,
+        "forceStream": false,
+        "substitutionPrefix": "CN"
+      },
+      "default": {
+        "prompt": {
+          "defPrep": [true, "{{GENERIC_ZH_ACGN_INSTRUCTIONS}}", "user"]
+        },
+        "model": {
+          "chunkSize": 30,
+          "batchSize": 32,
+          "parallel": 4,
+          "rpm": 1000,
+          "maxAttempts": 3,
+          "maxFail": 50,
+          "tempValues": [0.4, 0.7],
+          "temperature": [true, 0],
+          "top_k": [true, 20],
+          "top_p": [true, 0.8],
+          "hardTimeout": 2,
+          "model": [true, "index9b"],
+          "chat_template_kwargs": [true, { "enable_thinking": false }],
+          "grammar": [
+            true,
+            "root ::= char+\nchar ::= latin9 | cjk-punct\nlatin9 ::= [\\u0020-\\u007E\\u00A0-\\u00FF\\u20AC\\t\\r\\n]\ncjk-punct ::= [\\u2000-\\u206F\\u3000-\\u303F\\uFF00-\\uFFEF]"
+          ]
+        }
+      }
+    },
+    "nemotron": {
+      "reasoningType": "reason_and_instruct",
+      "metadata": {
+        "helptext_key": "models.dual",
+        "stripTags": { "start": "<|channel>thought", "end": "<channel|>" },
+        "display": true,
+        "defaultReasoning": true,
+        "localJSONL": true,
+        "stripEmpty": true,
+        "markdownBrainRot": true,
+        "forceStream": false,
+        "substitutionPrefix": "EN"
+      },
+      "instruct": {
+        "prompt": {
+          "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
+        },
+        "model": {
+          "chunkSize": 100,
+          "batchSize": 32,
+          "parallel": 4,
+          "rpm": 1000,
+          "maxAttempts": 3,
+          "maxFail": 50,
+          "tempValues": [0.3, 0.5, 0.75, 1],
+          "temperature": [true, 0],
+          "top_k": [true, 64],
+          "top_p": [true, 0.95],
+          "presence_penalty": [false, 1.5],
+          "hardTimeout": 5,
+          "model": [true, "gemma"],
+          "chat_template_kwargs": [
+            true,
+            {
+              "enable_thinking": false,
+              "conversational_mode": false,
+              "preserve_thinking": false
+            }
+          ],
+          "grammar": [
+            true,
+            "root ::= char+\nchar ::= latin9 | cjk-punct\nlatin9 ::= [\\u0020-\\u007E\\u00A0-\\u00FF\\u20AC\\t\\r\\n]\ncjk-punct ::= [\\u2000-\\u206F\\u3000-\\u303F\\uFF00-\\uFFEF]"
+          ]
+        }
+      },
+      "reasoning": {
+        "prompt": {
+          "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
+        },
+        "model": {
+          "chunkSize": 100,
+          "batchSize": 32,
+          "parallel": 4,
+          "rpm": 1000,
+          "maxAttempts": 3,
+          "maxFail": 50,
+          "temperature": [true, 1],
+          "top_k": [true, 64],
+          "top_p": [true, 0.95],
+          "presence_penalty": [false, 1.5],
+          "hardTimeout": 10,
+          "model": [true, "gemma"],
+          "chat_template_kwargs": [true, { "enable_thinking": true }],
+          "thinking_budget_tokens": [true, 8192],
+          "reasoning_control": [true, true],
+          "grammar": [false, ""]
+        }
+      }
+    },
+    "gemma": {
+      "reasoningType": "reason_and_instruct",
+      "metadata": {
+        "helptext_key": "models.dual",
+        "stripTags": { "start": "<|channel>thought", "end": "<channel|>" },
+        "display": true,
+        "defaultReasoning": true,
+        "localJSONL": true,
+        "stripEmpty": true,
+        "markdownBrainRot": true,
+        "forceStream": false,
+        "substitutionPrefix": "EN"
+      },
+      "instruct": {
+        "prompt": {
+          "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
+        },
+        "model": {
+          "chunkSize": 100,
+          "batchSize": 32,
+          "parallel": 4,
+          "rpm": 1000,
+          "maxAttempts": 3,
+          "maxFail": 50,
+          "tempValues": [0.3, 0.5, 0.75, 1],
+          "temperature": [true, 0],
+          "top_k": [true, 64],
+          "top_p": [true, 0.95],
+          "presence_penalty": [false, 1.5],
+          "hardTimeout": 5,
+          "model": [true, "gemma"],
+          "chat_template_kwargs": [true, { "enable_thinking": false }],
+          "grammar": [
+            true,
+            "root ::= char+\nchar ::= latin9 | cjk-punct\nlatin9 ::= [\\u0020-\\u007E\\u00A0-\\u00FF\\u20AC\\t\\r\\n]\ncjk-punct ::= [\\u2000-\\u206F\\u3000-\\u303F\\uFF00-\\uFFEF]"
+          ]
+        }
+      },
+      "reasoning": {
+        "prompt": {
+          "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
+        },
+        "model": {
+          "chunkSize": 100,
+          "batchSize": 32,
+          "parallel": 4,
+          "rpm": 1000,
+          "maxAttempts": 3,
+          "maxFail": 50,
+          "temperature": [true, 1],
+          "top_k": [true, 64],
+          "top_p": [true, 0.95],
+          "presence_penalty": [false, 1.5],
+          "hardTimeout": 10,
+          "model": [true, "gemma"],
+          "chat_template_kwargs": [true, { "enable_thinking": true }],
+          "thinking_budget_tokens": [true, 8192],
+          "reasoning_control": [true, true],
+          "grammar": [false, ""]
+        }
+      }
+    },
     "deepseek": {
       "reasoningType": "reason_and_instruct",
       "metadata": {
@@ -175,228 +342,6 @@
           "thinking_budget_tokens": [true, 8192],
           "reasoning_control": [true, true],
           "grammar": [false, ""]
-        }
-      }
-    },
-    "gemma": {
-      "reasoningType": "reason_and_instruct",
-      "metadata": {
-        "helptext_key": "models.dual",
-        "stripTags": { "start": "<|channel>thought", "end": "<channel|>" },
-        "display": true,
-        "defaultReasoning": true,
-        "localJSONL": true,
-        "stripEmpty": true,
-        "markdownBrainRot": true,
-        "forceStream": false,
-        "substitutionPrefix": "EN"
-      },
-      "instruct": {
-        "prompt": {
-          "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
-        },
-        "model": {
-          "chunkSize": 100,
-          "batchSize": 32,
-          "parallel": 4,
-          "rpm": 1000,
-          "maxAttempts": 3,
-          "maxFail": 50,
-          "tempValues": [0.3, 0.5, 0.75, 1],
-          "temperature": [true, 0],
-          "top_k": [true, 64],
-          "top_p": [true, 0.95],
-          "presence_penalty": [false, 1.5],
-          "hardTimeout": 5,
-          "model": [true, "gemma"],
-          "chat_template_kwargs": [true, { "enable_thinking": false }],
-          "grammar": [
-            true,
-            "root ::= char+\nchar ::= latin9 | cjk-punct\nlatin9 ::= [\\u0020-\\u007E\\u00A0-\\u00FF\\u20AC\\t\\r\\n]\ncjk-punct ::= [\\u2000-\\u206F\\u3000-\\u303F\\uFF00-\\uFFEF]"
-          ]
-        }
-      },
-      "reasoning": {
-        "prompt": {
-          "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
-        },
-        "model": {
-          "chunkSize": 100,
-          "batchSize": 32,
-          "parallel": 4,
-          "rpm": 1000,
-          "maxAttempts": 3,
-          "maxFail": 50,
-          "temperature": [true, 1],
-          "top_k": [true, 64],
-          "top_p": [true, 0.95],
-          "presence_penalty": [false, 1.5],
-          "hardTimeout": 10,
-          "model": [true, "gemma"],
-          "chat_template_kwargs": [true, { "enable_thinking": true }],
-          "thinking_budget_tokens": [true, 8192],
-          "reasoning_control": [true, true],
-          "grammar": [false, ""]
-        }
-      }
-    },
-    "ling": {
-      "reasoningType": "reason_and_instruct",
-      "metadata": {
-        "helptext_key": "models.dual",
-        "stripTags": { "start": "<think>", "end": "</think>" },
-        "display": true,
-        "defaultReasoning": true,
-        "localJSONL": true,
-        "stripEmpty": true,
-        "markdownBrainRot": true,
-        "forceStream": false,
-        "substitutionPrefix": "EN"
-      },
-      "instruct": {
-        "prompt": {
-          "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
-        },
-        "model": {
-          "chunkSize": 100,
-          "batchSize": 32,
-          "parallel": 4,
-          "rpm": 1000,
-          "maxAttempts": 3,
-          "maxFail": 50,
-          "tempValues": [0.3, 0.5, 0.75, 1],
-          "temperature": [true, 0],
-          "top_k": [true, 20],
-          "top_p": [true, 0.95],
-          "presence_penalty": [false, 1.5],
-          "hardTimeout": 5,
-          "model": [true, "ling"],
-          "chat_template_kwargs": [true, { "enable_thinking": false }],
-          "grammar": [
-            true,
-            "root ::= char+\nchar ::= latin9 | cjk-punct\nlatin9 ::= [\\u0020-\\u007E\\u00A0-\\u00FF\\u20AC\\t\\r\\n]\ncjk-punct ::= [\\u2000-\\u206F\\u3000-\\u303F\\uFF00-\\uFFEF]"
-          ]
-        }
-      },
-      "reasoning": {
-        "prompt": {
-          "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
-        },
-        "model": {
-          "chunkSize": 100,
-          "batchSize": 32,
-          "parallel": 4,
-          "rpm": 1000,
-          "maxAttempts": 3,
-          "maxFail": 50,
-          "temperature": [true, 1],
-          "top_k": [true, 20],
-          "top_p": [true, 0.95],
-          "presence_penalty": [false, 1.5],
-          "hardTimeout": 10,
-          "model": [true, "ling"],
-          "chat_template_kwargs": [true, { "enable_thinking": true }],
-          "thinking_budget_tokens": [true, 8192],
-          "reasoning_control": [true, true],
-          "grammar": [false, ""]
-        }
-      }
-    },
-    "spark": {
-      "reasoningType": "reason_and_instruct",
-      "metadata": {
-        "helptext_key": "models.dual",
-        "stripTags": { "start": "<think>", "end": "</think>" },
-        "display": true,
-        "defaultReasoning": true,
-        "localJSONL": true,
-        "stripEmpty": true,
-        "markdownBrainRot": true,
-        "forceStream": false,
-        "substitutionPrefix": "EN"
-      },
-      "instruct": {
-        "prompt": {
-          "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
-        },
-        "model": {
-          "chunkSize": 100,
-          "batchSize": 32,
-          "parallel": 4,
-          "rpm": 1000,
-          "maxAttempts": 3,
-          "maxFail": 50,
-          "tempValues": [0.3, 0.5, 0.75, 1],
-          "temperature": [true, 0],
-          "top_k": [true, 20],
-          "top_p": [true, 0.95],
-          "presence_penalty": [false, 1.5],
-          "hardTimeout": 5,
-          "model": [true, "spark"],
-          "chat_template_kwargs": [true, { "enable_thinking": false }],
-          "grammar": [
-            true,
-            "root ::= char+\nchar ::= latin9 | cjk-punct\nlatin9 ::= [\\u0020-\\u007E\\u00A0-\\u00FF\\u20AC\\t\\r\\n]\ncjk-punct ::= [\\u2000-\\u206F\\u3000-\\u303F\\uFF00-\\uFFEF]"
-          ]
-        }
-      },
-      "reasoning": {
-        "prompt": {
-          "defPrep": [true, "{{GENERIC_EN_ACGN_INSTRUCTIONS}}", "user"]
-        },
-        "model": {
-          "chunkSize": 100,
-          "batchSize": 32,
-          "parallel": 4,
-          "rpm": 1000,
-          "maxAttempts": 3,
-          "maxFail": 50,
-          "temperature": [true, 1],
-          "top_k": [true, 0],
-          "top_p": [true, 0.95],
-          "presence_penalty": [false, 1.5],
-          "hardTimeout": 10,
-          "model": [true, "spark"],
-          "chat_template_kwargs": [true, { "enable_thinking": true }],
-          "thinking_budget_tokens": [true, 8192],
-          "reasoning_control": [true, true],
-          "grammar": [false, ""]
-        }
-      }
-    },
-    "indextranslate": {
-      "reasoningType": "instruct_only",
-      "metadata": {
-        "helptext_key": "models.instruct",
-        "display": true,
-        "localJSONL": true,
-        "stripEmpty": true,
-        "markdownBrainRot": true,
-        "forceStream": false,
-        "substitutionPrefix": "CN"
-      },
-      "default": {
-        "prompt": {
-          "defPrep": [true, "{{GENERIC_ZH_ACGN_INSTRUCTIONS}}", "user"]
-        },
-        "model": {
-          "chunkSize": 30,
-          "batchSize": 32,
-          "parallel": 4,
-          "rpm": 1000,
-          "maxAttempts": 3,
-          "maxFail": 50,
-          "tempValues": [0.4, 0.7],
-          "temperature": [true, 0],
-          "top_k": [true, 20],
-          "top_p": [true, 0.8],
-          "hardTimeout": 2,
-          "model": [true, "index9b"],
-          "chat_template_kwargs": [true, { "enable_thinking": false }],
-          "grammar": [
-            true,
-            "root ::= char+\nchar ::= latin9 | cjk-punct\nlatin9 ::= [\\u0020-\\u007E\\u00A0-\\u00FF\\u20AC\\t\\r\\n]\ncjk-punct ::= [\\u2000-\\u206F\\u3000-\\u303F\\uFF00-\\uFFEF]"
-          ]
         }
       }
     },

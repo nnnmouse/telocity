@@ -125,11 +125,13 @@ Highly recommended to keep a local model as the default preset of the program an
 
 == Recommended local models for us vramlets
 
-link:https://huggingface.co/unsloth/gemma-4-E4B-it-qat-GGUF[unsloth/gemma-4-E4B-it-qat-GGUF] && link:https://huggingface.co/unsloth/gemma-4-E2B-it-qat-GGUF[unsloth/gemma-4-E2B-it-qat-GGUF] Best general purpose micro model.
+link:https://huggingface.co/IndexTeam/Index-Translate-9B-GGUF[IndexTeam/Index-Translate-9B-GGUF] && link:https://huggingface.co/IndexTeam/Index-Translate-2B-GGUF[IndexTeam/Index-Translate-2B-GGUF] current favorite for translating novels. After testing it further, I find it unbelievably good even. 2B version is inferior (noticeably struggles more with pronouns translating from high context languages like Japanese), but surprisingly still above all possible expectations for such a small model, should you be unable to run 9B. Pick the largest you can run and have fun.
+
+link:https://huggingface.co/unsloth/NVIDIA-Nemotron-3.5-Bolt-E4B-GGUF[unsloth/NVIDIA-Nemotron-3.5-Bolt-E4B-GGUF] Great finetune of Gemma 4 E4B that improves its agentic abilities. I also find it does better at tasks like summarizing/analyzing content etc. I'd recommend it over the original Gemma if its downsides and lack of QAT (E4B QAT with MTP is a speed demon) don't speak to you, it's a high quality finetune.
+
+link:https://huggingface.co/unsloth/gemma-4-E4B-it-qat-GGUF[unsloth/gemma-4-E4B-it-qat-GGUF] && link:https://huggingface.co/unsloth/gemma-4-E2B-it-qat-GGUF[unsloth/gemma-4-E2B-it-qat-GGUF] Great general purpose micro model.
 
 link:https://huggingface.co/bartowski/Qwen_Qwen3.5-4B-GGUF[bartowski/Qwen_Qwen3.5-4B-GGUF] Still remains king of long context among small models.
-
-link:https://huggingface.co/IndexTeam/Index-Translate-9B-GGUF[IndexTeam/Index-Translate-9B-GGUF] && link:https://huggingface.co/IndexTeam/Index-Translate-2B-GGUF[IndexTeam/Index-Translate-2B-GGUF] current favorite for translating novels.
 
 == Credits:
 

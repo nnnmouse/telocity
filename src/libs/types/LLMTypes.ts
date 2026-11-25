@@ -217,6 +217,8 @@ export type ResponsesPayload = {
   chat_template_kwargs?: {
     reasoning_effort?: ReasoningEffortValue; // gptoss
     enable_thinking?: boolean /* Alibaba Cloud */;
+    conversational_mode?: boolean; // Nemotron
+    preserve_thinking?: boolean; // Nemotron
     [key: string]: unknown;
   }; // llama
   provider?: OpenRouterProviderConfig; // openrouter exclusive
@@ -264,6 +266,8 @@ export type ChatCompletionsPayload = {
   chat_template_kwargs?: {
     reasoning_effort?: ReasoningEffortValue; // gptoss
     enable_thinking?: boolean /* Alibaba Cloud */;
+    conversational_mode?: boolean; // Nemotron
+    preserve_thinking?: boolean; // Nemotron
     [key: string]: unknown;
   }; // llama
   enable_thinking?: boolean; // Alibaba Cloud
@@ -289,8 +293,10 @@ export type CompletionsPayload = {
   chat_template_kwargs?: {
     reasoning_effort?: ReasoningEffortValue; // gptoss
     enable_thinking?: boolean /* Alibaba Cloud */;
+    conversational_mode?: boolean; // Nemotron
+    preserve_thinking?: boolean; // Nemotron
     [key: string]: unknown;
-  };
+  }; // llama
   grammar?: string; // llama
   max_tokens?: number;
 };
@@ -334,8 +340,10 @@ export interface LLMConfigurableProps {
   reasoning_effort?: ConfigParam<ReasoningEffortValue>; // official v1/chat/completions
   chat_template_kwargs?: ConfigParam<{
     /* llama */
-    reasoning_effort: ReasoningEffortValue; // gptoss
+    reasoning_effort?: ReasoningEffortValue; // gptoss
     enable_thinking?: boolean /* Alibaba Cloud */;
+    conversational_mode?: boolean; // Nemotron
+    preserve_thinking?: boolean; // Nemotron
   }>;
   reasoning?: ConfigParam<{ effort?: ReasoningEffortValue; enabled?: boolean }>; // official v1/responses API
   thinking?: ConfigParam<{ type: "enabled" | "disabled" }>; // DeepSeek

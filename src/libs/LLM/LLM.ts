@@ -355,7 +355,7 @@ function getArgConfig() {
         if (val === undefined || val === null) {
           return;
         }
-        if (typeof val !== "object") {
+        if (typeof val !== "object" || Array.isArray(val)) {
           throw createError(
             simpleTemplate(a.s.e.v.invalidOption, {
               Value: JSON.stringify(val),
@@ -387,6 +387,28 @@ function getArgConfig() {
                 Value: JSON.stringify(val),
               }),
               { code: "INVALID_ENABLE_THINKING" },
+            );
+          }
+        }
+        if ("conversational_mode" in kwargs) {
+          /* Nemotron */
+          if (typeof kwargs["conversational_mode"] !== "boolean") {
+            throw createError(
+              simpleTemplate(a.s.e.v.invalidOption, {
+                Value: JSON.stringify(val),
+              }),
+              { code: "INVALID_CONVERSATIONAL_MODE" },
+            );
+          }
+        }
+        if ("preserve_thinking" in kwargs) {
+          /* Nemotron */
+          if (typeof kwargs["preserve_thinking"] !== "boolean") {
+            throw createError(
+              simpleTemplate(a.s.e.v.invalidOption, {
+                Value: JSON.stringify(val),
+              }),
+              { code: "INVALID_PRESERVE_THINKING" },
             );
           }
         }
@@ -790,7 +812,10 @@ export class LLM implements CancellableJob {
   protected readonly idleTimeout?: number;
   protected readonly reasoning_effort?: ConfigParam<ReasoningEffortValue>; // v1/chat/completions
   protected readonly chat_template_kwargs?: ConfigParam<{
-    reasoning_effort: ReasoningEffortValue;
+    reasoning_effort?: ReasoningEffortValue;
+    enable_thinking?: boolean;
+    conversational_mode?: boolean;
+    preserve_thinking?: boolean;
   }>; // llama
   protected readonly reasoning?: ConfigParam<{ effort: ReasoningEffortValue }>; // v1/responses
   protected readonly thinking?: ConfigParam<{ type: "enabled" | "disabled" }>; // DeepSeek
