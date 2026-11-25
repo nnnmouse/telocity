@@ -58,15 +58,15 @@
     "mockfail:transport": "node ./scripts/mockserv.ts --transport"
   },
   "devDependencies": {
-    "@types/node": "26.6.5",
+    "@types/node": "26.6.6",
     "ajv": "8.20.0",
     "cross-env": "10.1.0",
     "esbuild": "0.28.2",
-    "oxfmt": "0.74.0",
-    "oxlint": "1.89.0",
-    "rimraf": "6.1.3",
+    "oxfmt": "0.79.0",
+    "oxlint": "1.94.0",
+    "rimraf": "6.1.4",
     "typescript": "7.0.2",
-    "vitest": "5.0.5"
+    "vitest": "5.1.1"
   },
   "url": "https://github.com/nnnmouse/telocity"
 }
